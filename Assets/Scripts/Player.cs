@@ -69,7 +69,7 @@ public class Player : MonoBehaviour {
         CalculateVelocity();
         HandleWallSliding();
 
-        controller.Move(velocity * Time.deltaTime, directionalInput);
+        controller.Move(velocity * Time.fixedDeltaTime, directionalInput);
 
         if (controller.collisions.above || controller.collisions.below) {
             if (controller.collisions.slidingDownMaxSlope) {
@@ -78,6 +78,10 @@ public class Player : MonoBehaviour {
                 velocity.y = 0;
             }
         }
+
+		if(t.position.y < -20) {
+			GameOverManager.GameOver();
+		}
 	}
 
 	public void SetDirectionalInput (Vector2 input) {

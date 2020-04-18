@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ThingToProtect : MonoBehaviour {
     public Transform mainTransform;
@@ -47,9 +46,15 @@ public class ThingToProtect : MonoBehaviour {
                 ContactPoint2D cont = collision.GetContact(i);
                 Vector2 contactLocation = cont.point;
                 if (contactLocation.y < currPos.y) {
-                    LoadingScreen.LoadScene(SceneManager.GetActiveScene().name);
+                    GameOverManager.GameOver();
                 }
             }
+        }
+    }
+
+    private void Update() {
+        if (mainTransform.position.y < -20) {
+            GameOverManager.GameOver();
         }
     }
 }
