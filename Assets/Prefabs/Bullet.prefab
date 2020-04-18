@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5718138573590482974}
   - component: {fileID: 5718138573590482973}
   - component: {fileID: 5718138573590482972}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BulletImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 5718138574887156895}
   - component: {fileID: 5718138574887156888}
   - component: {fileID: 5718138574887156894}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d356d9f695170684e8a36970311bd1da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: {x: 15, y: 0, z: 0}
+  speed: {x: 18, y: 0, z: 0}
   myT: {fileID: 5718138574887156895}
 --- !u!50 &5718138574887156894
 Rigidbody2D:

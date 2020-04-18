@@ -5,6 +5,7 @@ public class Enemy : MonoBehaviour {
 
     public Collider2D mainCollider;
     public Collider2D headCollider;
+    public Rigidbody2D mainRigidbody;
     public HandController gun;
     public Transform bodyTransform;
 
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour {
                 Destroy(gun);
                 AudioManager.instance.PlayGunSound();
                 StopCoroutine(attackRoutine);
+                mainRigidbody.isKinematic = false;
                 Destroy(gameObject, 5);
                 //Player.mainPlayer.Score++;
             }
