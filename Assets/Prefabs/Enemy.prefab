@@ -570,7 +570,7 @@ MonoBehaviour:
   handMainTransform: {fileID: 7285592983815561656}
   imageT: {fileID: 7285592983094924935}
   thingToProtect: {fileID: 0}
-  bulletPrefab: {fileID: 5718138574887156889, guid: cd26995c2047e544f939e611e9ff893b,
+  bulletPrefab: {fileID: 5718138574887156889, guid: e343f2e08a8334846ba40030aa08fcfa,
     type: 3}
   theCamera: {fileID: 0}
 --- !u!1 &7285592983912358302
