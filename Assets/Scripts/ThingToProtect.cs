@@ -6,10 +6,10 @@ public class ThingToProtect : MonoBehaviour {
 
     private float lastThrowTime;
 
-    public void Throw(Vector2 force) {
+    public void Throw(Vector2 direction) {
         mainTransform.SetParent(null);
         mainRigidbody.isKinematic = false;
-        mainRigidbody.AddForce(force);
+        mainRigidbody.AddForce(direction*450);
 
         lastThrowTime = Time.time;
     }

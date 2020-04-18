@@ -30,7 +30,7 @@ public class LoadingScreen : MonoBehaviour
     {
         if (loadRoutine != null)
         {
-            Debug.LogError("Tried loading while load already in progress");
+            //Debug.LogError("Tried loading while load already in progress");
         }
         else {
             loadRoutine = StartCoroutine(_FadeLoadScene(sceneName));
