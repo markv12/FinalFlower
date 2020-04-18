@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour {
     }
 
     private const float MOVE_SPEED = 5;
-    private const float MIN_DISTANCE = 8.5f;
+    private const float MIN_DISTANCE = 4.5f;
 
     void Update() {
         if (health >= 0) {

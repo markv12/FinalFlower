@@ -44,7 +44,7 @@ public class HandController : MonoBehaviour {
         handMainTransform.position = handPos;
         if (belongsToPlayer && Input.GetMouseButtonDown(0)) {
             if (thingToProtect != null) {
-                thingToProtect.Throw(shootPoint.forward * 450);
+                thingToProtect.Throw(shootPoint.right * 450);
                 thingToProtect = null;
             } else {
                 FireGun();
@@ -103,7 +103,6 @@ public class HandController : MonoBehaviour {
         }
         return new Vector3(result.x, result.y, 0);
     }
-
 }
 
 public enum DirectionState {
