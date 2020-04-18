@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   t: {fileID: 6260324718434507326}
-  maxJumpHeight: 4
+  maxJumpHeight: 5
   minJumpHeight: 1
   timeToJumpApex: 0.4
   moveSpeed: 9

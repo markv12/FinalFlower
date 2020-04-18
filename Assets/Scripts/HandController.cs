@@ -45,7 +45,7 @@ public class HandController : MonoBehaviour {
         handMainTransform.rotation = Quaternion.Euler(0, 0, angleFromPlayer);
         handMainTransform.position = handPos;
         if (belongsToPlayer && Input.GetMouseButtonDown(0)) {
-            if (thingToProtect != null) {
+            if (HasThingToProtect()) {
                 thingToProtect.Throw(shootPoint.right * 450);
                 thingToProtect = null;
             } else {
@@ -53,6 +53,10 @@ public class HandController : MonoBehaviour {
             }
         }
         imageT.localRotation = Quaternion.Lerp(imageT.localRotation, theIQ, Time.deltaTime * 3);
+    }
+
+    public bool HasThingToProtect() {
+        return thingToProtect != null;
     }
 
     public void FireGun() {

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ThingToProtect : MonoBehaviour {
     public Transform mainTransform;
@@ -37,6 +38,16 @@ public class ThingToProtect : MonoBehaviour {
                     if (theHandController != null) {
                         Catch(theHandController);
                     }
+                }
+            }
+        }
+        if (collision.gameObject.CompareTag("Wall")) {
+            Vector2 currPos = mainTransform.position;
+            for (int i = 0; i < collision.contactCount; i++) {
+                ContactPoint2D cont = collision.GetContact(i);
+                Vector2 contactLocation = cont.point;
+                if (contactLocation.y < currPos.y) {
+                    LoadingScreen.LoadScene(SceneManager.GetActiveScene().name);
                 }
             }
         }

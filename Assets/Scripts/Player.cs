@@ -1,15 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent (typeof (Controller2D))]
+[RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour {
 
 	public Transform t;
 
 	public float maxJumpHeight = 4;
 	public float minJumpHeight = 1;
+
 	public float timeToJumpApex = .4f;
 	public float moveSpeed = 9;
+	public float MoveSpeed {
+		get {
+			return handController.HasThingToProtect() ? moveSpeed / 1.7f : moveSpeed;
+		}
+	}
 	float accelerationTimeAirborne = .2f;
 	float accelerationTimeGrounded = .1f;
 
@@ -23,7 +29,18 @@ public class Player : MonoBehaviour {
 
 	float gravity;
 	float maxJumpVelocity;
+	public float MaxJumpVelocity {
+		get {
+			return handController.HasThingToProtect() ? maxJumpVelocity / 1.5f : maxJumpVelocity;
+		}
+	}
+
 	float minJumpVelocity;
+	public float MinJumpVelocity {
+		get {
+			return handController.HasThingToProtect() ? minJumpVelocity / 1.5f : minJumpVelocity;
+		}
+	}
 	Vector3 velocity;
 	float velocityXSmoothing;
 
@@ -85,18 +102,18 @@ public class Player : MonoBehaviour {
 		if (controller.collisions.below) {
 			if (controller.collisions.slidingDownMaxSlope) {
 				if (directionalInput.x != -Mathf.Sign (controller.collisions.slopeNormal.x)) { // not jumping against max slope
-					velocity.y = maxJumpVelocity * controller.collisions.slopeNormal.y;
-					velocity.x = maxJumpVelocity * controller.collisions.slopeNormal.x;
+					velocity.y = MaxJumpVelocity * controller.collisions.slopeNormal.y;
+					velocity.x = MaxJumpVelocity * controller.collisions.slopeNormal.x;
 				}
 			} else {
-				velocity.y = maxJumpVelocity;
+				velocity.y = MaxJumpVelocity;
 			}
 		}
 	}
 
 	public void OnJumpInputUp() {
-		if (velocity.y > minJumpVelocity) {
-			velocity.y = minJumpVelocity;
+		if (velocity.y > MinJumpVelocity) {
+			velocity.y = MinJumpVelocity;
 		}
 	}
 		
@@ -131,7 +148,7 @@ public class Player : MonoBehaviour {
 	}
 
 	void CalculateVelocity() {
-		float targetVelocityX = directionalInput.x * moveSpeed;
+		float targetVelocityX = directionalInput.x * MoveSpeed;
 		velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
 		velocity.y += gravity * Time.deltaTime;
 	}
