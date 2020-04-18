@@ -187,7 +187,7 @@ MonoBehaviour:
   maxJumpHeight: 5
   minJumpHeight: 1
   timeToJumpApex: 0.4
-  moveSpeed: 9
+  moveSpeed: 10
   wallJumpClimb: {x: 7.5, y: 16}
   wallJumpOff: {x: 8.5, y: 7}
   wallLeap: {x: 18, y: 17}
@@ -432,8 +432,8 @@ GameObject:
   - component: {fileID: 8494325367663458754}
   - component: {fileID: 8494325367663458753}
   - component: {fileID: 8494325367663458752}
-  - component: {fileID: 3373332280491247439}
   - component: {fileID: 7588043123381554943}
+  - component: {fileID: 3628229601045994611}
   m_Layer: 0
   m_Name: ThingToProtect
   m_TagString: Untagged
@@ -518,32 +518,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainTransform: {fileID: 8494325367663458754}
   mainRigidbody: {fileID: 7588043123381554943}
---- !u!61 &3373332280491247439
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8494325367663458759}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.2, y: 6.4}
-    newSize: {x: 1, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2}
-  m_EdgeRadius: 0
 --- !u!50 &7588043123381554943
 Rigidbody2D:
   serializedVersion: 4
@@ -565,3 +539,78 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!60 &3628229601045994611
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8494325367663458759}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.1333334, y: 4.266667}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.42666668, y: -1.6800001}
+      - {x: 0.44, y: -1.62}
+      - {x: 0.62666667, y: -1.6066667}
+      - {x: 0.71333337, y: -1.5733334}
+      - {x: 0.84000003, y: -1.4733334}
+      - {x: 0.91333336, y: -1.3666667}
+      - {x: 0.94, y: -1.2866668}
+      - {x: 0.9466667, y: -1.2066667}
+      - {x: 0.9466667, y: 1.2533333}
+      - {x: 0.91333336, y: 1.3666667}
+      - {x: 0.8666667, y: 1.4333334}
+      - {x: 0.7666667, y: 1.5333334}
+      - {x: 0.71333337, y: 1.5733334}
+      - {x: 0.59333336, y: 1.6133333}
+      - {x: 0.43333334, y: 1.6333333}
+      - {x: 0.42666668, y: 1.6800001}
+      - {x: 0.4, y: 1.7866668}
+      - {x: 0.38, y: 1.82}
+      - {x: 0.28, y: 1.9333334}
+      - {x: 0.22, y: 1.9666667}
+      - {x: 0.10666667, y: 2.0133333}
+      - {x: -0.093333334, y: 2.0133333}
+      - {x: -0.24666667, y: 1.9333334}
+      - {x: -0.35333335, y: 1.8000001}
+      - {x: -0.39333335, y: 1.6866667}
+      - {x: -0.4, y: 1.6133333}
+      - {x: -0.59333336, y: 1.6133333}
+      - {x: -0.7, y: 1.58}
+      - {x: -0.8, y: 1.5133333}
+      - {x: -0.8666667, y: 1.4333334}
+      - {x: -0.9066667, y: 1.36}
+      - {x: -0.93333334, y: 1.2866668}
+      - {x: -0.9466667, y: 1.2333333}
+      - {x: -0.9466667, y: -1.2533333}
+      - {x: -0.9266667, y: -1.3333334}
+      - {x: -0.8666667, y: -1.4333334}
+      - {x: -0.7666667, y: -1.5400001}
+      - {x: -0.6666667, y: -1.5866667}
+      - {x: -0.5866667, y: -1.6066667}
+      - {x: -0.39333335, y: -1.64}
+      - {x: -0.38, y: -1.7133334}
+      - {x: -0.35333335, y: -1.7800001}
+      - {x: -0.31333333, y: -1.86}
+      - {x: -0.18, y: -1.9733334}
+      - {x: -0.060000002, y: -2.0133333}
+      - {x: 0.08, y: -2.0133333}
+      - {x: 0.13333334, y: -2.0066667}
+      - {x: 0.24000001, y: -1.96}
+      - {x: 0.35333335, y: -1.86}
+      - {x: 0.40666667, y: -1.7466667}

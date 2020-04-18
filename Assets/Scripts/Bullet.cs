@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour {
         } else if(col.gameObject.CompareTag("Enemy")) {
             Enemy enemyScript = col.gameObject.GetComponentInParent<Enemy>();
             if (enemyScript != owner && !(owner is Enemy)) {
-                enemyScript.Health -= 1;
+                enemyScript.Kill(myT.right, myT.position);
             } else {
                 didHit = false;
             }

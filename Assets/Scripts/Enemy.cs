@@ -11,25 +11,19 @@ public class Enemy : MonoBehaviour {
     public HandController gun;
     public Transform bodyTransform;
 
-    [SerializeField]
-    private float health = 2;
-    public float Health {
-        get {
-            return health;
-        }
-        set {
-            health = value;
-            if (health <= 0) {
-                Destroy(mainCollider);
-                Destroy(headCollider);
-                Destroy(gun);
-                AudioManager.instance.PlayGunSound();
-                StopCoroutine(attackRoutine);
-                mainRigidbody.isKinematic = false;
-                Destroy(gameObject, 5);
-                //Player.mainPlayer.Score++;
-            }
-        }
+    private bool dead = false;
+    public void Kill(Vector3 hitAngle, Vector2 hitLocation) {
+        dead = true;
+        Destroy(mainCollider);
+        Destroy(headCollider);
+        Destroy(gun);
+        AudioManager.instance.PlayGunSound();
+        StopCoroutine(attackRoutine);
+        mainRigidbody.isKinematic = false;
+        Debug.Log(hitAngle);
+        mainRigidbody.AddForceAtPosition(hitAngle*600, hitLocation);
+        Destroy(gameObject, 5);
+        //Player.mainPlayer.Score++;
     }
 
     private Coroutine attackRoutine;
@@ -42,7 +36,7 @@ public class Enemy : MonoBehaviour {
     private const float AGGRO_RANGE = 12f;
 
     void Update() {
-        if (health >= 0) {
+        if (!dead) {
             float distanceFromPlayer = Player.mainPlayer.t.position.x - transform.position.x;
             float absDistance = Mathf.Abs(distanceFromPlayer);
             float theX = (MOVE_SPEED * Time.deltaTime * Mathf.Sign(distanceFromPlayer));
