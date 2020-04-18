@@ -15,7 +15,10 @@ public class Bullet : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D col) {
         bool didHit = true;
         if (col.gameObject.CompareTag("Player")) {
-            //col.gameObject.GetComponentInParent<Player>().Health -= 1;
+            var playerScript = col.gameObject.GetComponentInParent<Player>();
+            if (playerScript != owner) {
+                playerScript.GetHit();
+            }
         } else if(col.gameObject.CompareTag("Enemy")) {
             Enemy enemyScript = col.gameObject.GetComponentInParent<Enemy>();
             if (enemyScript != owner && !(owner is Enemy)) {

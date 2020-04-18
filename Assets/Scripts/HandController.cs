@@ -46,13 +46,19 @@ public class HandController : MonoBehaviour {
         handMainTransform.position = handPos;
         if (belongsToPlayer && Input.GetMouseButtonDown(0)) {
             if (HasThingToProtect()) {
-                thingToProtect.Throw(shootPoint.right * 450);
-                thingToProtect = null;
+                Throw();
             } else {
                 FireGun();
             }
         }
         imageT.localRotation = Quaternion.Lerp(imageT.localRotation, theIQ, Time.deltaTime * 3);
+    }
+
+    public void Throw() {
+        if (HasThingToProtect()) {
+            thingToProtect.Throw(shootPoint.right * 450);
+            thingToProtect = null;
+        }
     }
 
     public bool HasThingToProtect() {

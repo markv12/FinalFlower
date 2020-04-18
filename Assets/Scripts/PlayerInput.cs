@@ -10,15 +10,20 @@ public class PlayerInput : MonoBehaviour {
 		player = GetComponent<Player> ();
 	}
 
-	void FixedUpdate () {
-		Vector2 directionalInput = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
-		player.SetDirectionalInput (directionalInput);
+	void Update () {
+		if (player.isStunned) {
+			player.SetDirectionalInput(Vector2.zero);
+		} else {
+			Vector2 directionalInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+			player.SetDirectionalInput(directionalInput);
 
-		if (Input.GetKeyDown (KeyCode.Space)) {
-			player.OnJumpInputDown ();
+			if (Input.GetKeyDown(KeyCode.Space)) {
+				player.OnJumpInputDown();
+			}
+			if (Input.GetKeyUp(KeyCode.Space)) {
+				player.OnJumpInputUp();
+			}
 		}
-		if (Input.GetKeyUp (KeyCode.Space)) {
-			player.OnJumpInputUp ();
-		}
+
 	}
 }

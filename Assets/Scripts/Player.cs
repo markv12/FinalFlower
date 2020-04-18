@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour {
@@ -16,8 +17,9 @@ public class Player : MonoBehaviour {
 			return handController.HasThingToProtect() ? moveSpeed / 1.7f : moveSpeed;
 		}
 	}
-	float accelerationTimeAirborne = .2f;
-	float accelerationTimeGrounded = .1f;
+
+	readonly float accelerationTimeAirborne = .2f;
+	readonly float accelerationTimeGrounded = .1f;
 
 	public Vector2 wallJumpClimb;
 	public Vector2 wallJumpOff;
@@ -25,6 +27,23 @@ public class Player : MonoBehaviour {
 
 	public float wallSlideSpeedMax = 3;
 	public float wallStickTime = .25f;
+
+	public void GetHit() {
+		handController.Throw();
+		this.EnsureCoroutineStopped(ref beStunnedRoutine);
+		beStunnedRoutine = StartCoroutine(BeStunned());
+	}
+
+	private static readonly WaitForSeconds stunLength = new WaitForSeconds(0.5f);
+	public bool isStunned = false;
+	private Coroutine beStunnedRoutine;
+	private IEnumerator BeStunned() {
+		isStunned = true;
+		yield return stunLength;
+		isStunned = false;
+		beStunnedRoutine = null;
+	}
+
 	float timeToWallUnstick;
 
 	float gravity;
@@ -120,7 +139,6 @@ public class Player : MonoBehaviour {
 			velocity.y = MinJumpVelocity;
 		}
 	}
-		
 
 	void HandleWallSliding() {
 		wallDirX = (controller.collisions.left) ? -1 : 1;
