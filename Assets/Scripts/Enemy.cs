@@ -19,12 +19,11 @@ public class Enemy : MonoBehaviour {
         AudioManager.instance.PlayGunSound();
         StopCoroutine(attackRoutine);
         mainRigidbody.isKinematic = false;
-        Debug.Log(hitAngle);
-        mainRigidbody.AddForceAtPosition(hitAngle*550, hitLocation);
+        mainRigidbody.AddForceAtPosition(hitAngle*600, hitLocation);
         StartCoroutine(DieRoutine());
     }
 
-    private static readonly WaitForSeconds dieWait = new WaitForSeconds(3.5f);
+    private static readonly WaitForSeconds dieWait = new WaitForSeconds(3f);
     private IEnumerator DieRoutine() {
         yield return dieWait;
         Destroy(mainCollider);

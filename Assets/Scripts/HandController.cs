@@ -56,7 +56,7 @@ public class HandController : MonoBehaviour {
 
     public void Throw() {
         if (HasThingToProtect()) {
-            thingToProtect.Throw(shootPoint.right * 450);
+            thingToProtect.Throw(shootPoint.right);
             thingToProtect = null;
         }
     }
