@@ -14,16 +14,22 @@ public class Enemy : MonoBehaviour {
     private bool dead = false;
     public void Kill(Vector3 hitAngle, Vector2 hitLocation) {
         dead = true;
-        Destroy(mainCollider);
-        Destroy(headCollider);
+
         Destroy(gun);
         AudioManager.instance.PlayGunSound();
         StopCoroutine(attackRoutine);
         mainRigidbody.isKinematic = false;
         Debug.Log(hitAngle);
-        mainRigidbody.AddForceAtPosition(hitAngle*700, hitLocation);
+        mainRigidbody.AddForceAtPosition(hitAngle*550, hitLocation);
+        StartCoroutine(DieRoutine());
+    }
+
+    private static readonly WaitForSeconds dieWait = new WaitForSeconds(3.5f);
+    private IEnumerator DieRoutine() {
+        yield return dieWait;
+        Destroy(mainCollider);
+        Destroy(headCollider);
         Destroy(gameObject, 5);
-        //Player.mainPlayer.Score++;
     }
 
     private Coroutine attackRoutine;
