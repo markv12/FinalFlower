@@ -29,6 +29,7 @@ public class Player : MonoBehaviour {
 	public float wallStickTime = .25f;
 
 	public void GetHit() {
+		CameraShaker.instance.HitCameraShake();
 		handController.Throw();
 		this.EnsureCoroutineStopped(ref beStunnedRoutine);
 		beStunnedRoutine = StartCoroutine(BeStunned());

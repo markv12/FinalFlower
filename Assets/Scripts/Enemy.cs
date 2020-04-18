@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour {
 
     private bool dead = false;
     public void Kill(Vector3 hitAngle, Vector2 hitLocation) {
+        CameraShaker.instance.HitCameraShake();
         dead = true;
 
         Destroy(gun);

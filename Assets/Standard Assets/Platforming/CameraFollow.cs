@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
 
@@ -47,8 +48,12 @@ public class CameraFollow : MonoBehaviour {
 
 		focusPosition.y = Mathf.SmoothDamp (transform.position.y, focusPosition.y, ref smoothVelocityY, verticalSmoothTime);
 		focusPosition += Vector2.right * currentLookAheadX;
-		transform.position = (Vector3)focusPosition + Vector3.forward * -10;
+
+		Vector3 pos = (Vector3)focusPosition + Vector3.forward * -10;
+		transform.position = pos;
 	}
+
+
 
 	void OnDrawGizmos() {
 		Gizmos.color = new Color (1, 0, 0, .5f);
