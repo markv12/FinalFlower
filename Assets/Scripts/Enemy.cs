@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
+    public bool moveTowardsPlayer = false;
+
     public Collider2D mainCollider;
     public Collider2D headCollider;
     public Rigidbody2D mainRigidbody;
@@ -37,14 +39,20 @@ public class Enemy : MonoBehaviour {
 
     private const float MOVE_SPEED = 5;
     private const float MIN_DISTANCE = 4.5f;
+    private const float AGGRO_RANGE = 12f;
 
     void Update() {
         if (health >= 0) {
             float distanceFromPlayer = Player.mainPlayer.t.position.x - transform.position.x;
-            if (Mathf.Abs(distanceFromPlayer) > MIN_DISTANCE) {
-                float theX = (MOVE_SPEED * Time.deltaTime * Mathf.Sign(distanceFromPlayer));
+            float absDistance = Mathf.Abs(distanceFromPlayer);
+            float theX = (MOVE_SPEED * Time.deltaTime * Mathf.Sign(distanceFromPlayer));
+            if (moveTowardsPlayer) {
+                if (absDistance > MIN_DISTANCE) {
+                    transform.position += new Vector3(theX, 0, 0);
+                }
+            }
+            if (absDistance < AGGRO_RANGE) {
                 SetHorizontalInput(theX);
-                transform.position += new Vector3(theX, 0, 0);
             }
         }
         if (Vector3.Distance(transform.position, Player.mainPlayer.t.position) > 50) {
