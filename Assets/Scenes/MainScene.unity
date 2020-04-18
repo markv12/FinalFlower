@@ -705,7 +705,7 @@ GameObject:
   - component: {fileID: 7551480877524690100}
   m_Layer: 9
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -790,6 +790,7 @@ MonoBehaviour:
   maxJumpHeight: 4
   minJumpHeight: 1
   timeToJumpApex: 0.4
+  moveSpeed: 9
   wallJumpClimb: {x: 7.5, y: 16}
   wallJumpOff: {x: 8.5, y: 7}
   wallLeap: {x: 18, y: 17}
@@ -1145,7 +1146,8 @@ MonoBehaviour:
   handMainTransform: {fileID: 7132548369219610036}
   imageT: {fileID: 2374132918271603524}
   thingToProtect: {fileID: 2522231034621866755}
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 5718138574887156889, guid: cd26995c2047e544f939e611e9ff893b,
+    type: 3}
   theCamera: {fileID: 519420031}
 --- !u!1 &1248898013651263638
 GameObject:
@@ -1282,13 +1284,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248898013651263638}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2374132918271603524}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3961149164779309611
 GameObject:
   m_ObjectHideFlags: 0

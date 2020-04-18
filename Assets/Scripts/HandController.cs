@@ -54,17 +54,17 @@ public class HandController : MonoBehaviour {
     }
 
     public void FireGun() {
-        //GameObject newBullet = Instantiate(bulletPrefab);
-        //newBullet.transform.SetPositionAndRotation(shootPoint.position, shootPoint.rotation);
-        Debug.DrawRay(shootPoint.position, shootPoint.forward, Color.red, 1000);
+        GameObject newBullet = Instantiate(bulletPrefab);
+        newBullet.transform.SetPositionAndRotation(shootPoint.position, shootPoint.rotation);
         AudioManager.instance.PlayGunSound();
-        imageT.localRotation *= (dState == DirectionState.right) ? shotRotationReverse : shotRotation;
-        RaycastHit2D hit = Physics2D.Raycast(shootPoint.position, shootPoint.forward);
-        if (hit.transform != null) {
-            Debug.Log(hit.transform.gameObject.name);
-        } else {
-            Debug.Log("No Hit");
-        }
+        //Debug.DrawRay(shootPoint.position, shootPoint.forward, Color.red, 1000);
+        //imageT.localRotation *= (dState == DirectionState.right) ? shotRotationReverse : shotRotation;
+        //RaycastHit2D hit = Physics2D.Raycast(shootPoint.position, shootPoint.forward);
+        //if (hit.transform != null) {
+        //    Debug.Log(hit.transform.gameObject.name);
+        //} else {
+        //    Debug.Log("No Hit");
+        //}
     }
 
     private DirectionState dState = DirectionState.initial;
