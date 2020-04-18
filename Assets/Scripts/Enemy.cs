@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour {
         StopCoroutine(attackRoutine);
         mainRigidbody.isKinematic = false;
         Debug.Log(hitAngle);
-        mainRigidbody.AddForceAtPosition(hitAngle*600, hitLocation);
+        mainRigidbody.AddForceAtPosition(hitAngle*700, hitLocation);
         Destroy(gameObject, 5);
         //Player.mainPlayer.Score++;
     }
