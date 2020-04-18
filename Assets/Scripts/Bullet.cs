@@ -3,6 +3,7 @@
 public class Bullet : MonoBehaviour {
     public Vector3 speed;
     public Transform myT;
+    public MonoBehaviour owner;
 
     void Update () {
         myT.Translate(speed * Time.deltaTime);
@@ -12,12 +13,20 @@ public class Bullet : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D col) {
+        bool didHit = true;
         if (col.gameObject.CompareTag("Player")) {
             //col.gameObject.GetComponentInParent<Player>().Health -= 1;
         } else if(col.gameObject.CompareTag("Enemy")) {
-            col.gameObject.GetComponentInParent<Enemy>().Health -= 1;
+            Enemy enemyScript = col.gameObject.GetComponentInParent<Enemy>();
+            if (enemyScript != owner) {
+                enemyScript.Health -= 1;
+            } else {
+                didHit = false;
+            }
         }
-        AudioManager.instance.PlayGunSound();
-        Destroy(gameObject);
+        if (didHit) {
+            AudioManager.instance.PlayGunSound();
+            Destroy(gameObject);
+        }
     }
 }

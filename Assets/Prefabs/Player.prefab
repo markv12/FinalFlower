@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409910715dfcc2e489a8c06a3764bfb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 6260324718434507325}
   belongsToPlayer: 1
   heightAdjustment: 0
   armLength: 2.5
-  ownerT: {fileID: 6260324718434507326}
   shootPoint: {fileID: 7347791095971454325}
   handMainTransform: {fileID: 3754527482209972087}
   imageT: {fileID: 8508347971003398535}

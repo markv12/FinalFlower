@@ -562,10 +562,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409910715dfcc2e489a8c06a3764bfb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 7285592983912358272}
   belongsToPlayer: 0
   heightAdjustment: 0
   armLength: 1
-  ownerT: {fileID: 7285592983772432841}
   shootPoint: {fileID: 7285592982980607129}
   handMainTransform: {fileID: 7285592983815561656}
   imageT: {fileID: 7285592983094924935}
@@ -620,6 +620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4386a2d63afdd3469cbffd97a8566c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveTowardsPlayer: 0
   mainCollider: {fileID: 7285592983226837562}
   headCollider: {fileID: 7285592982879885289}
   mainRigidbody: {fileID: 7285592983912358273}

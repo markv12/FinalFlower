@@ -2,11 +2,12 @@
 
 public class HandController : MonoBehaviour {
 
+    public MonoBehaviour owner;
+    private Transform ownerT;
     public bool belongsToPlayer;
     public float heightAdjustment = 1f;
     public float armLength = 3.5f;
 
-    public Transform ownerT;
     public Transform shootPoint;
     public Transform handMainTransform;
     public Transform imageT;
@@ -19,6 +20,7 @@ public class HandController : MonoBehaviour {
     public static float cameraDistance;
 
     void Awake() {
+        ownerT = owner.transform;
         if (belongsToPlayer) {
             cameraDistance = -theCamera.transform.position.z;
         }
@@ -56,6 +58,7 @@ public class HandController : MonoBehaviour {
     public void FireGun() {
         GameObject newBullet = Instantiate(bulletPrefab);
         newBullet.transform.SetPositionAndRotation(shootPoint.position, shootPoint.rotation);
+        newBullet.GetComponent<Bullet>().owner = owner;
         AudioManager.instance.PlayGunSound();
         //Debug.DrawRay(shootPoint.position, shootPoint.forward, Color.red, 1000);
         //imageT.localRotation *= (dState == DirectionState.right) ? shotRotationReverse : shotRotation;
