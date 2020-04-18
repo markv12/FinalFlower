@@ -40,7 +40,7 @@ public class ThingToProtect : MonoBehaviour {
                 }
             }
         }
-        if (collision.gameObject.CompareTag("Wall")) {
+        if (collision.gameObject.CompareTag("Floor")) {
             Vector2 currPos = mainTransform.position;
             for (int i = 0; i < collision.contactCount; i++) {
                 ContactPoint2D cont = collision.GetContact(i);
