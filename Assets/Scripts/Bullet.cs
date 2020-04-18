@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour {
             //col.gameObject.GetComponentInParent<Player>().Health -= 1;
         } else if(col.gameObject.CompareTag("Enemy")) {
             Enemy enemyScript = col.gameObject.GetComponentInParent<Enemy>();
-            if (enemyScript != owner) {
+            if (enemyScript != owner && !(owner is Enemy)) {
                 enemyScript.Health -= 1;
             } else {
                 didHit = false;
