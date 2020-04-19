@@ -1,144 +1,167 @@
 ﻿using UnityEngine;
 
-public class AudioManager : MonoBehaviour {
+public class AudioManager : MonoBehaviour
+{
 
-    private const string  AUDIO_MANAGER_PATH = "AudioManager";
-    private static AudioManager instance;
-    public static AudioManager Instance {
-        get {
-            if (instance == null) {
-                GameObject gameOverScreenObject = (GameObject)Resources.Load(AUDIO_MANAGER_PATH);
-                GameObject instantiated = Instantiate(gameOverScreenObject);
-                DontDestroyOnLoad(instantiated);
-                instance = instantiated.GetComponent<AudioManager>();
+	private const string AUDIO_MANAGER_PATH = "AudioManager";
+	private static AudioManager instance;
+	public static AudioManager Instance
+	{
+		get
+		{
+			if (instance == null)
+			{
+				GameObject gameOverScreenObject = (GameObject)Resources.Load(AUDIO_MANAGER_PATH);
+				GameObject instantiated = Instantiate(gameOverScreenObject);
+				DontDestroyOnLoad(instantiated);
+				instance = instantiated.GetComponent<AudioManager>();
 
-                instance.warningMusic.volume = 0;
-                instance.warningMusic.Play();
+				instance.warningMusic.volume = 0;
+				instance.warningMusic.Play();
 
-                instance.backgroundMusic.volume = 0;
-                instance.backgroundMusic.Play();
-                instance.CreateAnimationRoutine(
-                    1,
-                    delegate (float progress) {
-                        instance.backgroundMusic.volume = progress;
-                    }
-                );
-            }
-            return instance;
-        }
-    }
+				instance.backgroundMusic.volume = 0;
+				instance.backgroundMusic.Play();
+				instance.CreateAnimationRoutine(
+						1,
+						delegate (float progress)
+						{
+							instance.backgroundMusic.volume = progress;
+						}
+				);
+			}
+			return instance;
+		}
+	}
 
-    public AudioSource[] audioSources;
+	public AudioSource[] audioSources;
 
-    public AudioSource menuMusic;
-    public AudioSource backgroundMusic;
-    public AudioSource warningMusic;
-    public AudioClip shootSound;
-    public AudioClip hitSound;
-    public AudioClip jumpSound;
-    public AudioClip capsuleThrowSound;
-    public AudioClip capsuleCatchSound;
-    public AudioClip capsuleBreakSound;
-    
-    private int audioSourceIndex = 0;
+	public AudioSource menuMusic;
+	public AudioSource backgroundMusic;
+	public AudioSource warningMusic;
+	public AudioClip shootSound;
+	public AudioClip hitSound;
+	public AudioClip jumpSound;
+	public AudioClip capsuleThrowSound;
+	public AudioClip capsuleCatchSound;
+	public AudioClip capsuleBreakSound;
 
-    public void PlayGunSound() {
-        PlaySFX(shootSound, 1f);
-    }
+	private int audioSourceIndex = 0;
 
-    public void PlayHitSound() {
-        PlaySFX(hitSound, 0.6f);
-    }
+	public void PlayGunSound()
+	{
+		PlaySFX(shootSound, 1f);
+	}
 
-    public void PlayJumpSound() {
-        PlaySFX(jumpSound, 0.6f);
-    }
-    public void PlayCapsuleThrow() {
-        PlaySFX(capsuleThrowSound, 1f);
-    }
+	public void PlayHitSound()
+	{
+		PlaySFX(hitSound, 0.4f);
+		// this sound is only for hitting walls and fizzling out. there are other sounds that haven't been implemented yet for hitting enemies and the player being hit.
+	}
 
-    public void PlayCapsuleCatch() {
-        PlaySFX(capsuleCatchSound, 1f);
-    }
+	public void PlayJumpSound()
+	{
+		PlaySFX(jumpSound, 1f);
+	}
+	public void PlayCapsuleThrow()
+	{
+		PlaySFX(capsuleThrowSound, 1f);
+	}
 
-    public void PlayCapsuleBreak() {
-        PlaySFX(capsuleBreakSound, 0.7f);
-    }
+	public void PlayCapsuleCatch()
+	{
+		PlaySFX(capsuleCatchSound, 1f);
+	}
 
-    public void PlaySFX(AudioClip clip, float volume) {
-        AudioSource source = GetNextAudioSource();
-        source.volume = volume;
-        source.PlayOneShot(clip);
-    }
+	public void PlayCapsuleBreak()
+	{
+		PlaySFX(capsuleBreakSound, 0.7f);
+	}
 
-    public void PlayMenuMusic() {
-        this.EnsureCoroutineStopped(ref musicFadeRoutine);
-        float warningStartVolume = warningMusic.volume;
-        float backgroundStartVolume = backgroundMusic.volume;
-        float endVolume = 0;
-        musicFadeRoutine = this.CreateAnimationRoutine(
-            0.5f,
-            delegate (float progress) {
-                warningMusic.volume = Mathf.Lerp(warningStartVolume, endVolume, progress);
-                backgroundMusic.volume = Mathf.Lerp(backgroundStartVolume, endVolume, progress);
-            },
-            delegate {
-                warningMusic.Stop();
-                backgroundMusic.Stop();
-                menuMusic.Play();
-                musicFadeRoutine = this.CreateAnimationRoutine(
-                    1f,
-                    delegate (float progress) {
-                        menuMusic.volume = Mathf.Lerp(0, 1, progress);
-                    }
-                );
-            }
-        );
-    }
+	public void PlaySFX(AudioClip clip, float volume)
+	{
+		AudioSource source = GetNextAudioSource();
+		source.volume = volume;
+		source.PlayOneShot(clip);
+	}
 
-    public void PlayGameMusic() {
-        this.EnsureCoroutineStopped(ref musicFadeRoutine);
-        float menuStartVolume = menuMusic.volume;
-        float endVolume = 0;
-        musicFadeRoutine = this.CreateAnimationRoutine(
-            0.5f,
-            delegate (float progress) {
-                menuMusic.volume = Mathf.Lerp(menuStartVolume, endVolume, progress);
-            },
-            delegate {
-                menuMusic.Stop();
-                backgroundMusic.volume = 0;
-                warningMusic.volume = 0;
-                backgroundMusic.Play();
-                warningMusic.Play();
+	public void PlayMenuMusic()
+	{
+		this.EnsureCoroutineStopped(ref musicFadeRoutine);
+		float warningStartVolume = warningMusic.volume;
+		float backgroundStartVolume = backgroundMusic.volume;
+		float endVolume = 0;
+		musicFadeRoutine = this.CreateAnimationRoutine(
+				0.5f,
+				delegate (float progress)
+				{
+					warningMusic.volume = Mathf.Lerp(warningStartVolume, endVolume, progress);
+					backgroundMusic.volume = Mathf.Lerp(backgroundStartVolume, endVolume, progress);
+				},
+				delegate
+				{
+					warningMusic.Stop();
+					backgroundMusic.Stop();
+					menuMusic.Play();
+					musicFadeRoutine = this.CreateAnimationRoutine(
+									1f,
+									delegate (float progress)
+								{
+									menuMusic.volume = Mathf.Lerp(0, 1, progress);
+								}
+							);
+				}
+		);
+	}
 
-                musicFadeRoutine = this.CreateAnimationRoutine(
-                    1f,
-                    delegate (float progress) {
-                        backgroundMusic.volume = Mathf.Lerp(0, 1, progress);
-                    }
-                );
-            }
-        );
-    }
+	public void PlayGameMusic()
+	{
+		this.EnsureCoroutineStopped(ref musicFadeRoutine);
+		float menuStartVolume = menuMusic.volume;
+		float endVolume = 0;
+		musicFadeRoutine = this.CreateAnimationRoutine(
+				0.5f,
+				delegate (float progress)
+				{
+					menuMusic.volume = Mathf.Lerp(menuStartVolume, endVolume, progress);
+				},
+				delegate
+				{
+					menuMusic.Stop();
+					backgroundMusic.volume = 0;
+					warningMusic.volume = 0;
+					backgroundMusic.Play();
+					warningMusic.Play();
 
-    private Coroutine musicFadeRoutine = null;
-    public void EnableWarningMusic(bool enabled) {
-        this.EnsureCoroutineStopped(ref musicFadeRoutine);
-        float startVolume = warningMusic.volume;
-        float endVolume = enabled ? 0.45f : 0;
-        musicFadeRoutine = this.CreateAnimationRoutine(
-            0.5f,
-            delegate (float progress) {
-                warningMusic.volume = Mathf.Lerp(startVolume, endVolume, progress);
-            }
-        );
-    }
+					musicFadeRoutine = this.CreateAnimationRoutine(
+									1f,
+									delegate (float progress)
+								{
+									backgroundMusic.volume = Mathf.Lerp(0, 1, progress);
+								}
+							);
+				}
+		);
+	}
 
-    private AudioSource GetNextAudioSource()
-    {
-        AudioSource result = audioSources[audioSourceIndex];
-        audioSourceIndex = (audioSourceIndex + 1) % audioSources.Length;
-        return result;
-    }
+	private Coroutine musicFadeRoutine = null;
+	public void EnableWarningMusic(bool enabled)
+	{
+		this.EnsureCoroutineStopped(ref musicFadeRoutine);
+		float startVolume = warningMusic.volume;
+		float endVolume = enabled ? 0.2f : 0;
+		musicFadeRoutine = this.CreateAnimationRoutine(
+				0.5f,
+				delegate (float progress)
+				{
+					warningMusic.volume = Mathf.Lerp(startVolume, endVolume, progress);
+				}
+		);
+	}
+
+	private AudioSource GetNextAudioSource()
+	{
+		AudioSource result = audioSources[audioSourceIndex];
+		audioSourceIndex = (audioSourceIndex + 1) % audioSources.Length;
+		return result;
+	}
 }
