@@ -75,7 +75,7 @@ public class AudioManager : MonoBehaviour
 
 	public void PlayWinSound()
 	{
-		PlaySFX(winSound, 0.8f);
+		PlaySFX(winSound, 0.5f);
 	}
 
 	public void PlayCapsuleThrow()
