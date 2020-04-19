@@ -8,6 +8,7 @@ public class ThingToProtect : MonoBehaviour {
 
     public void Throw(Vector2 direction) {
         AudioManager.Instance.EnableWarningMusic(true);
+        AudioManager.Instance.PlayCapsuleThrow();
         mainTransform.SetParent(null);
         mainRigidbody.isKinematic = false;
         mainRigidbody.AddForce(direction*450);
