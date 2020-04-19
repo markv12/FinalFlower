@@ -59,14 +59,17 @@ public class HighScoreManager : MonoBehaviour
 		{
 			playerName = "You";
 		}
-		int scoreCount = names.Length;
-		for (int i = 0; i < scoreCount; i++)
+		int totalCount = names.Length;
+		for (int i = 0; i < totalCount; i++)
 		{
 			if (!hasShownPlayer && playerScore <= float.Parse(scores[i]))
 			{
-				scoreLabel += playerName + "   " + playerScore.ToString("0.00") + "s\n";
+				scoreLabel += playerName + "   " + playerScore.ToString("0.000") + "s\n";
 				hasShownPlayer = true;
-				scoreCount--;
+				if (totalCount == scoreCount)
+				{
+					totalCount--;
+				}
 			}
 			if (i < scoreCount)
 			{
@@ -78,9 +81,9 @@ public class HighScoreManager : MonoBehaviour
 				scoreLabel += displayName + "   " + scores[i] + "s\n";
 			}
 		}
-		if (scoreLabel == "")
+		if (scoreLabel == "" || (!hasShownPlayer && totalCount < scoreCount))
 		{
-			scoreLabel = playerName + "   " + playerScore.ToString("0.00") + "s\n";
+			scoreLabel += playerName + "   " + playerScore.ToString("0.000") + "s\n";
 		}
 		highScoreTextObject.GetComponent<TextMeshProUGUI>().text = scoreLabel;
 	}
@@ -140,7 +143,6 @@ public class HighScoreManager : MonoBehaviour
 					scores[s] = split[1];
 					if (shouldIncludePlayer && playerScore <= float.Parse(split[1]))
 					{
-						Debug.Log("High Score!");
 						inputZone.SetActive(true);
 					}
 				}
@@ -151,7 +153,7 @@ public class HighScoreManager : MonoBehaviour
 
 	IEnumerator addHighScore(string name, float score)
 	{
-		string url = "https://agile-citadel-44322.herokuapp.com/" + leaderboardName + "/add/" + name + '/' + score.ToString("0.00") + '/';
+		string url = "https://agile-citadel-44322.herokuapp.com/" + leaderboardName + "/add/" + name + '/' + score.ToString("0.000") + '/';
 		using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
 		{
 			yield return webRequest.SendWebRequest();
