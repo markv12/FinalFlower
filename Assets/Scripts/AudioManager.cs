@@ -41,6 +41,7 @@ public class AudioManager : MonoBehaviour
 	public AudioClip shootSound;
 	public AudioClip hitSound;
 	public AudioClip jumpSound;
+	public AudioClip winSound;
 	public AudioClip capsuleThrowSound;
 	public AudioClip capsuleCatchSound;
 	public AudioClip capsuleBreakSound;
@@ -62,6 +63,12 @@ public class AudioManager : MonoBehaviour
 	{
 		PlaySFX(jumpSound, 1f);
 	}
+
+	public void PlayWinSound()
+	{
+		PlaySFX(winSound, 0.8f);
+	}
+
 	public void PlayCapsuleThrow()
 	{
 		PlaySFX(capsuleThrowSound, 1f);
