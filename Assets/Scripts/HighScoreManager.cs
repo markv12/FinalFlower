@@ -33,7 +33,8 @@ public class HighScoreManager : MonoBehaviour
 	public void saveScore()
 	{
 		string name = playerNameTextObject.GetComponent<TextMeshProUGUI>().text;
-		if (name.Length < 2 || name.Length > 16) return;
+		if (name.Length < 2) return;
+		if (name.Length > 16) name = name.Substring(0, 16);
 		Debug.Log("Adding high score " + playerScore + " for player " + name);
 		StartCoroutine(addHighScore(name, playerScore));
 		inputZone.SetActive(false);
