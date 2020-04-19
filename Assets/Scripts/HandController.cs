@@ -72,7 +72,7 @@ public class HandController : MonoBehaviour {
         GameObject newBullet = Instantiate(bulletPrefab);
         newBullet.transform.SetPositionAndRotation(shootPoint.position, shootPoint.rotation);
         newBullet.GetComponent<Bullet>().owner = owner;
-        AudioManager.instance.PlayGunSound();
+        AudioManager.Instance.PlayGunSound();
         //Debug.DrawRay(shootPoint.position, shootPoint.forward, Color.red, 1000);
         //imageT.localRotation *= (dState == DirectionState.right) ? shotRotationReverse : shotRotation;
         //RaycastHit2D hit = Physics2D.Raycast(shootPoint.position, shootPoint.forward);
