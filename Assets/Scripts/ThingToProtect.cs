@@ -37,14 +37,31 @@ public class ThingToProtect : MonoBehaviour {
         }
         if (collision.gameObject.CompareTag("Floor")) {
             Vector2 currPos = mainTransform.position;
-            for (int i = 0; i < collision.contactCount; i++) {
-                ContactPoint2D cont = collision.GetContact(i);
-                Vector2 contactLocation = cont.point;
-                if (contactLocation.y < currPos.y) {
-                    GameOverManager.GameOver();
-                }
+            float highestY = GetHighestY(collision.gameObject);
+            if(currPos.y > highestY) {
+                GameOverManager.GameOver();
+            }
+            //for (int i = 0; i < collision.contactCount; i++) {
+            //    ContactPoint2D cont = collision.GetContact(i);
+            //    Vector2 contactLocation = cont.point;
+            //    if (contactLocation.y < currPos.y) {
+            //        //GameOverManager.GameOver();
+            //    }
+            //}
+        }
+    }
+
+    private float GetHighestY(GameObject rootObject) {
+        SpriteRenderer[] allRenderers = rootObject.GetComponentsInChildren<SpriteRenderer>();
+        float result = float.MinValue;
+        for (int i = 0; i < allRenderers.Length; i++) {
+            Bounds theBounds = allRenderers[i].bounds;
+            float highY = (theBounds.center + theBounds.extents).y;
+            if(highY > result) {
+                result = highY;
             }
         }
+        return result;
     }
 
     private void Update() {
