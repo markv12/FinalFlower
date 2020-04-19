@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using System.Linq;
 
-public static class SceneLoader {
-    public static void LoadScene(Scenes scene) {
-        SceneManager.LoadScene(scene.Name());
-    }
+public static class SceneLoader
+{
+	public static void LoadScene(Scenes scene)
+	{
+		SceneManager.LoadScene(scene.Name());
+	}
 
 #if UNITY_EDITOR
     [MenuItem("Scenes/Load Title Screen")]
@@ -28,49 +30,61 @@ public static class SceneLoader {
     }
 #endif
 
-    private static Dictionary<string, Scenes> nameToScene;
-    private static Dictionary<string, Scenes> NameToScene {
-        get {
-            if(nameToScene == null) {
-                nameToScene = new Dictionary<string, Scenes>();
-                IEnumerable<Scenes> allScenes = System.Enum.GetValues(typeof(Scenes)).Cast<Scenes>();
-                foreach(Scenes s in allScenes) {
-                    nameToScene[s.Name()] = s;
-                }
-            }
-            return nameToScene;
-        }
-    }
+	private static Dictionary<string, Scenes> nameToScene;
+	private static Dictionary<string, Scenes> NameToScene
+	{
+		get
+		{
+			if (nameToScene == null)
+			{
+				nameToScene = new Dictionary<string, Scenes>();
+				IEnumerable<Scenes> allScenes = System.Enum.GetValues(typeof(Scenes)).Cast<Scenes>();
+				foreach (Scenes s in allScenes)
+				{
+					nameToScene[s.Name()] = s;
+				}
+			}
+			return nameToScene;
+		}
+	}
 
-    public static string GetNextSceneName(string sceneName) {
-        Scenes s = NameToScene[sceneName];
-        return (s + 1).Name();
-    }
+	public static string GetNextSceneName(string sceneName)
+	{
+		Scenes s = NameToScene[sceneName];
+		return (s + 1).Name();
+	}
 }
 
-public enum Scenes {
-    TITLE_SCREEN,
-    LEVEL_SELECT,
-    LEVEL_1,
-    LEVEL_2,
-    LEVEL_3,
+public enum Scenes
+{
+	TITLE_SCREEN,
+	LEVEL_SELECT,
+	RULE_SCREEN,
+	LEVEL_1,
+	LEVEL_2,
+	LEVEL_3,
 }
 
-public static class ScenesExtensions {
-    public static string Name(this Scenes me) {
-        switch (me) {
-            case Scenes.TITLE_SCREEN:
-                return "TitleScreen";
-            case Scenes.LEVEL_SELECT:
-                return "LevelSelect";
-            case Scenes.LEVEL_1:
-                return "Level 1";
-            case Scenes.LEVEL_2:
-                return "Level 2";
-            case Scenes.LEVEL_3:
-                return "Level 3";
-            default:
-                return "Scene Not Found";
-        }
-    }
+public static class ScenesExtensions
+{
+	public static string Name(this Scenes me)
+	{
+		switch (me)
+		{
+			case Scenes.TITLE_SCREEN:
+				return "TitleScreen";
+			case Scenes.LEVEL_SELECT:
+				return "LevelSelect";
+			case Scenes.RULE_SCREEN:
+				return "Rules";
+			case Scenes.LEVEL_1:
+				return "Level 1";
+			case Scenes.LEVEL_2:
+				return "Level 2";
+			case Scenes.LEVEL_3:
+				return "Level 3";
+			default:
+				return "Scene Not Found";
+		}
+	}
 }
