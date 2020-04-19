@@ -29,8 +29,9 @@ public static class SceneLoader {
 
 public enum Scenes {
     TITLE_SCREEN,
-    SCENE_1,
-    SCENE_2,
+    LEVEL_SELECT,
+    LEVEL_1,
+    LEVEL_2,
 }
 
 public static class ScenesExtensions {
@@ -38,10 +39,12 @@ public static class ScenesExtensions {
         switch (me) {
             case Scenes.TITLE_SCREEN:
                 return "TitleScreen";
-            case Scenes.SCENE_1:
-                return "MainDrawing";
-            case Scenes.SCENE_2:
-                return "LineSelection";
+            case Scenes.LEVEL_SELECT:
+                return "LevelSelect";
+            case Scenes.LEVEL_1:
+                return "Level 1";
+            case Scenes.LEVEL_2:
+                return "Level 2";
             default:
                 return "Scene Not Found";
         }

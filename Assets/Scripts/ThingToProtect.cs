@@ -7,6 +7,7 @@ public class ThingToProtect : MonoBehaviour {
     private float lastThrowTime;
 
     public void Throw(Vector2 direction) {
+        AudioManager.Instance.EnableWarningMusic(true);
         mainTransform.SetParent(null);
         mainRigidbody.isKinematic = false;
         mainRigidbody.AddForce(direction*450);
@@ -15,6 +16,7 @@ public class ThingToProtect : MonoBehaviour {
     }
 
     public void Catch(HandController _handController) {
+        AudioManager.Instance.EnableWarningMusic(false);
         mainTransform.SetParent(_handController.handMainTransform);
         _handController.thingToProtect = this;
 

@@ -3,7 +3,7 @@
 public class AudioManager : MonoBehaviour {
 
     private const string  AUDIO_MANAGER_PATH = "AudioManager";
-    public static AudioManager instance;
+    private static AudioManager instance;
     public static AudioManager Instance {
         get {
             if (instance == null) {
@@ -11,6 +11,19 @@ public class AudioManager : MonoBehaviour {
                 GameObject instantiated = Instantiate(gameOverScreenObject);
                 DontDestroyOnLoad(instantiated);
                 instance = instantiated.GetComponent<AudioManager>();
+
+                instance.warningMusic.volume = 0;
+                instance.warningMusic.Play();
+
+                instance.backgroundMusic.volume = 0;
+                instance.backgroundMusic.Play();
+                instance.CreateAnimationRoutine(
+                    1,
+                    delegate (float progress) {
+                        instance.backgroundMusic.volume = progress;
+                    }
+                );
+
             }
             return instance;
         }
@@ -19,23 +32,11 @@ public class AudioManager : MonoBehaviour {
     public AudioSource[] audioSources;
 
     public AudioSource backgroundMusic;
+    public AudioSource warningMusic;
     public AudioClip shootSound;
     public AudioClip hitSound;
     
     private int audioSourceIndex = 0;
-
-
-    void Awake() {
-        instance = this;
-        backgroundMusic.volume = 0;
-        backgroundMusic.Play();
-        this.CreateAnimationRoutine(
-            1,
-            delegate (float progress) {
-                backgroundMusic.volume = progress;
-            }
-        );
-    }
 
     public void PlayGunSound() {
         AudioSource source = GetNextAudioSource();
@@ -47,6 +48,19 @@ public class AudioManager : MonoBehaviour {
         AudioSource source = GetNextAudioSource();
         source.volume = 0.6f;
         source.PlayOneShot(hitSound);
+    }
+
+    private Coroutine warningMusicFadeRoutine = null;
+    public void EnableWarningMusic(bool enabled) {
+        this.EnsureCoroutineStopped(ref warningMusicFadeRoutine);
+        float startVolume = warningMusic.volume;
+        float endVolume = enabled ? 1 : 0;
+        warningMusicFadeRoutine = this.CreateAnimationRoutine(
+            0.5f,
+            delegate (float progress) {
+                warningMusic.volume = Mathf.Lerp(startVolume, endVolume, progress);
+            }
+        );
     }
 
     private AudioSource GetNextAudioSource()
