@@ -16,10 +16,11 @@ public class HandController : MonoBehaviour {
 
     public GameObject bulletPrefab;
 
-    public Camera theCamera;
+    private Camera theCamera;
     public static float cameraDistance;
 
-    void Awake() {
+    private void Start() {
+        theCamera = CameraShaker.instance.shakeTransform.GetComponent<Camera>();
         ownerT = owner.transform;
         if (belongsToPlayer) {
             cameraDistance = -theCamera.transform.position.z;
@@ -30,28 +31,30 @@ public class HandController : MonoBehaviour {
     private static readonly Quaternion shotRotation = Quaternion.Euler(0, 0, -16);
     private static readonly Quaternion shotRotationReverse = Quaternion.Euler(0, 0, 16);
     void Update() {
-        Vector3 aimPosition;
-        if (belongsToPlayer) {
-            Vector3 v3 = Input.mousePosition;
-            v3.z = cameraDistance;
-            aimPosition = theCamera.ScreenToWorldPoint(v3);
-        } else {
-            aimPosition = Player.mainPlayer.t.position;
-        }
-
-        Vector3 handPos = GetHandPosition(aimPosition);
-        float angleFromPlayer = GetHandAngle(handPos);
-        AdjustImageForAngle(angleFromPlayer);
-        handMainTransform.rotation = Quaternion.Euler(0, 0, angleFromPlayer);
-        handMainTransform.position = handPos;
-        if (belongsToPlayer && Input.GetMouseButtonDown(0)) {
-            if (HasThingToProtect()) {
-                Throw();
+        if (Time.timeScale > 0) {
+            Vector3 aimPosition;
+            if (belongsToPlayer) {
+                Vector3 v3 = Input.mousePosition;
+                v3.z = cameraDistance;
+                aimPosition = theCamera.ScreenToWorldPoint(v3);
             } else {
-                FireGun();
+                aimPosition = Player.mainPlayer.t.position;
             }
+
+            Vector3 handPos = GetHandPosition(aimPosition);
+            float angleFromPlayer = GetHandAngle(handPos);
+            AdjustImageForAngle(angleFromPlayer);
+            handMainTransform.rotation = Quaternion.Euler(0, 0, angleFromPlayer);
+            handMainTransform.position = handPos;
+            if (belongsToPlayer && Input.GetMouseButtonDown(0)) {
+                if (HasThingToProtect()) {
+                    Throw();
+                } else {
+                    FireGun();
+                }
+            }
+            imageT.localRotation = Quaternion.Lerp(imageT.localRotation, theIQ, Time.deltaTime * 3);
         }
-        imageT.localRotation = Quaternion.Lerp(imageT.localRotation, theIQ, Time.deltaTime * 3);
     }
 
     public void Throw() {

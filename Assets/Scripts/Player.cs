@@ -14,7 +14,7 @@ public class Player : MonoBehaviour {
 	public float moveSpeed = 9;
 	public float MoveSpeed {
 		get {
-			return handController.HasThingToProtect() ? moveSpeed / 1.7f : moveSpeed;
+			return handController.HasThingToProtect() ? moveSpeed / 2f : moveSpeed;
 		}
 	}
 
@@ -51,14 +51,14 @@ public class Player : MonoBehaviour {
 	float maxJumpVelocity;
 	public float MaxJumpVelocity {
 		get {
-			return handController.HasThingToProtect() ? maxJumpVelocity / 1.5f : maxJumpVelocity;
+			return handController.HasThingToProtect() ? maxJumpVelocity / 2f : maxJumpVelocity;
 		}
 	}
 
 	float minJumpVelocity;
 	public float MinJumpVelocity {
 		get {
-			return handController.HasThingToProtect() ? minJumpVelocity / 1.5f : minJumpVelocity;
+			return handController.HasThingToProtect() ? minJumpVelocity / 2f : minJumpVelocity;
 		}
 	}
 	Vector3 velocity;

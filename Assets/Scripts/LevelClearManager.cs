@@ -1,27 +1,27 @@
 ﻿using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class GameOverManager : MonoBehaviour {
+public class LevelClearManager : MonoBehaviour {
 
-    public static GameOverManager instance;
+    public static LevelClearManager instance;
 
     public CanvasGroup mainCanvasGroup;
 
-    private const string  GAME_OVER_SCREEN_PATH = "GameOverScreen";
-    private static Coroutine gameOverFadeRoutine = null;
-    public static void GameOver() {
+    private const string  LEVEL_CLEAR_SCREEN_PATH = "LevelClearScreen";
+    private static Coroutine levelClearFadeRoutine = null;
+    public static void LevelClear() {
         if (instance == null) {
-            GameObject gameOverScreenObject = (GameObject)Resources.Load(GAME_OVER_SCREEN_PATH);
+            GameObject gameOverScreenObject = (GameObject)Resources.Load(LEVEL_CLEAR_SCREEN_PATH);
             GameObject instantiated = Instantiate(gameOverScreenObject);
             DontDestroyOnLoad(instantiated);
-            instance = instantiated.GetComponent<GameOverManager>();
+            instance = instantiated.GetComponent<LevelClearManager>();
         }
-        instance.ShowGameOverScreen();
+        instance.ShowLevelClearScreen();
     }
 
-    private void ShowGameOverScreen() {
+    private void ShowLevelClearScreen() {
         Time.timeScale = 0;
-        this.EnsureCoroutineStopped(ref gameOverFadeRoutine);
+        this.EnsureCoroutineStopped(ref levelClearFadeRoutine);
         this.CreateAnimationRoutine(
             0.3f,
             delegate (float progress) {
