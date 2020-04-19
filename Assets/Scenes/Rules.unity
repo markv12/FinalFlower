@@ -1110,7 +1110,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: RULES
+  m_text: HOW TO PLAY
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 03b44a607940d48adbe03d3f6f439324, type: 2}
   m_sharedMaterial: {fileID: 4022974835890243719, guid: 03b44a607940d48adbe03d3f6f439324,
@@ -1180,10 +1180,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 110.72251}
   m_textInfo:
     textComponent: {fileID: 1626954200333047702}
-    characterCount: 5
+    characterCount: 11
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 2
+    wordCount: 3
     linkCount: 0
     lineCount: 1
     pageCount: 1

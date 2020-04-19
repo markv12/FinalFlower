@@ -331,7 +331,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Rules
+  m_text: How To Play
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 03b44a607940d48adbe03d3f6f439324, type: 2}
   m_sharedMaterial: {fileID: 4022974835890243719, guid: 03b44a607940d48adbe03d3f6f439324,
@@ -401,10 +401,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 29172693}
-    characterCount: 5
+    characterCount: 11
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 2
+    wordCount: 3
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -1476,7 +1476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.09803922}
+  m_Color: {r: 0.24862051, g: 0.29883856, b: 0.3490566, a: 0.7764706}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3295,7 +3295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.09803922}
+  m_Color: {r: 0.24862051, g: 0.29883856, b: 0.3490566, a: 0.7764706}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -4200,10 +4200,10 @@ MonoBehaviour:
   m_enableVertexGradient: 1
   m_colorMode: 2
   m_fontColorGradient:
-    topLeft: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
-    topRight: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
-    bottomLeft: {r: 0.4528302, g: 0.4384726, b: 0.38661444, a: 1}
-    bottomRight: {r: 0.4528302, g: 0.4384726, b: 0.38661444, a: 1}
+    topLeft: {r: 0.8980392, g: 0.87890875, b: 0.80784315, a: 1}
+    topRight: {r: 0.8980392, g: 0.87890875, b: 0.80784315, a: 1}
+    bottomLeft: {r: 0.8113208, g: 0.75600016, b: 0.5931827, a: 1}
+    bottomRight: {r: 0.8113208, g: 0.75600016, b: 0.5931827, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
