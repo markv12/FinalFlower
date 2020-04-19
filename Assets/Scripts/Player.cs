@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour {
 
 	public Transform t;
+	public PlayerAnimationController playerAnimationController;
 
 	public float maxJumpHeight = 4;
 	public float minJumpHeight = 1;
@@ -99,7 +99,7 @@ public class Player : MonoBehaviour {
             }
         }
 
-		if(t.position.y < -15) {
+		if(t.position.y < -15 && Time.timeScale > 0) {
 			GameOverManager.GameOver();
 		}
 	}
@@ -109,28 +109,32 @@ public class Player : MonoBehaviour {
 	}
 
 	public void OnJumpInputDown() {
-		if (wallSliding) {
-			if (wallDirX == directionalInput.x) {
-				velocity.x = -wallDirX * wallJumpClimb.x;
-				velocity.y = wallJumpClimb.y;
-			}
-			else if (directionalInput.x == 0) {
-				velocity.x = -wallDirX * wallJumpOff.x;
-				velocity.y = wallJumpOff.y;
-			}
-			else {
-				velocity.x = -wallDirX * wallLeap.x;
-				velocity.y = wallLeap.y;
-			}
-		}
-		if (controller.collisions.below) {
-			if (controller.collisions.slidingDownMaxSlope) {
-				if (directionalInput.x != -Mathf.Sign (controller.collisions.slopeNormal.x)) { // not jumping against max slope
-					velocity.y = MaxJumpVelocity * controller.collisions.slopeNormal.y;
-					velocity.x = MaxJumpVelocity * controller.collisions.slopeNormal.x;
+		if (Time.timeScale > 0) {
+			if (wallSliding) {
+				AudioManager.Instance.PlayJumpSound();
+				playerAnimationController.Jump();
+				if (wallDirX == directionalInput.x) {
+					velocity.x = -wallDirX * wallJumpClimb.x;
+					velocity.y = wallJumpClimb.y;
+				} else if (directionalInput.x == 0) {
+					velocity.x = -wallDirX * wallJumpOff.x;
+					velocity.y = wallJumpOff.y;
+				} else {
+					velocity.x = -wallDirX * wallLeap.x;
+					velocity.y = wallLeap.y;
 				}
-			} else {
-				velocity.y = MaxJumpVelocity;
+			}
+			if (controller.collisions.below) {
+				AudioManager.Instance.PlayJumpSound();
+				playerAnimationController.Jump();
+				if (controller.collisions.slidingDownMaxSlope) {
+					if (directionalInput.x != -Mathf.Sign(controller.collisions.slopeNormal.x)) { // not jumping against max slope
+						velocity.y = MaxJumpVelocity * controller.collisions.slopeNormal.y;
+						velocity.x = MaxJumpVelocity * controller.collisions.slopeNormal.x;
+					}
+				} else {
+					velocity.y = MaxJumpVelocity;
+				}
 			}
 		}
 	}
@@ -172,6 +176,7 @@ public class Player : MonoBehaviour {
 
 	void CalculateVelocity() {
 		float targetVelocityX = directionalInput.x * MoveSpeed;
+		playerAnimationController.RotateWheel(targetVelocityX);
 		velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
 		velocity.y += gravity * Time.deltaTime;
 	}
