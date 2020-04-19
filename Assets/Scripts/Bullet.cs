@@ -7,7 +7,12 @@ public class Bullet : MonoBehaviour {
 
     void Update () {
         myT.Translate(speed * Time.deltaTime);
-        if(Vector3.Distance(myT.position, Player.mainPlayer.transform.position) > 50) {
+        Vector3 pos = myT.position;
+        if (Vector3.Distance(pos, Player.mainPlayer.transform.position) > 50) {
+            Destroy(gameObject);
+        }
+        Vector3 viewportPosition = HandController.TheCamera.WorldToViewportPoint(pos);
+        if(Mathf.Abs(viewportPosition.x) > 1.05f || Mathf.Abs(viewportPosition.y) > 1.05f) {
             Destroy(gameObject);
         }
     }

@@ -16,14 +16,21 @@ public class HandController : MonoBehaviour {
 
     public GameObject bulletPrefab;
 
-    private Camera theCamera;
+    private static Camera theCamera;
+    public static Camera TheCamera {
+        get {
+            if (theCamera == null) {
+                theCamera = CameraShaker.instance.shakeTransform.GetComponent<Camera>();
+            }
+            return theCamera;
+        }
+    }
     public static float cameraDistance;
 
     private void Start() {
-        theCamera = CameraShaker.instance.shakeTransform.GetComponent<Camera>();
         ownerT = owner.transform;
         if (belongsToPlayer) {
-            cameraDistance = -theCamera.transform.position.z;
+            cameraDistance = -TheCamera.transform.position.z;
         }
     }
 
@@ -36,7 +43,7 @@ public class HandController : MonoBehaviour {
             if (belongsToPlayer) {
                 Vector3 v3 = Input.mousePosition;
                 v3.z = cameraDistance;
-                aimPosition = theCamera.ScreenToWorldPoint(v3);
+                aimPosition = TheCamera.ScreenToWorldPoint(v3);
             } else {
                 aimPosition = Player.mainPlayer.t.position;
             }

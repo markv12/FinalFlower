@@ -53,7 +53,7 @@ public class AudioManager : MonoBehaviour {
     public void EnableWarningMusic(bool enabled) {
         this.EnsureCoroutineStopped(ref warningMusicFadeRoutine);
         float startVolume = warningMusic.volume;
-        float endVolume = enabled ? 1 : 0;
+        float endVolume = enabled ? 0.75f : 0;
         warningMusicFadeRoutine = this.CreateAnimationRoutine(
             0.5f,
             delegate (float progress) {

@@ -1,10 +1,10 @@
 ﻿#if UNITY_EDITOR
-using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 #endif
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public static class SceneLoader {
     public static void LoadScene(Scenes scene) {

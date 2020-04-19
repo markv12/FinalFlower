@@ -20,6 +20,7 @@ public class GameOverManager : MonoBehaviour {
     }
 
     private void ShowGameOverScreen() {
+        AudioManager.Instance.EnableWarningMusic(false);
         Time.timeScale = 0;
         this.EnsureCoroutineStopped(ref gameOverFadeRoutine);
         this.CreateAnimationRoutine(
