@@ -4,6 +4,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour {
 
 	public Controller2D target;
+	public CameraZoomer cameraZoomer;
 	public float verticalOffset;
 	public float lookAheadDstX;
 	public float lookSmoothTimeX;
@@ -49,11 +50,9 @@ public class CameraFollow : MonoBehaviour {
 		focusPosition.y = Mathf.SmoothDamp (transform.position.y, focusPosition.y, ref smoothVelocityY, verticalSmoothTime);
 		focusPosition += Vector2.right * currentLookAheadX;
 
-		Vector3 pos = (Vector3)focusPosition + Vector3.forward * -10;
+		Vector3 pos = (Vector3)focusPosition + Vector3.forward * cameraZoomer.currentZoom;
 		transform.position = pos;
 	}
-
-
 
 	void OnDrawGizmos() {
 		Gizmos.color = new Color (1, 0, 0, .5f);
