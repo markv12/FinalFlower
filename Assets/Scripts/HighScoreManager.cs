@@ -108,6 +108,8 @@ public class HighScoreManager : MonoBehaviour
 				if (highScoreStrings.Length < scoreCountToDisplay)
 				{
 					scoreCountToDisplay = highScoreStrings.Length;
+					Debug.Log("High Score By Default!");
+					inputZone.SetActive(true);
 				}
 
 				names = new string[scoreCountToDisplay];
