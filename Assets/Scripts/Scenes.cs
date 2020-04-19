@@ -1,4 +1,6 @@
 ﻿#if UNITY_EDITOR
+using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 #endif
@@ -25,6 +27,25 @@ public static class SceneLoader {
         return PATH + sceneName + SCENE_SUFFIX;
     }
 #endif
+
+    private static Dictionary<string, Scenes> nameToScene;
+    private static Dictionary<string, Scenes> NameToScene {
+        get {
+            if(nameToScene == null) {
+                nameToScene = new Dictionary<string, Scenes>();
+                IEnumerable<Scenes> allScenes = System.Enum.GetValues(typeof(Scenes)).Cast<Scenes>();
+                foreach(Scenes s in allScenes) {
+                    nameToScene[s.Name()] = s;
+                }
+            }
+            return nameToScene;
+        }
+    }
+
+    public static string GetNextSceneName(string sceneName) {
+        Scenes s = NameToScene[sceneName];
+        return (s + 1).Name();
+    }
 }
 
 public enum Scenes {

@@ -23,7 +23,6 @@ public class AudioManager : MonoBehaviour {
                         instance.backgroundMusic.volume = progress;
                     }
                 );
-
             }
             return instance;
         }
