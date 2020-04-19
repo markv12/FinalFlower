@@ -53,6 +53,7 @@ public enum Scenes {
     LEVEL_SELECT,
     LEVEL_1,
     LEVEL_2,
+    LEVEL_3,
 }
 
 public static class ScenesExtensions {
@@ -64,8 +65,8 @@ public static class ScenesExtensions {
                 return "LevelSelect";
             case Scenes.LEVEL_1:
                 return "Level 1";
-            case Scenes.LEVEL_2:
-                return "Level 2";
+            case Scenes.LEVEL_3:
+                return "Level 3";
             default:
                 return "Scene Not Found";
         }
