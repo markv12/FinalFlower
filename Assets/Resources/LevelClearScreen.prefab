@@ -851,7 +851,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.6, y: 0.000020027}
+  m_AnchoredPosition: {x: 0.6, y: -28}
   m_SizeDelta: {x: 505.8, y: 645.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5640364742372330820
@@ -880,7 +880,41 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 'Demo Score1    1.01s
+
+    Demo Score2    1.01s
+
+    Demo Score3    1.01s
+
+    Demo Score4    1.01s
+
+    Demo Score5    1.01s
+
+    Demo Score6    1.01s
+
+    Demo Score7    1.01s
+
+    Demo Score8    1.01s
+
+    Demo Score9    1.01s
+
+    Demo Score10   1.01s
+
+    Demo Score11    1.01s
+
+    Demo Score12    1.01s
+
+    Demo Score 13   1.01s
+
+    Demo Score 14   1.01s
+
+    Demo Score 15   1.01s
+
+    Demo Score 16   1.01s
+
+    Demo Score  17  1.01s
+
+    Demo Score 18   1.01s'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 03b44a607940d48adbe03d3f6f439324, type: 2}
   m_sharedMaterial: {fileID: 4022974835890243719, guid: 03b44a607940d48adbe03d3f6f439324,
@@ -916,17 +950,17 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_textAlignment: 258
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -5
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 364
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -950,13 +984,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 3.8223937, z: 0, w: 1.3413343}
   m_textInfo:
     textComponent: {fileID: 3745779025496378077}
-    characterCount: 0
+    characterCount: 385
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 0
+    spaceCount: 106
+    wordCount: 78
     linkCount: 0
-    lineCount: 0
-    pageCount: 0
+    lineCount: 18
+    pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -2393,7 +2427,7 @@ MonoBehaviour:
   highScoreTextObject: {fileID: 1403969790222624917}
   playerNameTextObject: {fileID: 6809274980477076249}
   inputZone: {fileID: 4529350646940431315}
-  scoreCount: 17
+  scoreCount: 18
 --- !u!1 &8044564298908910103
 GameObject:
   m_ObjectHideFlags: 0

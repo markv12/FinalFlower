@@ -23,7 +23,7 @@ public class HighScoreManager : MonoBehaviour
 	{
 		leaderboardName = "ludumDare46" + SceneManager.GetActiveScene().name;
 		Debug.Log(leaderboardName);
-		highScoreTextObject.GetComponent<TextMeshProUGUI>().text = "";
+		highScoreTextObject.GetComponent<TextMeshProUGUI>().text = "Loading...";
 		playerNameTextObject.GetComponent<TextMeshProUGUI>().text = "";
 		setPlayerScore(time);
 		inputZone.SetActive(false);
