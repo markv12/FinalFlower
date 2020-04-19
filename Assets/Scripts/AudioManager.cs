@@ -35,19 +35,36 @@ public class AudioManager : MonoBehaviour {
     public AudioSource warningMusic;
     public AudioClip shootSound;
     public AudioClip hitSound;
+    public AudioClip jumpSound;
+    public AudioClip capsuleCatchSound;
+    public AudioClip capsuleBreakSound;
     
     private int audioSourceIndex = 0;
 
     public void PlayGunSound() {
-        AudioSource source = GetNextAudioSource();
-        source.volume = 1f;
-        source.PlayOneShot(shootSound);
+        PlaySFX(shootSound, 1f);
     }
 
     public void PlayHitSound() {
+        PlaySFX(hitSound, 0.6f);
+    }
+
+    public void PlayJumpSound() {
+        PlaySFX(jumpSound, 0.6f);
+    }
+
+    public void PlayCapsuleCatch() {
+        PlaySFX(capsuleCatchSound, 1f);
+    }
+
+    public void PlayCapsuleBreak() {
+        PlaySFX(capsuleBreakSound, 0.7f);
+    }
+
+    public void PlaySFX(AudioClip clip, float volume) {
         AudioSource source = GetNextAudioSource();
-        source.volume = 0.6f;
-        source.PlayOneShot(hitSound);
+        source.volume = volume;
+        source.PlayOneShot(clip);
     }
 
     public void PlayMenuMusic() {

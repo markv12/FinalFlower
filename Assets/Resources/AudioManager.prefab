@@ -697,6 +697,9 @@ MonoBehaviour:
   warningMusic: {fileID: 7831554653416676723}
   shootSound: {fileID: 8300000, guid: b0d4d1b511919488690c5e95f4df84b8, type: 3}
   hitSound: {fileID: 8300000, guid: 083dc74248df7496384632f36cdacfc3, type: 3}
+  jumpSound: {fileID: 8300000, guid: bf6ede5e0d7d34a169029aba6ba7cd4d, type: 3}
+  capsuleCatchSound: {fileID: 8300000, guid: 090b20a7cbf3e4d49bfd7f2b8dd55a13, type: 3}
+  capsuleBreakSound: {fileID: 8300000, guid: 4ea79b57a86114efc8710de6f422ff76, type: 3}
 --- !u!1 &4368468414536249568
 GameObject:
   m_ObjectHideFlags: 0

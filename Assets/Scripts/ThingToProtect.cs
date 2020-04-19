@@ -17,6 +17,7 @@ public class ThingToProtect : MonoBehaviour {
 
     public void Catch(HandController _handController) {
         AudioManager.Instance.EnableWarningMusic(false);
+        AudioManager.Instance.PlayCapsuleCatch();
         mainTransform.SetParent(_handController.handMainTransform);
         _handController.thingToProtect = this;
 
@@ -41,6 +42,7 @@ public class ThingToProtect : MonoBehaviour {
             Vector2 currPos = mainTransform.position;
             float highestY = GetHighestY(collision.gameObject);
             if(currPos.y > highestY) {
+                AudioManager.Instance.PlayCapsuleBreak();
                 GameOverManager.GameOver();
             }
             //for (int i = 0; i < collision.contactCount; i++) {
