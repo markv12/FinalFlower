@@ -66,7 +66,12 @@ public class HighScoreManager : MonoBehaviour
 			}
 			if (i < scoreCount)
 			{
-				scoreLabel += names[i].Substring(0, 12) + "   " + scores[i] + "s\n";
+				string displayName = names[i];
+				if (displayName.Length > 12)
+				{
+					displayName = displayName.Substring(0, 12);
+				}
+				scoreLabel += displayName + "   " + scores[i] + "s\n";
 			}
 		}
 		if (scoreLabel == "")
