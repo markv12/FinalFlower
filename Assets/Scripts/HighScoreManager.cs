@@ -33,7 +33,8 @@ public class HighScoreManager : MonoBehaviour
 	public void saveScore()
 	{
 		string name = playerNameTextObject.GetComponent<TextMeshProUGUI>().text;
-		if (name.Length < 2 || name.Length > 16) return;
+		if (name.Length < 2) return;
+		if (name.Length > 12) name = name.Substring(0, 12);
 		Debug.Log("Adding high score " + playerScore + " for player " + name);
 		StartCoroutine(addHighScore(name, playerScore));
 		inputZone.SetActive(false);
@@ -54,14 +55,19 @@ public class HighScoreManager : MonoBehaviour
 		{
 			playerName = "You";
 		}
-		for (int i = 0; i < names.Length; i++)
+		int scoreCount = names.Length;
+		for (int i = 0; i < scoreCount; i++)
 		{
 			if (!hasShownPlayer && playerScore <= float.Parse(scores[i]))
 			{
 				scoreLabel += playerName + "   " + playerScore.ToString("0.00") + "s\n";
 				hasShownPlayer = true;
+				scoreCount--;
 			}
-			scoreLabel += names[i] + "   " + scores[i] + "s\n";
+			if (i < scoreCount)
+			{
+				scoreLabel += names[i].Substring(0, 12) + "   " + scores[i] + "s\n";
+			}
 		}
 		if (scoreLabel == "")
 		{

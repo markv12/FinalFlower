@@ -16,9 +16,9 @@ public class CameraZoomer : MonoBehaviour
     private void LateUpdate() {
         Vector3 viewportPoint = mainCamera.WorldToViewportPoint(zoomTarget.position);
         if(Mathf.Abs(viewportPoint.x) > ZOOM_THRESHOLD || Mathf.Abs(viewportPoint.y) > ZOOM_THRESHOLD) {
-            currentZoom -= Time.deltaTime*3;
+            currentZoom -= Time.deltaTime*4;
         } else if (currentZoom < MAX_ZOOM){
-            currentZoom += Time.deltaTime * 2.5f;
+            currentZoom += Time.deltaTime * 3f;
         }
     }
 }

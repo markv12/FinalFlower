@@ -2,13 +2,26 @@
 
 public class AudioManager : MonoBehaviour {
 
+    private const string  AUDIO_MANAGER_PATH = "AudioManager";
+    public static AudioManager instance;
+    public static AudioManager Instance {
+        get {
+            if (instance == null) {
+                GameObject gameOverScreenObject = (GameObject)Resources.Load(AUDIO_MANAGER_PATH);
+                GameObject instantiated = Instantiate(gameOverScreenObject);
+                DontDestroyOnLoad(instantiated);
+                instance = instantiated.GetComponent<AudioManager>();
+            }
+            return instance;
+        }
+    }
+
     public AudioSource[] audioSources;
 
     public AudioClip shootSound;
     
     private int audioSourceIndex = 0;
 
-    public static AudioManager instance;
 
     void Awake() {
         instance = this;
