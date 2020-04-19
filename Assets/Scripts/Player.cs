@@ -99,7 +99,7 @@ public class Player : MonoBehaviour {
             }
         }
 
-		if(t.position.y < -20) {
+		if(t.position.y < -15) {
 			GameOverManager.GameOver();
 		}
 	}

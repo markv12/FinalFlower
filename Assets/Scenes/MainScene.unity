@@ -120,12 +120,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!20 &519420031 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 5269611284898119561, guid: e95e824e0f952e6419018e9ddeb829a9,
-    type: 3}
-  m_PrefabInstance: {fileID: 5269611285259503606}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &681758247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,7 +1056,7 @@ PrefabInstance:
     - target: {fileID: 5269611284898119542, guid: e95e824e0f952e6419018e9ddeb829a9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 5269611284898119542, guid: e95e824e0f952e6419018e9ddeb829a9,
         type: 3}
@@ -1109,15 +1103,20 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1389596927}
-    - target: {fileID: 5269611284898119560, guid: e95e824e0f952e6419018e9ddeb829a9,
-        type: 3}
-      propertyPath: verticalOffset
-      value: 1.6
-      objectReference: {fileID: 0}
     - target: {fileID: 5269611284898119562, guid: e95e824e0f952e6419018e9ddeb829a9,
         type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 5269611285259503609, guid: e95e824e0f952e6419018e9ddeb829a9,
+        type: 3}
+      propertyPath: zoomTarget
+      value: 
+      objectReference: {fileID: 6260324719798602436}
+    - target: {fileID: 9150223707244136375, guid: e95e824e0f952e6419018e9ddeb829a9,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e95e824e0f952e6419018e9ddeb829a9, type: 3}
@@ -1132,7 +1131,7 @@ PrefabInstance:
         type: 3}
       propertyPath: theCamera
       value: 
-      objectReference: {fileID: 519420031}
+      objectReference: {fileID: 0}
     - target: {fileID: 6260324718434507320, guid: 293dd13ccc42d4e44ac87bb0d2f72cf6,
         type: 3}
       propertyPath: m_Name
@@ -1195,6 +1194,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 293dd13ccc42d4e44ac87bb0d2f72cf6, type: 3}
+--- !u!4 &6260324719798602436 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8494325367663458754, guid: 293dd13ccc42d4e44ac87bb0d2f72cf6,
+    type: 3}
+  m_PrefabInstance: {fileID: 6260324719798602435}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7285592982803488433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1211,7 +1216,7 @@ PrefabInstance:
         type: 3}
       propertyPath: theCamera
       value: 
-      objectReference: {fileID: 519420031}
+      objectReference: {fileID: 0}
     - target: {fileID: 7285592983912358272, guid: 62707444af6a0924ab0f65b54778534a,
         type: 3}
       propertyPath: moveTowardsPlayer
