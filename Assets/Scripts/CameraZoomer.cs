@@ -13,8 +13,9 @@ public class CameraZoomer : MonoBehaviour
         zoomTarget = FindObjectOfType<ThingToProtect>().transform;
     }
 
+    private static readonly Vector3 adjustmentVector = new Vector3(-0.5f, -0.5f, 0);
     private void LateUpdate() {
-        Vector3 viewportPoint = mainCamera.WorldToViewportPoint(zoomTarget.position);
+        Vector3 viewportPoint = (mainCamera.WorldToViewportPoint(zoomTarget.position) + adjustmentVector) * 2f;
         float maxViewportPos = Mathf.Max(Mathf.Abs(viewportPoint.x), Mathf.Abs(viewportPoint.y));
         if (maxViewportPos > ZOOM_THRESHOLD) {
             float maxDiff = (maxViewportPos - ZOOM_THRESHOLD) * 20;

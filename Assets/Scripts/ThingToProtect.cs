@@ -70,7 +70,7 @@ public class ThingToProtect : MonoBehaviour {
     }
 
     private void Update() {
-        if (mainTransform.position.y < -15) {
+        if (mainTransform.position.y < -15 && Time.timeScale > 0) {
             GameOverManager.GameOver();
         }
     }
