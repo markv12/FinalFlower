@@ -700,7 +700,9 @@ MonoBehaviour:
   backgroundMusic: {fileID: 6160548387907860264}
   warningMusic: {fileID: 7831554653416676723}
   shootSound: {fileID: 8300000, guid: b0d4d1b511919488690c5e95f4df84b8, type: 3}
-  hitSound: {fileID: 8300000, guid: 083dc74248df7496384632f36cdacfc3, type: 3}
+  hitWallSound: {fileID: 8300000, guid: 083dc74248df7496384632f36cdacfc3, type: 3}
+  hitPlayerSound: {fileID: 8300000, guid: 8880df3f3db9448b59f386e963fff109, type: 3}
+  hitEnemySound: {fileID: 8300000, guid: 07a31e66e8b4b463f97bd322b9137023, type: 3}
   jumpSound: {fileID: 8300000, guid: bf6ede5e0d7d34a169029aba6ba7cd4d, type: 3}
   winSound: {fileID: 8300000, guid: 8dc7945da27ec430cbf79c0d061eb844, type: 3}
   capsuleThrowSound: {fileID: 8300000, guid: 579611513eafd430d9e85a169b165ff3, type: 3}

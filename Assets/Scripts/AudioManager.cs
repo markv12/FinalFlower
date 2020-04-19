@@ -39,7 +39,9 @@ public class AudioManager : MonoBehaviour
 	public AudioSource backgroundMusic;
 	public AudioSource warningMusic;
 	public AudioClip shootSound;
-	public AudioClip hitSound;
+	public AudioClip hitWallSound;
+	public AudioClip hitPlayerSound;
+	public AudioClip hitEnemySound;
 	public AudioClip jumpSound;
 	public AudioClip winSound;
 	public AudioClip capsuleThrowSound;
@@ -53,10 +55,17 @@ public class AudioManager : MonoBehaviour
 		PlaySFX(shootSound, 1f);
 	}
 
-	public void PlayHitSound()
+	public void PlayHitWallSound()
 	{
-		PlaySFX(hitSound, 0.4f);
-		// this sound is only for hitting walls and fizzling out. there are other sounds that haven't been implemented yet for hitting enemies and the player being hit.
+		PlaySFX(hitWallSound, 0.4f);
+	}
+	public void PlayHitPlayerSound()
+	{
+		PlaySFX(hitPlayerSound, 1.3f);
+	}
+	public void PlayHitEnemySound()
+	{
+		PlaySFX(hitEnemySound, 1.3f);
 	}
 
 	public void PlayJumpSound()
