@@ -59,14 +59,17 @@ public class HighScoreManager : MonoBehaviour
 		{
 			playerName = "You";
 		}
-		int scoreCount = names.Length;
-		for (int i = 0; i < scoreCount; i++)
+		int currCount = names.Length;
+		for (int i = 0; i < currCount; i++)
 		{
 			if (!hasShownPlayer && playerScore <= float.Parse(scores[i]))
 			{
 				scoreLabel += playerName + "   " + playerScore.ToString("0.00") + "s\n";
 				hasShownPlayer = true;
-				scoreCount--;
+				if (currCount == scoreCount)
+				{
+					currCount--;
+				}
 			}
 			if (i < scoreCount)
 			{
@@ -140,7 +143,6 @@ public class HighScoreManager : MonoBehaviour
 					scores[s] = split[1];
 					if (shouldIncludePlayer && playerScore <= float.Parse(split[1]))
 					{
-						Debug.Log("High Score!");
 						inputZone.SetActive(true);
 					}
 				}
