@@ -9,7 +9,8 @@ public class LevelClearManager : MonoBehaviour {
 
     private const string  LEVEL_CLEAR_SCREEN_PATH = "LevelClearScreen";
     private static Coroutine levelClearFadeRoutine = null;
-    public static void LevelClear() {
+    public static void LevelClear(float timeInSeconds) {
+        Debug.Log(timeInSeconds);
         if (instance == null) {
             GameObject gameOverScreenObject = (GameObject)Resources.Load(LEVEL_CLEAR_SCREEN_PATH);
             GameObject instantiated = Instantiate(gameOverScreenObject);
