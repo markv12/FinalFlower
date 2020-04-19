@@ -161,6 +161,7 @@ public class HighScoreManager : MonoBehaviour
 			else
 			{
 				Debug.Log("Successfully added new score");
+				StartCoroutine(getHighScores());
 			}
 		}
 	}
