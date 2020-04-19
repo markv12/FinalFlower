@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour {
             }
         }
         if (didHit) {
-            //AudioManager.Instance.PlayGunSound();
+            AudioManager.Instance.PlayHitSound();
             Destroy(gameObject);
         }
     }

@@ -18,17 +18,35 @@ public class AudioManager : MonoBehaviour {
 
     public AudioSource[] audioSources;
 
+    public AudioSource backgroundMusic;
     public AudioClip shootSound;
+    public AudioClip hitSound;
     
     private int audioSourceIndex = 0;
 
 
     void Awake() {
         instance = this;
+        backgroundMusic.volume = 0;
+        backgroundMusic.Play();
+        this.CreateAnimationRoutine(
+            1,
+            delegate (float progress) {
+                backgroundMusic.volume = progress;
+            }
+        );
     }
 
     public void PlayGunSound() {
-        GetNextAudioSource().PlayOneShot(shootSound);
+        AudioSource source = GetNextAudioSource();
+        source.volume = 1f;
+        source.PlayOneShot(shootSound);
+    }
+
+    public void PlayHitSound() {
+        AudioSource source = GetNextAudioSource();
+        source.volume = 0.6f;
+        source.PlayOneShot(hitSound);
     }
 
     private AudioSource GetNextAudioSource()
