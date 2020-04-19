@@ -60,11 +60,12 @@ public class HighScoreManager : MonoBehaviour
 			playerName = "You";
 		}
 		int totalCount = names.Length;
+		string delineator = "     ";
 		for (int i = 0; i < totalCount; i++)
 		{
 			if (!hasShownPlayer && playerScore <= float.Parse(scores[i]))
 			{
-				scoreLabel += playerName + "   " + playerScore.ToString("0.000") + "s\n";
+				scoreLabel += playerName + delineator + playerScore.ToString("0.000") + "s\n";
 				hasShownPlayer = true;
 				if (totalCount == scoreCount)
 				{
@@ -78,12 +79,12 @@ public class HighScoreManager : MonoBehaviour
 				{
 					displayName = displayName.Substring(0, 12);
 				}
-				scoreLabel += displayName + "   " + scores[i] + "s\n";
+				scoreLabel += displayName + delineator + scores[i] + "s\n";
 			}
 		}
 		if (scoreLabel == "" || (!hasShownPlayer && totalCount < scoreCount))
 		{
-			scoreLabel += playerName + "   " + playerScore.ToString("0.000") + "s\n";
+			scoreLabel += playerName + delineator + playerScore.ToString("0.000") + "s\n";
 		}
 		highScoreTextObject.GetComponent<TextMeshProUGUI>().text = scoreLabel;
 	}
