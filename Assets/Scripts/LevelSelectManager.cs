@@ -8,12 +8,13 @@ public class LevelSelectManager : MonoBehaviour {
     public Button level3Button;
 
     void Awake() {
-        level1Button.onClick.AddListener(delegate { LoadScene(Scenes.LEVEL_1); });
-        level2Button.onClick.AddListener(delegate { LoadScene(Scenes.LEVEL_2); });
-        level3Button.onClick.AddListener(delegate { LoadScene(Scenes.LEVEL_3); });
+        level1Button.onClick.AddListener(delegate { LoadGameScene(Scenes.LEVEL_1); });
+        level2Button.onClick.AddListener(delegate { LoadGameScene(Scenes.LEVEL_2); });
+        level3Button.onClick.AddListener(delegate { LoadGameScene(Scenes.LEVEL_3); });
     }
 
-    private void LoadScene(Scenes scene) {
+    private void LoadGameScene(Scenes scene) {
+        AudioManager.Instance.PlayGameMusic();
         LoadingScreen.LoadScene(scene);
     }
 }
