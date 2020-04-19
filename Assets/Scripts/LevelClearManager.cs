@@ -8,13 +8,10 @@ public class LevelClearManager : MonoBehaviour
 
 	public CanvasGroup mainCanvasGroup;
 
-	public string nextSceneName;
-
 	private const string LEVEL_CLEAR_SCREEN_PATH = "LevelClearScreen";
 	private static Coroutine levelClearFadeRoutine = null;
 	public static void LevelClear(float timeInSeconds)
 	{
-		Debug.Log(timeInSeconds);
 		if (instance == null)
 		{
 			GameObject gameOverScreenObject = (GameObject)Resources.Load(LEVEL_CLEAR_SCREEN_PATH);
@@ -56,7 +53,7 @@ public class LevelClearManager : MonoBehaviour
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
-				LoadingScreen.LoadScene(nextSceneName, delegate
+				LoadingScreen.LoadScene(SceneLoader.GetNextSceneName(SceneManager.GetActiveScene().name), delegate
 				{
 					Time.timeScale = 1;
 					mainCanvasGroup.alpha = 0;
