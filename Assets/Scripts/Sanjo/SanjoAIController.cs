@@ -79,7 +79,7 @@ public class SanjoAIController : MonoBehaviour
 		{
 			if( floorChecker.isHit() )
 			{
-				bool obstacleAhead = wallChecker.isHit() || !pitfallChecker.isHit();
+				bool obstacleAhead = wallChecker.isHit() || !pitfallChecker.isHit() || jumpReservation;
 
 				if( isWalker && !obstacleAhead )
 				{
@@ -95,7 +95,7 @@ public class SanjoAIController : MonoBehaviour
 				{
 					float heightFromTarget = target.transform.position.y - transform.position.y;
 
-					bool doJump = obstacleAhead | ( heightFromTarget > 4.0f );
+					bool doJump = obstacleAhead || ( heightFromTarget > 4.0f );
 
 					if( doJump )
 					{
@@ -121,6 +121,8 @@ public class SanjoAIController : MonoBehaviour
 		}
 
 		rigidBody.velocity = move;
+
+		jumpReservation = false;
 	}
 
 	private void UpdateDetection( float distance )
@@ -140,11 +142,13 @@ public class SanjoAIController : MonoBehaviour
 		}
 	}
 
+	bool jumpReservation = false;
 	private void UpdateContactAttack()
 	{
 		if( attackCollision.isHit() )
 		{
-			Player.mainPlayer.GetHit();
+			jumpReservation = true;
+			//Player.mainPlayer.GetHit();
 		}
 	}
 }
