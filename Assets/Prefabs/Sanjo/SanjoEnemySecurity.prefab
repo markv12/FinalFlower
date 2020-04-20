@@ -150,7 +150,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: 97c74b8b375ca8745a452be38bf0485a, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6156863, g: 0.105882354, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -355,11 +355,11 @@ MonoBehaviour:
   owner: {fileID: 5206888464954068496}
   target: {fileID: 0}
   movePower: 100
-  jumpPowerX: 1
-  jumpPowerY: 8
+  jumpPowerY: 6
+  hightLimitOfWalk: 5
   minDistance: 0
-  detectRange: 12
-  lostRange: 18
+  detectRange: 10
+  lostRange: 14
   floorChecker: {fileID: 8365735777279518162}
   pitfallChecker: {fileID: 7043492384265321370}
   wallChecker: {fileID: 2321303633307550540}
@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 3716305850666352306}
   - component: {fileID: 5925888040917681173}
   m_Layer: 0
-  m_Name: SanjoEnemyNoHand
+  m_Name: SanjoEnemySecurity
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

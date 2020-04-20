@@ -11,16 +11,21 @@ public class SanjoAIController : MonoBehaviour
 	public ThingToProtect target;
 
 	public float movePower = 80.0f;
-	public float jumpPowerX = 1.0f;
-	public float jumpPowerY = 8.0f;
+
+	public float jumpPowerY = 5.0f;
+	public float hightLimitOfWalk = 4.0f;
+
 	public float minDistance = 0.0f;
-	public float detectRange = 12.0f;
-	public float lostRange = 18.0f;
+	public float detectRange = 8.0f;
+	public float lostRange = 12.0f;
 
 	public SanjoCollisionChecker floorChecker = null;
 	public SanjoCollisionChecker pitfallChecker = null;
 	public SanjoCollisionChecker wallChecker = null;
 	public SanjoCollisionChecker attackCollision = null;
+	
+	private float obstaclePowerX = 1.0f;
+	private float obstaclePowerY = 8.0f;
 
 	// Start is called before the first frame update
 	void Start()
@@ -79,7 +84,7 @@ public class SanjoAIController : MonoBehaviour
 		{
 			if( floorChecker.isHit() )
 			{
-				bool obstacleAhead = wallChecker.isHit() || !pitfallChecker.isHit() || jumpReservation;
+				bool obstacleAhead = wallChecker.isHit() || !pitfallChecker.isHit();
 
 				if( isWalker && !obstacleAhead )
 				{
@@ -93,28 +98,28 @@ public class SanjoAIController : MonoBehaviour
 
 				if( isJumper )
 				{
-					float heightFromTarget = target.transform.position.y - transform.position.y;
-
-					bool doJump = obstacleAhead || ( heightFromTarget > 4.0f );
-
-					if( doJump )
+					// 障害物回避
+					if( obstacleAhead )
 					{
-						move.y = jumpPowerY * 0.5f;
-
-						if( obstacleAhead )
-						{
-							move.x = jumpPowerX * Mathf.Sign( distance );
-							move.y = jumpPowerY;
-						}
+						move.x = obstaclePowerX * Mathf.Sign( distance );
+						move.y = obstaclePowerY;
 
 						if( !pitfallChecker.isHit() )
 						{
 							move.x *= 2.0f;
 						}
 					}
+					// お邪魔ジャンプ
 					else
 					{
+						float heightFromTarget = target.transform.position.y - transform.position.y;
 
+						bool doJump = ( heightFromTarget > hightLimitOfWalk ) || jumpReservation;
+
+						if( doJump )
+						{
+							move.y = jumpPowerY;
+						}
 					}
 				}
 			}
