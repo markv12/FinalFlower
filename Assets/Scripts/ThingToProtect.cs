@@ -1,8 +1,18 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class ThingToProtect : MonoBehaviour {
     public Transform mainTransform;
     public Rigidbody2D mainRigidbody;
+
+    public SpriteRenderer mainRenderer;
+    public SpriteRenderer flowerRenderer;
+    public Sprite normalSprite;
+    public Sprite brokenSprite;
+    public Sprite normalFlowerSprite;
+    public Sprite whitherFlowerSprite1;
+    public Sprite whitherFlowerSprite2;
+    public Sprite whitherFlowerSprite3;
 
     private float lastThrowTime;
 
@@ -56,9 +66,21 @@ public class ThingToProtect : MonoBehaviour {
 
 		if( isBreak )
 		{
+            mainRenderer.sprite = brokenSprite;
+            StartCoroutine(WhitherFlower());
 			AudioManager.Instance.PlayCapsuleBreak();
             GameOverManager.GameOver();	
 		}
+    }
+
+    private const float ANIM_FRAME_TIME = 0.25f;
+    private IEnumerator WhitherFlower() {
+        yield return new WaitForSecondsRealtime(ANIM_FRAME_TIME);
+        flowerRenderer.sprite = whitherFlowerSprite1;
+        yield return new WaitForSecondsRealtime(ANIM_FRAME_TIME);
+        flowerRenderer.sprite = whitherFlowerSprite2;
+        yield return new WaitForSecondsRealtime(ANIM_FRAME_TIME);
+        flowerRenderer.sprite = whitherFlowerSprite3;
     }
 
     private float GetHighestY(GameObject rootObject) {

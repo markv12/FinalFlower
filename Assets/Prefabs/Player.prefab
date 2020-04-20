@@ -1386,6 +1386,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainTransform: {fileID: 8494325367663458754}
   mainRigidbody: {fileID: 7588043123381554943}
+  mainRenderer: {fileID: 8494325367663458753}
+  flowerRenderer: {fileID: 8539313415657850741}
+  normalSprite: {fileID: 21300000, guid: 22a871c58efd050458c5b3078dea74b2, type: 3}
+  brokenSprite: {fileID: 21300000, guid: 257610631f1edca4d99fb98908b73186, type: 3}
+  normalFlowerSprite: {fileID: 21300000, guid: c2c28515ed6452a4094519fa358bc8f8, type: 3}
+  whitherFlowerSprite1: {fileID: 21300000, guid: 9960996d50b908d4d938c547b0048266,
+    type: 3}
+  whitherFlowerSprite2: {fileID: 21300000, guid: 5f6751afa80c987418c812321f3f8e3f,
+    type: 3}
+  whitherFlowerSprite3: {fileID: 21300000, guid: 8b4016a8a9a60504988515f478200201,
+    type: 3}
 --- !u!50 &7588043123381554943
 Rigidbody2D:
   serializedVersion: 4
