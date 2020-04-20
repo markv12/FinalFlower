@@ -63,10 +63,6 @@ public class LevelClearManager : MonoBehaviour
 	{
 		controlsEnabled = !controlsEnabled;
 	}
-	public bool AreControlsEnabled()
-	{
-		return controlsEnabled;
-	}
 
 	private void Update()
 	{

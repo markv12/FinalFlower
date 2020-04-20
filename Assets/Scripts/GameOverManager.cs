@@ -37,7 +37,8 @@ public class GameOverManager : MonoBehaviour
 				delegate
 				{
 					// this is here so that both canvases can't overlap
-					if (levelClearCanvasGroup.GetComponent<LevelClearManager>().AreControlsEnabled() == false)
+					Debug.Log(levelClearCanvasGroup.alpha);
+					if (levelClearCanvasGroup.alpha == 0)
 					{
 						controlsEnabled = true;
 					}
