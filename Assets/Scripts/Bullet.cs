@@ -38,7 +38,6 @@ public class Bullet : MonoBehaviour
 			Enemy enemyScript = col.gameObject.GetComponentInParent<Enemy>();
 			if (enemyScript != null && enemyScript != owner && !(owner is Enemy))
 			{
-				AudioManager.Instance.PlayHitEnemySound();
 				enemyScript.Kill(myT.right, myT.position);
 			}
 			else

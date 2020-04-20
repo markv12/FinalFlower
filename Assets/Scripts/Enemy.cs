@@ -17,8 +17,8 @@ public class Enemy : MonoBehaviour {
         dead = true;
 
         Destroy(gun);
-        //AudioManager.Instance.PlayGunSound();
-        StopCoroutine(attackRoutine);
+        AudioManager.Instance.PlayHitEnemySound();
+        this.EnsureCoroutineStopped(ref attackRoutine);
         mainRigidbody.isKinematic = false;
         mainRigidbody.AddForceAtPosition(hitAngle*600, hitLocation);
         StartCoroutine(DieRoutine());
