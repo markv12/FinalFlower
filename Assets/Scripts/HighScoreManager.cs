@@ -10,6 +10,7 @@ public class HighScoreManager : MonoBehaviour
 
 	public GameObject playerScoreTextObject;
 	public GameObject highScoreTextObject;
+	public GameObject highScorePanel;
 	public GameObject playerNameTextObject;
 	public GameObject inputZone;
 	public int scoreCount = 5;
@@ -22,7 +23,6 @@ public class HighScoreManager : MonoBehaviour
 	public void setup(float time)
 	{
 		leaderboardName = "ludumDare46" + SceneManager.GetActiveScene().name;
-		Debug.Log(leaderboardName);
 		highScoreTextObject.GetComponent<TextMeshProUGUI>().text = "Loading...";
 		playerNameTextObject.GetComponent<TextMeshProUGUI>().text = "";
 		setPlayerScore(time);
@@ -52,6 +52,7 @@ public class HighScoreManager : MonoBehaviour
 
 	void updateHighScoreLabel(bool shouldIncludePlayer)
 	{
+		highScorePanel.SetActive(true);
 		bool hasShownPlayer = !shouldIncludePlayer;
 		string scoreLabel = "";
 		string playerName = playerNameTextObject.GetComponent<TextMeshProUGUI>().text;
@@ -65,7 +66,7 @@ public class HighScoreManager : MonoBehaviour
 		{
 			if (!hasShownPlayer && playerScore <= float.Parse(scores[i]))
 			{
-				scoreLabel += playerName + delineator + playerScore.ToString("0.000") + "s\n";
+				scoreLabel += "<#FFE100>" + playerName + delineator + playerScore.ToString("0.000") + "s</color>\n";
 				hasShownPlayer = true;
 				if (totalCount == scoreCount)
 				{
@@ -84,14 +85,14 @@ public class HighScoreManager : MonoBehaviour
 		}
 		if (scoreLabel == "" || (!hasShownPlayer && totalCount < scoreCount))
 		{
-			scoreLabel += playerName + delineator + playerScore.ToString("0.000") + "s\n";
+			scoreLabel += "<#FFE100>" + playerName + delineator + playerScore.ToString("0.000") + "s</color>\n";
 		}
 		highScoreTextObject.GetComponent<TextMeshProUGUI>().text = scoreLabel;
 	}
 
 	IEnumerator getHighScores(bool shouldIncludePlayer)
 	{
-		Debug.Log("Updating high scores");
+		Debug.Log("Loading high scores");
 		string url = "https://agile-citadel-44322.herokuapp.com/" + leaderboardName + "/bottom/" + scoreCount.ToString() + '/';
 		using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
 		{
@@ -100,6 +101,12 @@ public class HighScoreManager : MonoBehaviour
 			if (webRequest.isNetworkError)
 			{
 				Debug.Log("Network Error: " + webRequest.error);
+			}
+			else if (webRequest.downloadHandler.text.Substring(0, 1) == "<")
+			{
+				Debug.Log("Network Error: 404");
+				highScorePanel.SetActive(false);
+				yield break;
 			}
 			else if (webRequest.downloadHandler.text == "Forbidden" || webRequest.downloadHandler.text == "Internal Server Error")
 			{

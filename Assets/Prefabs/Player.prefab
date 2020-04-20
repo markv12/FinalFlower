@@ -293,7 +293,7 @@ MonoBehaviour:
   owner: {fileID: 6260324718434507325}
   belongsToPlayer: 1
   heightAdjustment: 0
-  armLength: 2.5
+  armLength: 2
   shootPoint: {fileID: 7347791095971454325}
   handMainTransform: {fileID: 3754527482209972087}
   imageT: {fileID: 1229993304080926898}

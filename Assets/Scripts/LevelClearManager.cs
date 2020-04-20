@@ -40,6 +40,16 @@ public class LevelClearManager : MonoBehaviour
 		);
 	}
 
+	public void BackToMainMenu()
+	{
+		LoadingScreen.LoadScene(Scenes.TITLE_SCREEN, delegate
+		{
+			Time.timeScale = 1;
+			mainCanvasGroup.alpha = 0;
+		});
+		controlsEnabled = false;
+	}
+
 	private bool controlsEnabled = false;
 
 	public void ToggleControlsEnabled()
