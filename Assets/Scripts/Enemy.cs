@@ -55,7 +55,7 @@ public class Enemy : MonoBehaviour {
                 SetHorizontalInput(theX);
             }
         }
-        if (Vector3.Distance(transform.position, Player.mainPlayer.t.position) > 50) {
+        if (Vector3.Distance(transform.position, Player.mainPlayer.t.position) > 250) {
             Destroy(gameObject);
         }
     }
