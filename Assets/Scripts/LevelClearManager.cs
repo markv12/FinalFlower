@@ -13,9 +13,11 @@ public class LevelClearManager : MonoBehaviour
 	private static Coroutine levelClearFadeRoutine = null;
 	public static void LevelClear(float timeInSeconds)
 	{
-		if (Time.frameCount - GameOverManager.lastActivateFrame > 15) {
+		if (Time.frameCount - GameOverManager.lastActivateFrame > 15)
+		{
 			GameOverManager.lastActivateFrame = Time.frameCount;
-			if (instance == null) {
+			if (instance == null)
+			{
 				GameObject gameOverScreenObject = (GameObject)Resources.Load(LEVEL_CLEAR_SCREEN_PATH);
 				GameObject instantiated = Instantiate(gameOverScreenObject);
 				DontDestroyOnLoad(instantiated);
@@ -53,6 +55,7 @@ public class LevelClearManager : MonoBehaviour
 				Time.timeScale = 1;
 				mainCanvasGroup.alpha = 0;
 				gameOverCanvasGroup.alpha = 0;
+				controlsEnabled = false;
 			});
 		}
 	}

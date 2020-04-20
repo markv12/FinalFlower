@@ -16,9 +16,11 @@ public class GameOverManager : MonoBehaviour
 	private static Coroutine gameOverFadeRoutine = null;
 	public static void GameOver()
 	{
-		if (Time.frameCount - lastActivateFrame > 15) {
+		if (Time.frameCount - lastActivateFrame > 15)
+		{
 			lastActivateFrame = Time.frameCount;
-			if (instance == null) {
+			if (instance == null)
+			{
 				GameObject gameOverScreenObject = (GameObject)Resources.Load(GAME_OVER_SCREEN_PATH);
 				GameObject instantiated = Instantiate(gameOverScreenObject);
 				DontDestroyOnLoad(instantiated);
@@ -57,6 +59,7 @@ public class GameOverManager : MonoBehaviour
 			{
 				Time.timeScale = 1;
 				mainCanvasGroup.alpha = 0;
+				controlsEnabled = false;
 			});
 		}
 	}
