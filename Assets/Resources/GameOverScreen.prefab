@@ -1068,6 +1068,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCanvasGroup: {fileID: 8646097727836153125}
+  levelClearCanvasGroup: {fileID: 8646097727836153125, guid: 2b366f1ff0ae6e046ba657483e62f2be,
+    type: 3}
 --- !u!114 &7852764699324514836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1093,7 +1095,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7852764699324514839}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0

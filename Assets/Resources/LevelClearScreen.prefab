@@ -2758,6 +2758,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCanvasGroup: {fileID: 8646097727836153125}
+  gameOverCanvasGroup: {fileID: 8646097727836153125, guid: b2b65f9b14890584281871c2d43e597d,
+    type: 3}
 --- !u!225 &8646097727836153125
 CanvasGroup:
   m_ObjectHideFlags: 0

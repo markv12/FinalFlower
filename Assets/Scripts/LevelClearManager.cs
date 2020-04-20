@@ -7,6 +7,7 @@ public class LevelClearManager : MonoBehaviour
 	public static LevelClearManager instance;
 
 	public CanvasGroup mainCanvasGroup;
+	public CanvasGroup gameOverCanvasGroup;
 
 	private const string LEVEL_CLEAR_SCREEN_PATH = "LevelClearScreen";
 	private static Coroutine levelClearFadeRoutine = null;
@@ -36,6 +37,7 @@ public class LevelClearManager : MonoBehaviour
 				delegate
 				{
 					controlsEnabled = true;
+					gameOverCanvasGroup.alpha = 0;
 				}
 		);
 	}
@@ -49,6 +51,7 @@ public class LevelClearManager : MonoBehaviour
 			{
 				Time.timeScale = 1;
 				mainCanvasGroup.alpha = 0;
+				gameOverCanvasGroup.alpha = 0;
 			});
 		}
 		controlsEnabled = false;
@@ -59,6 +62,10 @@ public class LevelClearManager : MonoBehaviour
 	public void ToggleControlsEnabled()
 	{
 		controlsEnabled = !controlsEnabled;
+	}
+	public bool AreControlsEnabled()
+	{
+		return controlsEnabled;
 	}
 
 	private void Update()
@@ -72,6 +79,7 @@ public class LevelClearManager : MonoBehaviour
 				{
 					Time.timeScale = 1;
 					mainCanvasGroup.alpha = 0;
+					gameOverCanvasGroup.alpha = 0;
 				});
 				controlsEnabled = false;
 			}
@@ -82,6 +90,7 @@ public class LevelClearManager : MonoBehaviour
 				{
 					Time.timeScale = 1;
 					mainCanvasGroup.alpha = 0;
+					gameOverCanvasGroup.alpha = 0;
 				});
 				controlsEnabled = false;
 			}

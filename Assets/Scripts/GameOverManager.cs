@@ -7,6 +7,7 @@ public class GameOverManager : MonoBehaviour
 	public static GameOverManager instance;
 
 	public CanvasGroup mainCanvasGroup;
+	public CanvasGroup levelClearCanvasGroup;
 
 	private const string GAME_OVER_SCREEN_PATH = "GameOverScreen";
 	private static Coroutine gameOverFadeRoutine = null;
@@ -35,7 +36,16 @@ public class GameOverManager : MonoBehaviour
 				},
 				delegate
 				{
-					controlsEnabled = true;
+					// this is here so that both canvases can't overlap
+					if (levelClearCanvasGroup.GetComponent<LevelClearManager>().AreControlsEnabled() == false)
+					{
+						controlsEnabled = true;
+					}
+					else
+					{
+						mainCanvasGroup.alpha = 0;
+						controlsEnabled = false;
+					}
 				}
 		);
 	}
