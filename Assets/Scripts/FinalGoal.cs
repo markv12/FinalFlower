@@ -4,10 +4,13 @@ using UnityEngine;
 public class FinalGoal : MonoBehaviour {
 	public SpriteRenderer flowerSprite;
 
+
 	public SpriteRenderer darkBackground;
 	public SpriteRenderer greenBackground;
 
 	public SpriteRenderer lowerGreen;
+	
+	public CanvasGroup finalTextGroup;
 
 	private bool started = false;
 
@@ -17,6 +20,7 @@ public class FinalGoal : MonoBehaviour {
 			if (thingToProtect != null) {
 				flowerSprite.enabled = true;
 				thingToProtect.SetVisible(false);
+				Destroy(thingToProtect.mainRigidbody);
 				started = true;
 				StartCoroutine(EndRoutine());
 			}
@@ -34,10 +38,18 @@ public class FinalGoal : MonoBehaviour {
 		);
 		yield return new WaitForSeconds(0.666f);
 		yield return this.CreateAnimationRoutine(
-			4f,
+			3.5f,
 			delegate (float progress) {
 				greenBackground.color = Color.Lerp(whiteClear, white, progress);
 			}
 		);
+		yield return this.CreateAnimationRoutine(
+			1f,
+			delegate (float progress) {
+				finalTextGroup.alpha = progress;
+			}
+		);
+		yield return new WaitForSeconds(3f);
+		LoadingScreen.LoadScene(Scenes.TITLE_SCREEN);
 	}
 }
