@@ -52,12 +52,12 @@ public class AudioManager : MonoBehaviour
 
 	public void PlayGunSound()
 	{
-		PlaySFX(shootSound, 1f);
+		PlaySFX(shootSound, .7f);
 	}
 
 	public void PlayHitWallSound()
 	{
-		PlaySFX(hitWallSound, 0.4f);
+		PlaySFX(hitWallSound, 0.3f);
 	}
 	public void PlayHitPlayerSound()
 	{
@@ -85,7 +85,7 @@ public class AudioManager : MonoBehaviour
 
 	public void PlayCapsuleCatch()
 	{
-		PlaySFX(capsuleCatchSound, 1f);
+		PlaySFX(capsuleCatchSound, 0.8f);
 	}
 
 	public void PlayCapsuleBreak()
