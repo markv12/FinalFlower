@@ -4,7 +4,8 @@ public class AudioManager : MonoBehaviour
 {
 
 	private const string AUDIO_MANAGER_PATH = "AudioManager";
-	private const float BG_MUSIC_VOLUME = 0.666f;
+	private const float BG_MUSIC_VOLUME = 0.4f;
+	private const float MENU_MUSIC_VOLUME = 0.6f;
 	private static AudioManager instance;
 	public static AudioManager Instance
 	{
@@ -63,11 +64,11 @@ public class AudioManager : MonoBehaviour
 	}
 	public void PlayHitPlayerSound()
 	{
-		PlaySFX(hitPlayerSound, 1.3f);
+		PlaySFX(hitPlayerSound, 1f);
 	}
 	public void PlayHitEnemySound()
 	{
-		PlaySFX(hitEnemySound, 1.3f);
+		PlaySFX(hitEnemySound, 1f);
 	}
 
 	public void PlayJumpSound()
@@ -82,7 +83,7 @@ public class AudioManager : MonoBehaviour
 
 	public void PlayCapsuleThrow()
 	{
-		PlaySFX(capsuleThrowSound, 1.2f);
+		PlaySFX(capsuleThrowSound, 1f);
 	}
 
 	public void PlayCapsuleCatch()
@@ -92,7 +93,7 @@ public class AudioManager : MonoBehaviour
 
 	public void PlayCapsuleBreak()
 	{
-		PlaySFX(capsuleBreakSound, 0.7f);
+		PlaySFX(capsuleBreakSound, 0.6f);
 	}
 
 	public void PlaySFX(AudioClip clip, float volume)
@@ -124,12 +125,12 @@ public class AudioManager : MonoBehaviour
 					endMusic.Stop();
 					menuMusic.Play();
 					musicFadeRoutine = this.CreateAnimationRoutine(
-									1f,
-									delegate (float progress)
-								{
-									menuMusic.volume = Mathf.Lerp(0, 1, progress);
-								}
-							);
+							1f,
+							delegate (float progress)
+						{
+							menuMusic.volume = Mathf.Lerp(0, MENU_MUSIC_VOLUME, progress);
+						}
+					);
 				}
 		);
 	}
@@ -169,7 +170,7 @@ public class AudioManager : MonoBehaviour
 	{
 		this.EnsureCoroutineStopped(ref musicFadeRoutine);
 		float startVolume = warningMusic.volume;
-		float endVolume = enabled ? 0.2f : 0;
+		float endVolume = enabled ? 0.1f : 0;
 		musicFadeRoutine = this.CreateAnimationRoutine(
 				0.5f,
 				delegate (float progress)
