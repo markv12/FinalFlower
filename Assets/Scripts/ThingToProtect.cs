@@ -30,7 +30,7 @@ public class ThingToProtect : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        if ((Time.time - lastThrowTime) > 1f) {
+        if ((Time.time - lastThrowTime) > 0.6f) {
             Transform theParent = collision.gameObject.transform.parent;
             if (theParent != null) {
                 HandController theHandController = theParent.GetComponentInParent<HandController>();
