@@ -37,14 +37,13 @@ public class LevelClearManager : MonoBehaviour
 				delegate
 				{
 					controlsEnabled = true;
-					gameOverCanvasGroup.alpha = 0;
 				}
 		);
 	}
 
 	public void BackToMainMenu()
 	{
-		if (controlsEnabled)
+		if (mainCanvasGroup.alpha > 0)
 		{
 			Debug.Log("Back to main menu button from LevelClearManager pushed");
 			LoadingScreen.LoadScene(Scenes.TITLE_SCREEN, delegate
@@ -54,7 +53,6 @@ public class LevelClearManager : MonoBehaviour
 				gameOverCanvasGroup.alpha = 0;
 			});
 		}
-		controlsEnabled = false;
 	}
 
 	private bool controlsEnabled = false;
