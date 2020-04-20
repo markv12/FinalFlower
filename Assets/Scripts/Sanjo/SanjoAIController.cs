@@ -90,15 +90,28 @@ public class SanjoAIController : MonoBehaviour
 
 				if( isJumper )
 				{
-					if( obstacleAhead )
+					float heightFromTarget = target.transform.position.y - transform.position.y;
+
+					bool doJump = obstacleAhead | ( heightFromTarget > 4.0f );
+
+					if( doJump )
 					{
-						move.x = jumpPowerX;
-						move.y = jumpPowerY;
+						move.y = jumpPowerY * 0.5f;
+
+						if( obstacleAhead )
+						{
+							move.x = jumpPowerX * Mathf.Sign( distance ) ;
+							move.y = jumpPowerY;
+						}
 
 						if( !pitfallChecker.isHit() )
 						{
 							move.x *= 2.0f;
 						}
+					}
+					else
+					{
+
 					}
 				}
 			}

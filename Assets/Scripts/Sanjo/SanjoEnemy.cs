@@ -5,11 +5,14 @@ public class SanjoEnemy : MonoBehaviour
 {	
     public Collider2D mainCollider;
     public Collider2D headCollider;
-    public Rigidbody2D mainRigidbody;
     public HandController gun;
-    public Transform bodyTransform;
 	public SanjoAIController AI;
-		
+
+	public SanjoAIController GetAI()
+	{
+		return AI;
+	}
+
     void Start()
 	{
         attackRoutine = StartCoroutine(AttackRoutine());
@@ -28,6 +31,8 @@ public class SanjoEnemy : MonoBehaviour
 		{
 			Destroy( gun );
 		}
+
+		Rigidbody2D mainRigidbody = GetComponent<Rigidbody2D>();
 
         StopCoroutine(attackRoutine);
         mainRigidbody.isKinematic = false;
