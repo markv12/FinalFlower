@@ -68,7 +68,7 @@ public class SanjoAIController : MonoBehaviour
 		pitfallChecker.SetOffsetX( Mathf.Sign( distanceFromTarget ) );
 	}
 
-		private void UpdateMove( float distance )
+	private void UpdateMove( float distance )
 	{
 		Vector2 move = rigidBody.velocity;
 
