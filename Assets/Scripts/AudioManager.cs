@@ -4,7 +4,7 @@ public class AudioManager : MonoBehaviour
 {
 
 	private const string AUDIO_MANAGER_PATH = "AudioManager";
-	private const float BG_MUSIC_VOLUME = 0.4f;
+	private const float BG_MUSIC_VOLUME = 0.25f;
 	private const float MENU_MUSIC_VOLUME = 0.6f;
 	private static AudioManager instance;
 	public static AudioManager Instance
@@ -170,7 +170,7 @@ public class AudioManager : MonoBehaviour
 	{
 		this.EnsureCoroutineStopped(ref musicFadeRoutine);
 		float startVolume = warningMusic.volume;
-		float endVolume = enabled ? 0.1f : 0;
+		float endVolume = enabled ? 0.08f : 0;
 		musicFadeRoutine = this.CreateAnimationRoutine(
 				0.5f,
 				delegate (float progress)

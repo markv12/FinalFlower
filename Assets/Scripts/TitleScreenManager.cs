@@ -33,7 +33,6 @@ public class TitleScreenManager : MonoBehaviour
 	}
 	private void Quit()
 	{
-		Debug.Log("Quitting");
 		Application.Quit();
 	}
 }
