@@ -108,7 +108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 209725757992709663}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.415, y: 0.47, z: 0}
+  m_LocalPosition: {x: -0.415, y: 0.441, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8563951477367484343}
@@ -291,6 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 6260324718434507325}
+  playerAnimationController: {fileID: 2660333673224300432}
   belongsToPlayer: 1
   heightAdjustment: 0
   armLength: 2
@@ -653,6 +654,12 @@ MonoBehaviour:
   pupil1: {fileID: 992519053321762289}
   pupil2: {fileID: 8577681157533935418}
   eyeTarget: {fileID: 8494325367663458754}
+  headRenderer: {fileID: 4066995435654918119}
+  eyesRenderer: {fileID: 2513133893227471718}
+  headSprite: {fileID: 21300000, guid: a086cd12540ed4e458c132a0ad5d2258, type: 3}
+  headAlarmSprite: {fileID: 21300000, guid: d2df3dc9e1e6b464f8caf2871c734208, type: 3}
+  eyesSprite: {fileID: 21300000, guid: 259461d95adf47445b9a2d9a88cdf7f9, type: 3}
+  eyesAlarmSprite: {fileID: 21300000, guid: 8a4fff1252b707443be89879752d8633, type: 3}
   headLowPosition: {x: 0, y: 0.7, z: 0}
   headTopPosition: {x: 0, y: 1.15, z: 0}
 --- !u!1 &6924829803559305448
@@ -1146,7 +1153,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8218258526507541620}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.415, y: 0.47, z: 0}
+  m_LocalPosition: {x: 0.415, y: 0.441, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8563951477367484343}

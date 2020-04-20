@@ -12,6 +12,13 @@ public class PlayerAnimationController : MonoBehaviour {
 
     public Transform eyeTarget;
 
+    public SpriteRenderer headRenderer;
+    public SpriteRenderer eyesRenderer;
+    public Sprite headSprite;
+    public Sprite headAlarmSprite;
+    public Sprite eyesSprite;
+    public Sprite eyesAlarmSprite;
+
     public Vector3 headLowPosition;
     public Vector3 headTopPosition;
 
@@ -68,5 +75,10 @@ public class PlayerAnimationController : MonoBehaviour {
         } else {
             return localRootPos + (diff.normalized * MAX_EYE_DISTANCE);
         }
+    }
+
+    public void SetThrowMode(bool isThrow) {
+        headRenderer.sprite = isThrow ? headAlarmSprite : headSprite;
+        eyesRenderer.sprite = isThrow ? eyesAlarmSprite : eyesSprite;
     }
 }
