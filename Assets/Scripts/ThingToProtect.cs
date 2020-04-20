@@ -96,9 +96,11 @@ public class ThingToProtect : MonoBehaviour {
         return result;
     }
 
-    public void SetVisible(bool visible) {
-        mainRenderer.enabled = visible;
-        flowerRenderer.enabled = visible;
+    public bool Visible { get; private set; } = true;
+    public void SetVisible(bool _visible) {
+        Visible = _visible;
+        mainRenderer.enabled = _visible;
+        flowerRenderer.enabled = _visible;
     }
 
     private void Update() {
