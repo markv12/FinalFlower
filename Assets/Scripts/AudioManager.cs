@@ -80,7 +80,7 @@ public class AudioManager : MonoBehaviour
 
 	public void PlayCapsuleThrow()
 	{
-		PlaySFX(capsuleThrowSound, 1f);
+		PlaySFX(capsuleThrowSound, 1.2f);
 	}
 
 	public void PlayCapsuleCatch()

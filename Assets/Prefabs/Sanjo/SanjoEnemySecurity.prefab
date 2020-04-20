@@ -313,6 +313,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8178286633104222360}
   - component: {fileID: 631243341262186233}
+  - component: {fileID: 925605163848318617}
   m_Layer: 0
   m_Name: SanjoAIController
   m_TagString: Untagged
@@ -364,6 +365,20 @@ MonoBehaviour:
   pitfallChecker: {fileID: 7043492384265321370}
   wallChecker: {fileID: 2321303633307550540}
   attackCollision: {fileID: 2531833206343142066}
+  wheel: {fileID: 3674015865539745863}
+--- !u!114 &925605163848318617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4823900346862181412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df000ca498c754044804208350c041e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheel: {fileID: 3674015865539745863}
 --- !u!1 &5206888464954068496
 GameObject:
   m_ObjectHideFlags: 0
