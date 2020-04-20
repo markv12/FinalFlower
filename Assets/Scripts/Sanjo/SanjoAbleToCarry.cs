@@ -37,6 +37,11 @@ public class SanjoAbleToCarry : MonoBehaviour
 
 	private void OnCollisionEnter2D( Collision2D collision )
 	{
+		if( collision.collider.tag.CompareTo( owner.tag ) == 0 )
+		{
+			return;
+		}
+
 		if( ( Time.time - lastThrowTime ) > 0.6f )
 		{
 			Transform theParent = collision.gameObject.transform.parent;

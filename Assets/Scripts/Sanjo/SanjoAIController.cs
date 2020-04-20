@@ -4,39 +4,39 @@ using UnityEngine;
 
 public class SanjoAIController : MonoBehaviour
 {
-    public bool isWalker = false;
-	public bool isJumper = false;
-	
-    public GameObject owner;
+	public bool isWalker = true;
+	public bool isJumper = true;
+
+	public GameObject owner;
 	public ThingToProtect target;
 
 	public float movePower = 80.0f;
-    public float jumpPowerX = 1.0f;
-    public float jumpPowerY = 8.0f;
-    public float minDistance = 0.0f;
-    public float detectRange = 12.0f;
-    public float lostRange = 18.0f;
+	public float jumpPowerX = 1.0f;
+	public float jumpPowerY = 8.0f;
+	public float minDistance = 0.0f;
+	public float detectRange = 12.0f;
+	public float lostRange = 18.0f;
 
 	public SanjoCollisionChecker floorChecker = null;
 	public SanjoCollisionChecker pitfallChecker = null;
 	public SanjoCollisionChecker wallChecker = null;
 	public SanjoCollisionChecker attackCollision = null;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        rigidBody = owner.GetComponent<Rigidbody2D>();
-    }
-	
+	// Start is called before the first frame update
+	void Start()
+	{
+		rigidBody = owner.GetComponent<Rigidbody2D>();
+	}
+
 	private Rigidbody2D rigidBody;
 
 	private bool isDetected = false;
 	private bool isLanding = false;
 
-    private bool dead = false;
+	private bool dead = false;
 
-    // Update is called once per frame
-    public void Update() 
+	// Update is called once per frame
+	public void Update()
 	{
 		Transform targetTrans;
 
@@ -49,21 +49,24 @@ public class SanjoAIController : MonoBehaviour
 			targetTrans = target.transform;
 		}
 
-		if (Vector3.Distance(transform.position, target.transform.position) > 50) 
+		if( Vector3.Distance( transform.position, target.transform.position ) > 50 )
 		{
-            Destroy(gameObject);
-        }
+			Destroy( gameObject );
+		}
 
-		if( dead ){ return; }
+		if( dead )
+		{
+			return;
+		}
 
 		float distanceFromTarget = target.transform.position.x - transform.position.x;
-		
+
 		UpdateMove( distanceFromTarget );
 
 		UpdateDetection( distanceFromTarget );
 
 		UpdateContactAttack();
-		
+
 		wallChecker.SetOffsetX( Mathf.Sign( distanceFromTarget ) );
 		pitfallChecker.SetOffsetX( Mathf.Sign( distanceFromTarget ) );
 	}
@@ -100,7 +103,7 @@ public class SanjoAIController : MonoBehaviour
 
 						if( obstacleAhead )
 						{
-							move.x = jumpPowerX * Mathf.Sign( distance ) ;
+							move.x = jumpPowerX * Mathf.Sign( distance );
 							move.y = jumpPowerY;
 						}
 
@@ -116,7 +119,7 @@ public class SanjoAIController : MonoBehaviour
 				}
 			}
 		}
-		
+
 		rigidBody.velocity = move;
 	}
 
