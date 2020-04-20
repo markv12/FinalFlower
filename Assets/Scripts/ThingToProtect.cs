@@ -39,21 +39,26 @@ public class ThingToProtect : MonoBehaviour {
                 }
             }
         }
-        if (collision.gameObject.CompareTag("Floor")) {
+
+		bool isBreak = false;
+
+		isBreak = collision.gameObject.CompareTag( "Enemy" );
+
+        if (collision.gameObject.CompareTag("Floor") ) {
             Vector2 currPos = mainTransform.position;
             float highestY = GetHighestY(collision.gameObject);
-            if(currPos.y > highestY) {
-                AudioManager.Instance.PlayCapsuleBreak();
-                GameOverManager.GameOver();
+            
+			if(currPos.y > highestY)
+			{
+				isBreak |= (currPos.y > highestY);
             }
-            //for (int i = 0; i < collision.contactCount; i++) {
-            //    ContactPoint2D cont = collision.GetContact(i);
-            //    Vector2 contactLocation = cont.point;
-            //    if (contactLocation.y < currPos.y) {
-            //        //GameOverManager.GameOver();
-            //    }
-            //}
         }
+
+		if( isBreak )
+		{
+			AudioManager.Instance.PlayCapsuleBreak();
+            GameOverManager.GameOver();	
+		}
     }
 
     private float GetHighestY(GameObject rootObject) {
