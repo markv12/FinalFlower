@@ -39,7 +39,7 @@ public class HighScoreManager : MonoBehaviour
 		name = name.Replace('?', '.');
 		name = name.Replace('/', '-');
 		name = name.Replace('\n', ' ');
-		Debug.LogError("Adding high score " + playerScore + " for player " + name);
+		Debug.Log("Adding high score " + playerScore + " for player " + name);
 		StartCoroutine(addHighScore(name, playerScore));
 		inputZone.SetActive(false);
 	}
@@ -92,7 +92,7 @@ public class HighScoreManager : MonoBehaviour
 
 	IEnumerator getHighScores(bool shouldIncludePlayer)
 	{
-		Debug.LogError("Loading high scores");
+		Debug.Log("Loading high scores");
 		string url = "https://agile-citadel-44322.herokuapp.com/" + leaderboardName + "/bottom/" + scoreCount.ToString() + '/';
 		using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
 		{
@@ -100,29 +100,29 @@ public class HighScoreManager : MonoBehaviour
 
 			if (webRequest.isNetworkError)
 			{
-				Debug.LogError("Network Error: " + webRequest.error);
+				Debug.Log("Network Error: " + webRequest.error);
 			}
 			else if (webRequest.downloadHandler.text.Substring(0, 1) == "<")
 			{
-				Debug.LogError("Network Error: 404");
+				Debug.Log("Network Error: 404");
 				highScorePanel.SetActive(false);
 				yield break;
 			}
 			else if (webRequest.downloadHandler.text == "Forbidden" || webRequest.downloadHandler.text == "Internal Server Error")
 			{
-				Debug.LogError("Network Error: " + webRequest.downloadHandler.text);
+				Debug.Log("Network Error: " + webRequest.downloadHandler.text);
 				updateHighScoreLabel(true);
 				inputZone.SetActive(true);
 			}
 			else
 			{
-				Debug.LogError("Received high scores: " + webRequest.downloadHandler.text);
+				Debug.Log("Received high scores: " + webRequest.downloadHandler.text);
 				string[] highScoreStrings;
 				string[] stringSplitter = new string[] { "\\n" };
 				string highScoreString = webRequest.downloadHandler.text.Substring(1, webRequest.downloadHandler.text.Length - 2);
 				if (webRequest.downloadHandler.text.IndexOf("\\n") == -1)
 				{
-					Debug.LogError("Only one score: " + highScoreString);
+					Debug.Log("Only one score: " + highScoreString);
 					highScoreStrings = new string[] { highScoreString };
 				}
 				else
@@ -136,7 +136,7 @@ public class HighScoreManager : MonoBehaviour
 					scoreCountToDisplay = highScoreStrings.Length;
 					if (shouldIncludePlayer)
 					{
-						Debug.LogError("High Score By Default!");
+						Debug.Log("High Score By Default!");
 						inputZone.SetActive(true);
 					}
 				}
@@ -168,15 +168,15 @@ public class HighScoreManager : MonoBehaviour
 
 			if (webRequest.isNetworkError)
 			{
-				Debug.LogError("Network Error: " + webRequest.error);
+				Debug.Log("Network Error: " + webRequest.error);
 			}
 			else if (webRequest.downloadHandler.text == "Forbidden" || webRequest.downloadHandler.text == "Internal Server Error")
 			{
-				Debug.LogError("Network Error: " + webRequest.downloadHandler.text);
+				Debug.Log("Network Error: " + webRequest.downloadHandler.text);
 			}
 			else
 			{
-				Debug.LogError("Successfully added new score");
+				Debug.Log("Successfully added new score");
 				StartCoroutine(getHighScores(false));
 			}
 		}
