@@ -7,12 +7,14 @@ public class TitleScreenManager : MonoBehaviour
 	public Button startButton;
 	public Button levelSelectButton;
 	public Button rulesButton;
+	public Button quitButton;
 
 	void Awake()
 	{
 		startButton.onClick.AddListener(delegate { StartGame(); });
 		levelSelectButton.onClick.AddListener(delegate { GoToLevelSelect(); });
 		rulesButton.onClick.AddListener(delegate { GoToRulesScreen(); });
+		quitButton.onClick.AddListener(delegate { Quit(); });
 		AudioManager.Instance.PlayMenuMusic();
 	}
 
@@ -28,5 +30,10 @@ public class TitleScreenManager : MonoBehaviour
 	private void GoToRulesScreen()
 	{
 		LoadingScreen.LoadScene(Scenes.RULE_SCREEN);
+	}
+	private void Quit()
+	{
+		Debug.Log("Quitting");
+		Application.Quit();
 	}
 }
