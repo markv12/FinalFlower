@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 282741043674230526}
   m_Layer: 8
   m_Name: 3 block wall
-  m_TagString: Wall
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
