@@ -27,7 +27,7 @@ public class GameOverManager : MonoBehaviour
 		AudioManager.Instance.EnableWarningMusic(false);
 		Time.timeScale = 0;
 		this.EnsureCoroutineStopped(ref gameOverFadeRoutine);
-		this.CreateAnimationRoutine(
+		gameOverFadeRoutine = this.CreateAnimationRoutine(
 				0.3f,
 				delegate (float progress)
 				{

@@ -83,6 +83,8 @@ public class Player : MonoBehaviour {
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (gravity) * minJumpHeight);
+	
+		LevelNameIndicator.ShowLevelName(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
 	}
 
 	void FixedUpdate() {
