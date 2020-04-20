@@ -364,6 +364,7 @@ MonoBehaviour:
   pitfallChecker: {fileID: 7043492384265321370}
   wallChecker: {fileID: 2321303633307550540}
   attackCollision: {fileID: 2531833206343142066}
+  wheel: {fileID: 3674015865539745863}
 --- !u!1 &5206888464954068496
 GameObject:
   m_ObjectHideFlags: 0
