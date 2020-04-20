@@ -13,7 +13,8 @@ public class GameOverManager : MonoBehaviour
 	private static Coroutine gameOverFadeRoutine = null;
 	public static void GameOver()
 	{
-		if (instance == null) {
+		if (instance == null)
+		{
 			GameObject gameOverScreenObject = (GameObject)Resources.Load(GAME_OVER_SCREEN_PATH);
 			GameObject instantiated = Instantiate(gameOverScreenObject);
 			DontDestroyOnLoad(instantiated);
@@ -44,13 +45,14 @@ public class GameOverManager : MonoBehaviour
 
 	public void BackToMainMenu()
 	{
-		if (mainCanvasGroup.alpha > 0)
+		if (controlsEnabled == true)
 		{
 			Debug.Log("Back to main menu button from GameOverManager pushed");
 			LoadingScreen.LoadScene(Scenes.TITLE_SCREEN, delegate
 			{
 				Time.timeScale = 1;
 				mainCanvasGroup.alpha = 0;
+				controlsEnabled = false;
 			});
 		}
 	}

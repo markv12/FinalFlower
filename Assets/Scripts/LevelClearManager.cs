@@ -16,7 +16,8 @@ public class LevelClearManager : MonoBehaviour
 	private static Coroutine levelClearFadeRoutine = null;
 	public static void LevelClear(float timeInSeconds)
 	{
-		if (instance == null) {
+		if (instance == null)
+		{
 			GameObject gameOverScreenObject = (GameObject)Resources.Load(LEVEL_CLEAR_SCREEN_PATH);
 			GameObject instantiated = Instantiate(gameOverScreenObject);
 			DontDestroyOnLoad(instantiated);
@@ -45,7 +46,7 @@ public class LevelClearManager : MonoBehaviour
 
 	public void BackToMainMenu()
 	{
-		if (mainCanvasGroup.alpha > 0)
+		if (controlsEnabled == true)
 		{
 			Debug.Log("Back to main menu button from LevelClearManager pushed");
 			LoadingScreen.LoadScene(Scenes.TITLE_SCREEN, delegate
@@ -53,6 +54,7 @@ public class LevelClearManager : MonoBehaviour
 				Time.timeScale = 1;
 				mainCanvasGroup.alpha = 0;
 				gameOverCanvasGroup.alpha = 0;
+				controlsEnabled = false;
 			});
 		}
 	}
