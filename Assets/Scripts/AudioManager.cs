@@ -25,7 +25,7 @@ public class AudioManager : MonoBehaviour
 						1,
 						delegate (float progress)
 						{
-							instance.backgroundMusic.volume = progress;
+							instance.backgroundMusic.volume = Mathf.Lerp(0, 1f, progress);
 						}
 				);
 			}
@@ -75,7 +75,7 @@ public class AudioManager : MonoBehaviour
 
 	public void PlayWinSound()
 	{
-		PlaySFX(winSound, 0.5f);
+		PlaySFX(winSound, 0.7f);
 	}
 
 	public void PlayCapsuleThrow()
@@ -152,7 +152,7 @@ public class AudioManager : MonoBehaviour
 									1f,
 									delegate (float progress)
 								{
-									backgroundMusic.volume = Mathf.Lerp(0, 1, progress);
+									backgroundMusic.volume = Mathf.Lerp(0, 0.9f, progress);
 								}
 							);
 				}
