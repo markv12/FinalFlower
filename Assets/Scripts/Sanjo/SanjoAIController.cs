@@ -56,10 +56,10 @@ public class SanjoAIController : MonoBehaviour
 			targetTrans = target.transform;
 		}
 
-		if( Vector3.Distance( transform.position, target.transform.position ) > 50 )
-		{
-			Destroy( gameObject );
-		}
+		//if( Vector3.Distance( transform.position, target.transform.position ) > 50 )
+		//{
+		//	Destroy( gameObject );
+		//}
 
 		if( dead )
 		{
