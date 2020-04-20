@@ -4,6 +4,9 @@ public class HandController : MonoBehaviour {
 
     public MonoBehaviour owner;
     private Transform ownerT;
+
+    public PlayerAnimationController playerAnimationController;
+
     public bool belongsToPlayer;
     public float heightAdjustment = 1f;
     public float armLength = 3.5f;
@@ -73,6 +76,7 @@ public class HandController : MonoBehaviour {
             thingToProtect = null;
             closedClaw.SetActive(false);
             openClaw.SetActive(true);
+            playerAnimationController.SetThrowMode(true);
         }
     }
 
@@ -80,6 +84,7 @@ public class HandController : MonoBehaviour {
         thingToProtect = _thingToProtect;
         closedClaw.SetActive(true);
         openClaw.SetActive(false);
+        playerAnimationController.SetThrowMode(false);
     }
 
     public bool HasThingToProtect() {
