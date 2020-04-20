@@ -57,7 +57,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   cameraZoomer: {fileID: 5269611285259503609}
-  verticalOffset: 1.6
+  verticalOffset: 0
   lookAheadDstX: 4
   lookSmoothTimeX: 0.5
   verticalSmoothTime: 0.1
