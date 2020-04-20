@@ -14,6 +14,9 @@ public class HandController : MonoBehaviour {
 
     public ThingToProtect thingToProtect;
 
+    public GameObject closedClaw;
+    public GameObject openClaw;
+
     public GameObject bulletPrefab;
 
     private static Camera theCamera;
@@ -68,7 +71,15 @@ public class HandController : MonoBehaviour {
         if (HasThingToProtect()) {
             thingToProtect.Throw(shootPoint.right);
             thingToProtect = null;
+            closedClaw.SetActive(false);
+            openClaw.SetActive(true);
         }
+    }
+
+    public void Catch(ThingToProtect _thingToProtect) {
+        thingToProtect = _thingToProtect;
+        closedClaw.SetActive(true);
+        openClaw.SetActive(false);
     }
 
     public bool HasThingToProtect() {

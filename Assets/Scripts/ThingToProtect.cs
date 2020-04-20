@@ -20,12 +20,12 @@ public class ThingToProtect : MonoBehaviour {
         AudioManager.Instance.EnableWarningMusic(false);
         AudioManager.Instance.PlayCapsuleCatch();
         mainTransform.SetParent(_handController.handMainTransform);
-        _handController.thingToProtect = this;
+        _handController.Catch(this);
 
         mainRigidbody.isKinematic = true;
         mainRigidbody.velocity = Vector2.zero;
         mainRigidbody.angularVelocity = 0;
-        mainTransform.localPosition = new Vector3(0.6f, 0, 0);
+        mainTransform.localPosition = new Vector3(0.75f, 0, 0);
         mainTransform.localRotation = Quaternion.identity;
     }
 
@@ -33,7 +33,7 @@ public class ThingToProtect : MonoBehaviour {
         if ((Time.time - lastThrowTime) > 1f) {
             Transform theParent = collision.gameObject.transform.parent;
             if (theParent != null) {
-                HandController theHandController = theParent.GetComponent<HandController>();
+                HandController theHandController = theParent.GetComponentInParent<HandController>();
                 if (theHandController != null) {
                     Catch(theHandController);
                 }
