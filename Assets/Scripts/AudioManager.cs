@@ -55,7 +55,7 @@ public class AudioManager : MonoBehaviour
 
 	public void PlayGunSound()
 	{
-		PlaySFX(shootSound, .7f);
+		PlaySFX(shootSound, .4f);
 	}
 
 	public void PlayHitWallSound()
@@ -93,7 +93,7 @@ public class AudioManager : MonoBehaviour
 
 	public void PlayCapsuleBreak()
 	{
-		PlaySFX(capsuleBreakSound, 0.6f);
+		PlaySFX(capsuleBreakSound, 0.45f);
 	}
 
 	public void PlaySFX(AudioClip clip, float volume)
@@ -180,18 +180,21 @@ public class AudioManager : MonoBehaviour
 		);
 	}
 
-	public void PlayEndMusic() {
+	public void PlayEndMusic()
+	{
 		this.EnsureCoroutineStopped(ref musicFadeRoutine);
 		float warningStartVolume = warningMusic.volume;
 		float backgroundStartVolume = backgroundMusic.volume;
 		float endVolume = 0;
 		musicFadeRoutine = this.CreateAnimationRoutine(
 				0.5f,
-				delegate (float progress) {
+				delegate (float progress)
+				{
 					warningMusic.volume = Mathf.Lerp(warningStartVolume, endVolume, progress);
 					backgroundMusic.volume = Mathf.Lerp(backgroundStartVolume, endVolume, progress);
 				},
-				delegate {
+				delegate
+				{
 					warningMusic.Stop();
 					backgroundMusic.Stop();
 					endMusic.Play();

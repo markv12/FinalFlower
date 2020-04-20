@@ -77,7 +77,7 @@ public class HighScoreManager : MonoBehaviour
 					totalCount--;
 				}
 			}
-			if (i < scoreCount)
+			if (i < totalCount)
 			{
 				string displayName = names[i];
 				if (displayName.Length > 14)
@@ -115,6 +115,8 @@ public class HighScoreManager : MonoBehaviour
 			else if (webRequest.downloadHandler.text == "Forbidden" || webRequest.downloadHandler.text == "Internal Server Error")
 			{
 				Debug.Log("Network Error: " + webRequest.downloadHandler.text);
+				names = new string[0];
+				scores = new string[0];
 				updateHighScoreLabel(true);
 				inputZone.SetActive(true);
 			}

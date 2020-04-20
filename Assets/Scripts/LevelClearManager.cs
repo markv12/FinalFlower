@@ -44,6 +44,7 @@ public class LevelClearManager : MonoBehaviour
 	{
 		if (controlsEnabled)
 		{
+			Debug.Log("Back to main menu button from LevelClearManager pushed");
 			LoadingScreen.LoadScene(Scenes.TITLE_SCREEN, delegate
 			{
 				Time.timeScale = 1;
@@ -66,6 +67,7 @@ public class LevelClearManager : MonoBehaviour
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
+				Debug.Log("Next level button from LevelClearManager pushed");
 				LoadingScreen.LoadScene(SceneLoader.GetNextSceneName(SceneManager.GetActiveScene().name), delegate
 				{
 					Time.timeScale = 1;
@@ -75,6 +77,7 @@ public class LevelClearManager : MonoBehaviour
 			}
 			if (Input.GetKeyDown(KeyCode.R))
 			{
+				Debug.Log("Retry button from LevelClearManager pushed");
 				LoadingScreen.LoadScene(SceneManager.GetActiveScene().name, delegate
 				{
 					Time.timeScale = 1;

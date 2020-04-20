@@ -44,6 +44,7 @@ public class GameOverManager : MonoBehaviour
 	{
 		if (controlsEnabled)
 		{
+			Debug.Log("Back to main menu button from GameOverManager pushed");
 			LoadingScreen.LoadScene(Scenes.TITLE_SCREEN, delegate
 			{
 				Time.timeScale = 1;
@@ -60,6 +61,7 @@ public class GameOverManager : MonoBehaviour
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
+				Debug.Log("Retry button from GameOverManager pushed");
 				LoadingScreen.LoadScene(SceneManager.GetActiveScene().name, delegate
 				{
 					Time.timeScale = 1;
