@@ -38,13 +38,13 @@ public class LevelNameIndicator : MonoBehaviour
 	private IEnumerator LevelNameAnimation() {
 		yield return nameWait;
 		yield return levelNameIndicatorSubRoutine = this.CreateAnimationRoutine(
-				0.666f,
-				delegate (float progress) {
-					mainCanvasGroup.alpha = Easing.easeInOutSine(1, 0, progress);
-				},
-				delegate {
-					gameObject.SetActive(false);
-				}
+			0.666f,
+			delegate (float progress) {
+				mainCanvasGroup.alpha = Easing.easeInOutSine(1, 0, progress);
+			},
+			delegate {
+				gameObject.SetActive(false);
+			}
 		);
 	}
 }

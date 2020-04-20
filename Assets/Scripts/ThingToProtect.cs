@@ -96,6 +96,11 @@ public class ThingToProtect : MonoBehaviour {
         return result;
     }
 
+    public void SetVisible(bool visible) {
+        mainRenderer.enabled = visible;
+        flowerRenderer.enabled = visible;
+    }
+
     private void Update() {
         if (mainTransform.position.y < -15 && Time.timeScale > 0) {
             GameOverManager.GameOver();
