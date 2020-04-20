@@ -4,7 +4,6 @@ using UnityEngine;
 public class SanjoEnemy : MonoBehaviour 
 {	
     public Collider2D mainCollider;
-    public Collider2D headCollider;
     public HandController gun;
 	public SanjoAIController AI;
 
@@ -45,7 +44,6 @@ public class SanjoEnemy : MonoBehaviour
 	{
         yield return dieWait;
         Destroy(mainCollider);
-        Destroy(headCollider);
         Destroy(gameObject, 5);
     }
 	
