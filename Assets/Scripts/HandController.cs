@@ -71,7 +71,7 @@ public class HandController : MonoBehaviour {
     }
 
     public void Throw() {
-        if (HasThingToProtect()) {
+        if (HasThingToProtect() && thingToProtect.Visible) {
             thingToProtect.Throw(shootPoint.right);
             thingToProtect = null;
             closedClaw.SetActive(false);
