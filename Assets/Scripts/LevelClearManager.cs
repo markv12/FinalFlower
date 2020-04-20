@@ -13,14 +13,16 @@ public class LevelClearManager : MonoBehaviour
 	private static Coroutine levelClearFadeRoutine = null;
 	public static void LevelClear(float timeInSeconds)
 	{
-		if (instance == null)
-		{
-			GameObject gameOverScreenObject = (GameObject)Resources.Load(LEVEL_CLEAR_SCREEN_PATH);
-			GameObject instantiated = Instantiate(gameOverScreenObject);
-			DontDestroyOnLoad(instantiated);
-			instance = instantiated.GetComponent<LevelClearManager>();
+		if (Time.frameCount - GameOverManager.lastActivateFrame > 15) {
+			GameOverManager.lastActivateFrame = Time.frameCount;
+			if (instance == null) {
+				GameObject gameOverScreenObject = (GameObject)Resources.Load(LEVEL_CLEAR_SCREEN_PATH);
+				GameObject instantiated = Instantiate(gameOverScreenObject);
+				DontDestroyOnLoad(instantiated);
+				instance = instantiated.GetComponent<LevelClearManager>();
+			}
+			instance.ShowLevelClearScreen(timeInSeconds);
 		}
-		instance.ShowLevelClearScreen(timeInSeconds);
 	}
 
 	private void ShowLevelClearScreen(float timeInSeconds)
