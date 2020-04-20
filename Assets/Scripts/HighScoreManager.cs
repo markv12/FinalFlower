@@ -34,7 +34,7 @@ public class HighScoreManager : MonoBehaviour
 	{
 		string name = playerNameTextObject.GetComponent<TextMeshProUGUI>().text;
 		if (name.Length < 2) return;
-		if (name.Length > 12) name = name.Substring(0, 12);
+		if (name.Length > 14) name = name.Substring(0, 14);
 		name = name.Replace(',', ' ');
 		name = name.Replace('?', '.');
 		name = name.Replace('/', '-');
@@ -76,9 +76,9 @@ public class HighScoreManager : MonoBehaviour
 			if (i < scoreCount)
 			{
 				string displayName = names[i];
-				if (displayName.Length > 12)
+				if (displayName.Length > 14)
 				{
-					displayName = displayName.Substring(0, 12);
+					displayName = displayName.Substring(0, 14);
 				}
 				scoreLabel += displayName + delineator + scores[i] + "s\n";
 			}
