@@ -41,24 +41,16 @@ public class GameOverManager : MonoBehaviour
 				},
 				delegate
 				{
-					// this is here so that both canvases can't overlap
-					Debug.Log(levelClearCanvasGroup.alpha);
-					if (levelClearCanvasGroup.alpha == 0)
-					{
-						controlsEnabled = true;
-					}
-					else
-					{
-						mainCanvasGroup.alpha = 0;
-						controlsEnabled = false;
-					}
+
+					controlsEnabled = true;
+
 				}
 		);
 	}
 
 	public void BackToMainMenu()
 	{
-		if (controlsEnabled)
+		if (mainCanvasGroup.alpha > 0)
 		{
 			Debug.Log("Back to main menu button from GameOverManager pushed");
 			LoadingScreen.LoadScene(Scenes.TITLE_SCREEN, delegate
@@ -67,7 +59,6 @@ public class GameOverManager : MonoBehaviour
 				mainCanvasGroup.alpha = 0;
 			});
 		}
-		controlsEnabled = false;
 	}
 
 	private bool controlsEnabled = false;
