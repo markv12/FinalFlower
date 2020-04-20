@@ -30,6 +30,7 @@ public class FinalGoal : MonoBehaviour {
 	private static readonly Color whiteClear = new Color(1, 1, 1, 0);
 	private static readonly Color white = new Color(1, 1, 1, 1);
 	private IEnumerator EndRoutine() {
+		AudioManager.Instance.PlayEndMusic();
 		this.CreateAnimationRoutine(
 			3f,
 			delegate (float progress) {

@@ -4,6 +4,7 @@ public class AudioManager : MonoBehaviour
 {
 
 	private const string AUDIO_MANAGER_PATH = "AudioManager";
+	private const float BG_MUSIC_VOLUME = 0.666f;
 	private static AudioManager instance;
 	public static AudioManager Instance
 	{
@@ -25,7 +26,7 @@ public class AudioManager : MonoBehaviour
 						1,
 						delegate (float progress)
 						{
-							instance.backgroundMusic.volume = Mathf.Lerp(0, 1f, progress);
+							instance.backgroundMusic.volume = Mathf.Lerp(0, BG_MUSIC_VOLUME, progress);
 						}
 				);
 			}
@@ -38,6 +39,7 @@ public class AudioManager : MonoBehaviour
 	public AudioSource menuMusic;
 	public AudioSource backgroundMusic;
 	public AudioSource warningMusic;
+	public AudioSource endMusic;
 	public AudioClip shootSound;
 	public AudioClip hitWallSound;
 	public AudioClip hitPlayerSound;
@@ -105,6 +107,7 @@ public class AudioManager : MonoBehaviour
 		this.EnsureCoroutineStopped(ref musicFadeRoutine);
 		float warningStartVolume = warningMusic.volume;
 		float backgroundStartVolume = backgroundMusic.volume;
+		float endMusicStartVolume = endMusic.volume;
 		float endVolume = 0;
 		musicFadeRoutine = this.CreateAnimationRoutine(
 				0.5f,
@@ -112,11 +115,13 @@ public class AudioManager : MonoBehaviour
 				{
 					warningMusic.volume = Mathf.Lerp(warningStartVolume, endVolume, progress);
 					backgroundMusic.volume = Mathf.Lerp(backgroundStartVolume, endVolume, progress);
+					endMusic.volume = Mathf.Lerp(endMusicStartVolume, endVolume, progress);
 				},
 				delegate
 				{
 					warningMusic.Stop();
 					backgroundMusic.Stop();
+					endMusic.Stop();
 					menuMusic.Play();
 					musicFadeRoutine = this.CreateAnimationRoutine(
 									1f,
@@ -152,7 +157,7 @@ public class AudioManager : MonoBehaviour
 									1f,
 									delegate (float progress)
 								{
-									backgroundMusic.volume = Mathf.Lerp(0, 0.9f, progress);
+									backgroundMusic.volume = Mathf.Lerp(0, BG_MUSIC_VOLUME, progress);
 								}
 							);
 				}
@@ -170,6 +175,32 @@ public class AudioManager : MonoBehaviour
 				delegate (float progress)
 				{
 					warningMusic.volume = Mathf.Lerp(startVolume, endVolume, progress);
+				}
+		);
+	}
+
+	public void PlayEndMusic() {
+		this.EnsureCoroutineStopped(ref musicFadeRoutine);
+		float warningStartVolume = warningMusic.volume;
+		float backgroundStartVolume = backgroundMusic.volume;
+		float endVolume = 0;
+		musicFadeRoutine = this.CreateAnimationRoutine(
+				0.5f,
+				delegate (float progress) {
+					warningMusic.volume = Mathf.Lerp(warningStartVolume, endVolume, progress);
+					backgroundMusic.volume = Mathf.Lerp(backgroundStartVolume, endVolume, progress);
+				},
+				delegate {
+					warningMusic.Stop();
+					backgroundMusic.Stop();
+					endMusic.Play();
+					musicFadeRoutine = this.CreateAnimationRoutine(
+									1f,
+									delegate (float progress)
+									{
+										endMusic.volume = Mathf.Lerp(0, BG_MUSIC_VOLUME, progress);
+									}
+							);
 				}
 		);
 	}
