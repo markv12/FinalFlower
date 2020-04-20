@@ -96,12 +96,12 @@ public class SanjoHandController : MonoBehaviour {
 
             imageT.localRotation = Quaternion.Lerp(imageT.localRotation, theIQ, Time.deltaTime * 3);
         }
-		
+
 		if( !belongsToPlayer && HasAnyObject() )
 		{
 			Throw();
 		}
-    }
+	}
 
     public void Throw()
 	{

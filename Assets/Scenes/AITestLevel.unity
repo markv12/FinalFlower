@@ -849,7 +849,7 @@ PrefabInstance:
     - target: {fileID: 90032606222278964, guid: 9699291942c67134da5a73679b7954ca,
         type: 3}
       propertyPath: armLength
-      value: 1.2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 631243341262186233, guid: 9699291942c67134da5a73679b7954ca,
         type: 3}
@@ -870,6 +870,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SanjoEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5793143389873614634, guid: 9699291942c67134da5a73679b7954ca,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6699727340732210335, guid: 9699291942c67134da5a73679b7954ca,
         type: 3}
