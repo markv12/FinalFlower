@@ -66,10 +66,13 @@ public class ThingToProtect : MonoBehaviour {
 
 		if( isBreak )
 		{
-            mainRenderer.sprite = brokenSprite;
-            StartCoroutine(WhitherFlower());
-			AudioManager.Instance.PlayCapsuleBreak();
-            GameOverManager.GameOver();	
+            if (Time.frameCount - LevelClearManager.lastActivateFrame > 15) {
+                LevelClearManager.lastActivateFrame = Time.frameCount;
+                mainRenderer.sprite = brokenSprite;
+                StartCoroutine(WhitherFlower());
+                AudioManager.Instance.PlayCapsuleBreak();
+                GameOverManager.GameOver();
+            }
 		}
     }
 

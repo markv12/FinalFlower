@@ -4,6 +4,9 @@ using UnityEngine;
 public class LevelClearManager : MonoBehaviour
 {
 
+	//Shared with multiple scripts, make sure UIs don't open within quick succession of each other
+	public static int lastActivateFrame = 0;
+
 	public static LevelClearManager instance;
 
 	public CanvasGroup mainCanvasGroup;
@@ -13,16 +16,13 @@ public class LevelClearManager : MonoBehaviour
 	private static Coroutine levelClearFadeRoutine = null;
 	public static void LevelClear(float timeInSeconds)
 	{
-		if (Time.frameCount - GameOverManager.lastActivateFrame > 15) {
-			GameOverManager.lastActivateFrame = Time.frameCount;
-			if (instance == null) {
-				GameObject gameOverScreenObject = (GameObject)Resources.Load(LEVEL_CLEAR_SCREEN_PATH);
-				GameObject instantiated = Instantiate(gameOverScreenObject);
-				DontDestroyOnLoad(instantiated);
-				instance = instantiated.GetComponent<LevelClearManager>();
-			}
-			instance.ShowLevelClearScreen(timeInSeconds);
+		if (instance == null) {
+			GameObject gameOverScreenObject = (GameObject)Resources.Load(LEVEL_CLEAR_SCREEN_PATH);
+			GameObject instantiated = Instantiate(gameOverScreenObject);
+			DontDestroyOnLoad(instantiated);
+			instance = instantiated.GetComponent<LevelClearManager>();
 		}
+		instance.ShowLevelClearScreen(timeInSeconds);
 	}
 
 	private void ShowLevelClearScreen(float timeInSeconds)
