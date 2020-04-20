@@ -63,6 +63,13 @@ public enum Scenes
 	LEVEL_1,
 	LEVEL_2,
 	LEVEL_3,
+	LEVEL_4,
+	LEVEL_5,
+	LEVEL_6,
+	LEVEL_7,
+	LEVEL_8,
+	LEVEL_9,
+	LEVEL_10,
 }
 
 public static class ScenesExtensions
@@ -83,6 +90,20 @@ public static class ScenesExtensions
 				return "Level 2";
 			case Scenes.LEVEL_3:
 				return "Level 3";
+			case Scenes.LEVEL_4:
+				return "Level 4";
+			case Scenes.LEVEL_5:
+				return "Level 5";
+			case Scenes.LEVEL_6:
+				return "Level 6";
+			case Scenes.LEVEL_7:
+				return "Level 7";
+			case Scenes.LEVEL_8:
+				return "Level 8";
+			case Scenes.LEVEL_9:
+				return "Level 9";
+			case Scenes.LEVEL_10:
+				return "Level 10";
 			default:
 				return "Scene Not Found";
 		}
