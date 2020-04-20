@@ -24,6 +24,8 @@ public class SanjoAIController : MonoBehaviour
 	public SanjoCollisionChecker wallChecker = null;
 	public SanjoCollisionChecker attackCollision = null;
 	
+    public Transform wheel;
+	
 	private float obstaclePowerX = 1.0f;
 	private float obstaclePowerY = 8.0f;
 
@@ -93,6 +95,8 @@ public class SanjoAIController : MonoBehaviour
 					if( Mathf.Abs( distance ) > minDistance )
 					{
 						move.x = velocityX;
+
+						wheel.Rotate(new Vector3(0, 0, velocityX * -1.2f));
 					}
 				}
 
