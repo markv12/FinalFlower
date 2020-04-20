@@ -60,6 +60,10 @@ public class HighScoreManager : MonoBehaviour
 		{
 			playerName = "You";
 		}
+		if (playerName.Length > 14)
+		{
+			playerName = playerName.Substring(0, 14);
+		}
 		int totalCount = names.Length;
 		string delineator = "     ";
 		for (int i = 0; i < totalCount; i++)
