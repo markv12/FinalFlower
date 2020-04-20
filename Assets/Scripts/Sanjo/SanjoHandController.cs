@@ -4,8 +4,9 @@ public class SanjoHandController : MonoBehaviour {
 
     public MonoBehaviour owner;
     public bool belongsToPlayer;
-    public float heightAdjustment = 1f;
+    public float heightAdjustment = 0.0f;
     public float armLength = 1.8f;
+	public float throwPower = 300.0f;
 	
     public Transform shootPoint;
     public Transform handMainTransform;
@@ -44,12 +45,14 @@ public class SanjoHandController : MonoBehaviour {
     private static readonly Quaternion theIQ = Quaternion.identity;
     private static readonly Quaternion shotRotation = Quaternion.Euler(0, 0, -16);
     private static readonly Quaternion shotRotationReverse = Quaternion.Euler(0, 0, 16);
+	
+	private float lastThrowTime;
 
     void Update() 
 	{
         if (Time.timeScale > 0) 
 		{
-            Vector3 aimPosition;
+            Vector3 aimPosition /*= new Vector3( 0.0f, 1.0f, 0.0f )*/;
 
             if (belongsToPlayer)
 			{
@@ -59,12 +62,19 @@ public class SanjoHandController : MonoBehaviour {
             } 
 			else 
 			{
-				SanjoEnemy enemyScript = owner.GetComponent<SanjoEnemy>();
+				if( HasAnyObject() )
+				{
+					aimPosition = Player.mainPlayer.transform.position;
+				}
+				else
+				{
+					SanjoEnemy enemyScript = owner.GetComponent<SanjoEnemy>();
 
-				ThingToProtect protectObj = enemyScript.GetAI().target;
+					ThingToProtect protectObj = enemyScript.GetAI().target;
 
-                aimPosition = protectObj.transform.position;
-            }
+					aimPosition = protectObj.transform.position;
+				}
+			}
 
             Vector3 handPos = GetHandPosition(aimPosition);
             float angleFromPlayer = GetHandAngle(handPos);
@@ -86,26 +96,33 @@ public class SanjoHandController : MonoBehaviour {
 
             imageT.localRotation = Quaternion.Lerp(imageT.localRotation, theIQ, Time.deltaTime * 3);
         }
+		
+		if( !belongsToPlayer && HasAnyObject() )
+		{
+			Throw();
+		}
     }
 
     public void Throw()
 	{
         if (HasAnyObject())
 		{
+			SanjoAbleToCarry carryObj = catchObject.GetComponent<SanjoAbleToCarry>();
+
+			if( carryObj )
+			{
+				carryObj.OnThrow(shootPoint.right * throwPower); 
+			}
+
 			catchObject = null;
             closedClaw.SetActive(false);
             openClaw.SetActive(true);
 
-			ThingToProtect protectObj = catchObject.GetComponent<ThingToProtect>();
-
-			if( protectObj )
-			{
-				protectObj.Throw(shootPoint.right); 
-			}
+			lastThrowTime = Time.time;
         }
     }
 
-    public void Catch(GameObject anyObject) {
+    public void OnCatch(GameObject anyObject) {
         catchObject = anyObject;
         closedClaw.SetActive(true);
         openClaw.SetActive(false);
@@ -114,22 +131,14 @@ public class SanjoHandController : MonoBehaviour {
     public bool HasAnyObject() {
         return catchObject != null;
     }
-	
-    public void FireGun()
-	{
-        GameObject newBullet = Instantiate(bulletPrefab);
-        newBullet.transform.SetPositionAndRotation(shootPoint.position, shootPoint.rotation);
-        newBullet.GetComponent<Bullet>().owner = owner;
-        AudioManager.Instance.PlayGunSound();
-        //Debug.DrawRay(shootPoint.position, shootPoint.forward, Color.red, 1000);
-        //imageT.localRotation *= (dState == DirectionState.right) ? shotRotationReverse : shotRotation;
-        //RaycastHit2D hit = Physics2D.Raycast(shootPoint.position, shootPoint.forward);
-        //if (hit.transform != null) {
-        //    Debug.Log(hit.transform.gameObject.name);
-        //} else {
-        //    Debug.Log("No Hit");
-        //}
-    }
+
+ //   public void FireGun()
+//	 {
+ //       GameObject newBullet = Instantiate(bulletPrefab);
+ //       newBullet.transform.SetPositionAndRotation(shootPoint.position, shootPoint.rotation);
+ //       newBullet.GetComponent<Bullet>().owner = owner;
+ //       AudioManager.Instance.PlayGunSound();
+ //   }
 
     private DirectionState dState = DirectionState.initial;
     private void AdjustImageForAngle(float angleFromPlayer) {
@@ -150,19 +159,34 @@ public class SanjoHandController : MonoBehaviour {
         }
     }
 
-    private float GetHandAngle(Vector3 gunPos) {
+    private float GetHandAngle(Vector3 gunPos) 
+	{
         Vector3 relPosFromPlayer = gunPos - owner.transform.position;
+
         return Mathf.Atan2(relPosFromPlayer.y, relPosFromPlayer.x) * 57.2958f;
     }
 
-    private Vector3 GetHandPosition(Vector3 aimPosition) {
+    private Vector3 GetHandPosition(Vector3 aimPosition)
+	{
         Vector3 result;
         Vector3 relPosFromPlayer = aimPosition - owner.transform.position;
+
         relPosFromPlayer.z = 0;
-        if (relPosFromPlayer.magnitude > armLength) {
+
+		if( HasAnyObject() && !belongsToPlayer )
+		{
+			relPosFromPlayer.x *= -1.0f;
+
+			relPosFromPlayer.y += 5.0f;
+		}
+
+        if (relPosFromPlayer.magnitude > armLength) 
+		{
             Vector3 normalizedAngle = relPosFromPlayer.normalized * armLength;
             result = owner.transform.position + normalizedAngle;
-        } else {
+        }
+		else
+		{
             result = aimPosition;
         }
         return new Vector3(result.x, result.y, 0);

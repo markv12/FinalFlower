@@ -1,77 +1,55 @@
 ﻿using UnityEngine;
 
-public class SanjoAbleToCarry : MonoBehaviour {
- //   public Transform mainTransform;
- //   public Rigidbody2D mainRigidbody;
+public class SanjoAbleToCarry : MonoBehaviour 
+{
+	public GameObject owner;
+	private Transform mainTransform;
+	private Rigidbody2D mainRigidbody;
 
- //   private float lastThrowTime;
+	private float lastThrowTime;
 
- //   public void OnThrow(Vector2 direction) 
-	//{
- //       mainTransform.SetParent(null);
- //       mainRigidbody.isKinematic = false;
- //       mainRigidbody.AddForce(direction*450);
+	private void Start()
+	{
+		mainRigidbody = GetComponent<Rigidbody2D>();
+		mainTransform = GetComponent<Transform>();
+	}
 
- //       lastThrowTime = Time.time;
- //   }
+	public void OnThrow( Vector2 direction )
+	{
+		mainTransform.SetParent( null );
+		mainRigidbody.isKinematic = false;
+		mainRigidbody.AddForce( direction );
 
- //   public void OnCatch(HandController _handController)
-	//{
- //       AudioManager.Instance.EnableWarningMusic(false);
- //       AudioManager.Instance.PlayCapsuleCatch();
- //       mainTransform.SetParent(_handController.handMainTransform);
- //       _handController.Catch(this);
+		lastThrowTime = Time.time;
+	}
 
- //       mainRigidbody.isKinematic = true;
- //       mainRigidbody.velocity = Vector2.zero;
- //       mainRigidbody.angularVelocity = 0;
- //       mainTransform.localPosition = new Vector3(0.75f, 0, 0);
- //       mainTransform.localRotation = Quaternion.identity;
- //   }
+	public void Catch( SanjoHandController _handController )
+	{
+		mainTransform.SetParent( _handController.handMainTransform );
+		_handController.OnCatch( owner );
 
- //   private void OnCollisionEnter2D(Collision2D collision) {
- //       if ((Time.time - lastThrowTime) > 0.6f) {
- //           Transform theParent = collision.gameObject.transform.parent;
- //           if (theParent != null) {
- //               HandController theHandController = theParent.GetComponentInParent<HandController>();
- //               if (theHandController != null) {
- //                   Catch(theHandController);
- //               }
- //           }
- //       }
- //       if (collision.gameObject.CompareTag("Floor")) {
- //           Vector2 currPos = mainTransform.position;
- //           float highestY = GetHighestY(collision.gameObject);
- //           if(currPos.y > highestY) {
- //               AudioManager.Instance.PlayCapsuleBreak();
- //               GameOverManager.GameOver();
- //           }
- //           //for (int i = 0; i < collision.contactCount; i++) {
- //           //    ContactPoint2D cont = collision.GetContact(i);
- //           //    Vector2 contactLocation = cont.point;
- //           //    if (contactLocation.y < currPos.y) {
- //           //        //GameOverManager.GameOver();
- //           //    }
- //           //}
- //       }
- //   }
+		mainRigidbody.isKinematic = true;
+		mainRigidbody.velocity = Vector2.zero;
+		mainRigidbody.angularVelocity = 0;
+		mainTransform.localPosition = new Vector3( 0.75f, 0, 0 );
+		mainTransform.localRotation = Quaternion.identity;
+	}
 
- //   private float GetHighestY(GameObject rootObject) {
- //       SpriteRenderer[] allRenderers = rootObject.GetComponentsInChildren<SpriteRenderer>();
- //       float result = float.MinValue;
- //       for (int i = 0; i < allRenderers.Length; i++) {
- //           Bounds theBounds = allRenderers[i].bounds;
- //           float highY = (theBounds.center + theBounds.extents).y;
- //           if(highY > result) {
- //               result = highY;
- //           }
- //       }
- //       return result;
- //   }
+	private void OnCollisionEnter2D( Collision2D collision )
+	{
+		if( ( Time.time - lastThrowTime ) > 0.6f )
+		{
+			Transform theParent = collision.gameObject.transform.parent;
 
- //   private void Update() {
- //       if (mainTransform.position.y < -15 && Time.timeScale > 0) {
- //           GameOverManager.GameOver();
- //       }
- //   }
+			if( theParent != null )
+			{
+				SanjoHandController theHandController = theParent.GetComponentInParent<SanjoHandController>();
+
+				if( theHandController != null )
+				{
+					Catch( theHandController );
+				}
+			}
+		}
+	}
 }

@@ -704,6 +704,7 @@ GameObject:
   - component: {fileID: 6699727340732210335}
   - component: {fileID: 5793143389873614634}
   - component: {fileID: 3716305850666352306}
+  - component: {fileID: 5925888040917681173}
   m_Layer: 0
   m_Name: SanjoEnemy
   m_TagString: Enemy
@@ -762,9 +763,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eddd821a4dc66b54fbd1d0e3c04d9067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCollider: {fileID: 0}
-  gun: {fileID: 0}
+  hand: {fileID: 90032606222278964}
   AI: {fileID: 631243341262186233}
+--- !u!61 &5925888040917681173
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5206888464954068496}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.15}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 1.9}
+  m_EdgeRadius: 0
 --- !u!1 &5207708606247926420
 GameObject:
   m_ObjectHideFlags: 0
@@ -853,7 +879,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1, y: 2.1}
+  m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
 --- !u!114 &2531833206343142066
 MonoBehaviour:
@@ -925,7 +951,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 6}
+  m_Size: {x: 0.4, y: 6}
   m_EdgeRadius: 0
 --- !u!114 &7043492384265321370
 MonoBehaviour:
@@ -950,7 +976,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8637075811538478744}
-  - component: {fileID: 7847834438226850}
+  - component: {fileID: 90032606222278964}
   m_Layer: 10
   m_Name: Hand
   m_TagString: Untagged
@@ -973,7 +999,7 @@ Transform:
   m_Father: {fileID: 6699727340732210335}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7847834438226850
+--- !u!114 &90032606222278964
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -982,22 +1008,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 7760512921764881469}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 409910715dfcc2e489a8c06a3764bfb0, type: 3}
+  m_Script: {fileID: 11500000, guid: 1fdf17e8ed7c04f41af8b7b9a50cbe9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 0}
-  playerAnimationController: {fileID: 0}
-  belongsToPlayer: 1
+  owner: {fileID: 3716305850666352306}
+  belongsToPlayer: 0
   heightAdjustment: 0
-  armLength: 2
+  armLength: 1.2
+  throwPower: 300
   shootPoint: {fileID: 1804994902700995211}
   handMainTransform: {fileID: 8637075811538478744}
-  imageT: {fileID: 2228881876167474045}
-  thingToProtect: {fileID: 0}
+  imageT: {fileID: 2646735370327875442}
+  catchObject: {fileID: 0}
   closedClaw: {fileID: 4078415286772813509}
   openClaw: {fileID: 2685144848588756174}
-  bulletPrefab: {fileID: 5718138574887156889, guid: cd26995c2047e544f939e611e9ff893b,
-    type: 3}
+  bulletPrefab: {fileID: 0}
 --- !u!1 &8629601386226996765
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,7 +1079,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.5}
+  m_Size: {x: 0.8, y: 1.5}
   m_EdgeRadius: 0
 --- !u!114 &2321303633307550540
 MonoBehaviour:
@@ -1115,7 +1140,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -1}
+  m_Offset: {x: 0, y: -1.1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}

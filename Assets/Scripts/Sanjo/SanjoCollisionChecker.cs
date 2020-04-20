@@ -9,9 +9,6 @@ public class SanjoCollisionChecker : MonoBehaviour
 	
 	public bool isHit() { return hit; }
 
-	private int tagHash1 = 0;
-	private int tagHash2 = 0;
-
 	private BoxCollider2D box;
 
 	private Vector2 offset;
@@ -32,9 +29,6 @@ public class SanjoCollisionChecker : MonoBehaviour
 	
 	private void Start()
 	{
-		tagHash1 = tagName1.GetHashCode();
-		tagHash2 = tagName2.GetHashCode();
-
 		box = GetComponent<BoxCollider2D>();
 	}
 
@@ -54,23 +48,23 @@ public class SanjoCollisionChecker : MonoBehaviour
 		exit = false;
 	}
 
-	private bool checkHash( int hash )
+	private bool checkHash( Collider2D collision )
 	{
-		return ( hash == tagHash1 || hash == tagHash2 );
+		return ( collision.tag.CompareTo( tagName1) == 0 || collision.tag.CompareTo(tagName2) == 0 );
 	}
 
 	private void OnTriggerEnter2D( Collider2D collision )
 	{
-		enter = checkHash( collision.tag.GetHashCode() );
+		enter = checkHash( collision );
 	}
  
 	private void OnTriggerStay2D( Collider2D collision )
 	{
-		stay = checkHash( collision.tag.GetHashCode() );
+		stay = checkHash( collision );
 	}
      
 	private void OnTriggerExit2D( Collider2D collision )
 	{
-		exit = checkHash( collision.tag.GetHashCode() );
+		exit = checkHash( collision );
 	}
 }

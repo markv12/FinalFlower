@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class SanjoEnemy : MonoBehaviour 
 {	
-    public Collider2D mainCollider;
-    public HandController gun;
+    public SanjoHandController hand;
 	public SanjoAIController AI;
+	
+    private Collider2D mainCollider;
 
 	public SanjoAIController GetAI()
 	{
@@ -14,7 +15,8 @@ public class SanjoEnemy : MonoBehaviour
 
     void Start()
 	{
-        attackRoutine = StartCoroutine(AttackRoutine());
+        //attackRoutine = StartCoroutine(AttackRoutine());
+		mainCollider = GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -26,14 +28,14 @@ public class SanjoEnemy : MonoBehaviour
 	{
         CameraShaker.instance.HitCameraShake();
 
-		if( gun )
+		if( hand )
 		{
-			Destroy( gun );
+			Destroy( hand );
 		}
 
 		Rigidbody2D mainRigidbody = GetComponent<Rigidbody2D>();
 
-        StopCoroutine(attackRoutine);
+        //StopCoroutine(attackRoutine);
         mainRigidbody.isKinematic = false;
         mainRigidbody.AddForceAtPosition( hitAngle * 600, hitLocation );
         StartCoroutine(DieRoutine());
@@ -43,21 +45,22 @@ public class SanjoEnemy : MonoBehaviour
     private IEnumerator DieRoutine() 
 	{
         yield return dieWait;
-        Destroy(mainCollider);
+		
+		Destroy(mainCollider);
         Destroy(gameObject, 5);
     }
 	
-    private Coroutine attackRoutine;
-    private IEnumerator AttackRoutine()
-	{
-        while (true) 
-		{
-            yield return new WaitForSeconds(2f + Random.Range(-1f, 1.5f));
+ //   private Coroutine attackRoutine;
+ //   private IEnumerator AttackRoutine()
+	//{
+ //       while (true) 
+	//	{
+ //           yield return new WaitForSeconds(2f + Random.Range(-1f, 1.5f));
 
-			if( gun )
-			{
-				gun.FireGun();
-			}
-        }
-    }
+	//		if( hand )
+	//		{
+	//			hand.FireGun();
+	//		}
+ //       }
+ //   }
 }
