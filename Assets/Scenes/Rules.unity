@@ -807,10 +807,10 @@ MonoBehaviour:
   m_text: 'YOU are in charge of delivering the last remaining flower on Earth safely
     to its holding pod. Don''t let it fall on the ground, or it will smash!
 
-    When you''re not holding the capsule, you move faster, jump higher, and gain the
-    ability to shoot at enemies.
+    <#f80>When you''re holding the capsule,</color> you can''t jump or run as freely.
 
-    The fate of the world rests in your hands. Good luck!'
+    <#f80>When your claw is empty, </color>you move faster, jump higher, and gain
+    the ability to shoot at enemies.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 03b44a607940d48adbe03d3f6f439324, type: 2}
   m_sharedMaterial: {fileID: 4022974835890243719, guid: 03b44a607940d48adbe03d3f6f439324,
