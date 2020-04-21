@@ -28,6 +28,7 @@ public class LevelClearManager : MonoBehaviour
 
 	private void ShowLevelClearScreen(float timeInSeconds)
 	{
+		this.gameObject.SetActive(true);
 		gameObject.GetComponent<HighScoreManager>().setup(timeInSeconds);
 		Time.timeScale = 0;
 		this.EnsureCoroutineStopped(ref levelClearFadeRoutine);
@@ -49,13 +50,10 @@ public class LevelClearManager : MonoBehaviour
 		if (controlsEnabled == true)
 		{
 			Debug.Log("Back to main menu button from LevelClearManager pushed");
-			LoadingScreen.LoadScene(Scenes.TITLE_SCREEN, delegate
-			{
-				Time.timeScale = 1;
-				mainCanvasGroup.alpha = 0;
-				gameOverCanvasGroup.alpha = 0;
-				controlsEnabled = false;
+			LoadingScreen.LoadScene(Scenes.TITLE_SCREEN, delegate {
+				TurnUIOff();
 			});
+			controlsEnabled = false;
 		}
 	}
 
@@ -75,9 +73,7 @@ public class LevelClearManager : MonoBehaviour
 				Debug.Log("Next level button from LevelClearManager pushed");
 				LoadingScreen.LoadScene(SceneLoader.GetNextSceneName(SceneManager.GetActiveScene().name), delegate
 				{
-					Time.timeScale = 1;
-					mainCanvasGroup.alpha = 0;
-					gameOverCanvasGroup.alpha = 0;
+					TurnUIOff();
 				});
 				controlsEnabled = false;
 			}
@@ -86,12 +82,16 @@ public class LevelClearManager : MonoBehaviour
 				Debug.Log("Retry button from LevelClearManager pushed");
 				LoadingScreen.LoadScene(SceneManager.GetActiveScene().name, delegate
 				{
-					Time.timeScale = 1;
-					mainCanvasGroup.alpha = 0;
-					gameOverCanvasGroup.alpha = 0;
+					TurnUIOff();
 				});
 				controlsEnabled = false;
 			}
 		}
+	}
+	private void TurnUIOff() {
+		Time.timeScale = 1;
+		mainCanvasGroup.alpha = 0;
+		gameOverCanvasGroup.alpha = 0;
+		this.gameObject.SetActive(false);
 	}
 }
