@@ -52,8 +52,8 @@ public class GameOverManager : MonoBehaviour
 			{
 				Time.timeScale = 1;
 				mainCanvasGroup.alpha = 0;
-				controlsEnabled = false;
 			});
+			controlsEnabled = false;
 		}
 	}
 
