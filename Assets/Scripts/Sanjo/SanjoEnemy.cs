@@ -29,7 +29,7 @@ public class SanjoEnemy : MonoBehaviour
 	{
         CameraShaker.instance.HitCameraShake();
 
-		mainRigidbody.AddForceAtPosition( hitAngle * 1200, hitLocation );
+		mainRigidbody.AddForce( hitAngle * 750 );
     }
 
     private static readonly WaitForSeconds dieWait = new WaitForSeconds(3f);
