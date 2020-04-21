@@ -588,7 +588,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.85333335, y: 1.7066667}
+    oldSize: {x: 0.96, y: 1.92}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -684,8 +684,8 @@ MonoBehaviour:
   owner: {fileID: 5206888464954068496}
   target: {fileID: 0}
   movePower: 100
-  jumpPowerX: 1
   jumpPowerY: 8
+  hightLimitOfWalk: 4
   minDistance: 0
   detectRange: 12
   lostRange: 18
@@ -693,6 +693,7 @@ MonoBehaviour:
   pitfallChecker: {fileID: 7043492384265321370}
   wallChecker: {fileID: 2321303633307550540}
   attackCollision: {fileID: 2531833206343142066}
+  wheel: {fileID: 0}
 --- !u!1 &5206888464954068496
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,7 +707,7 @@ GameObject:
   - component: {fileID: 3716305850666352306}
   - component: {fileID: 5925888040917681173}
   m_Layer: 0
-  m_Name: SanjoEnemy
+  m_Name: SanjoEnemyOld
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -765,6 +766,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 90032606222278964}
   AI: {fileID: 631243341262186233}
+  mainRigidbody: {fileID: 5793143389873614634}
 --- !u!61 &5925888040917681173
 BoxCollider2D:
   m_ObjectHideFlags: 0

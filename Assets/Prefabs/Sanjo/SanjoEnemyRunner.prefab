@@ -259,7 +259,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.85333335, y: 1.7066667}
+    oldSize: {x: 0.96, y: 1.92}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -436,6 +436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 0}
   AI: {fileID: 631243341262186233}
+  mainRigidbody: {fileID: 5793143389873614634}
 --- !u!61 &5925888040917681173
 BoxCollider2D:
   m_ObjectHideFlags: 0

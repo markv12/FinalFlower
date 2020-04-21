@@ -436,6 +436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 0}
   AI: {fileID: 631243341262186233}
+  mainRigidbody: {fileID: 5793143389873614634}
 --- !u!61 &5925888040917681173
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -259,7 +259,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.85333335, y: 1.7066667}
+    oldSize: {x: 0.96, y: 1.92}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -313,7 +313,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8178286633104222360}
   - component: {fileID: 631243341262186233}
-  - component: {fileID: 3937407295731756367}
   m_Layer: 0
   m_Name: SanjoAIController
   m_TagString: Untagged
@@ -365,19 +364,6 @@ MonoBehaviour:
   pitfallChecker: {fileID: 7043492384265321370}
   wallChecker: {fileID: 2321303633307550540}
   attackCollision: {fileID: 2531833206343142066}
-  wheel: {fileID: 3674015865539745863}
---- !u!114 &3937407295731756367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4823900346862181412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df000ca498c754044804208350c041e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   wheel: {fileID: 3674015865539745863}
 --- !u!1 &5206888464954068496
 GameObject:
@@ -450,6 +436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 0}
   AI: {fileID: 631243341262186233}
+  mainRigidbody: {fileID: 5793143389873614634}
 --- !u!61 &5925888040917681173
 BoxCollider2D:
   m_ObjectHideFlags: 0

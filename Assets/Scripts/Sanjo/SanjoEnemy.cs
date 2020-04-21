@@ -5,6 +5,7 @@ public class SanjoEnemy : MonoBehaviour
 {	
     public SanjoHandController hand;
 	public SanjoAIController AI;
+	public Rigidbody2D mainRigidbody;
 	
     private Collider2D mainCollider;
 
@@ -24,21 +25,11 @@ public class SanjoEnemy : MonoBehaviour
 		AI.Update();
 	}
 
-	public void Kill(Vector3 hitAngle, Vector2 hitLocation)
+	public void BulletHit(Vector3 hitAngle, Vector2 hitLocation)
 	{
         CameraShaker.instance.HitCameraShake();
 
-		if( hand )
-		{
-			Destroy( hand );
-		}
-
-		Rigidbody2D mainRigidbody = GetComponent<Rigidbody2D>();
-
-        //StopCoroutine(attackRoutine);
-        mainRigidbody.isKinematic = false;
-        mainRigidbody.AddForceAtPosition( hitAngle * 600, hitLocation );
-        StartCoroutine(DieRoutine());
+		mainRigidbody.AddForceAtPosition( hitAngle * 1200, hitLocation );
     }
 
     private static readonly WaitForSeconds dieWait = new WaitForSeconds(3f);

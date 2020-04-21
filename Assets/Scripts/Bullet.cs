@@ -42,7 +42,12 @@ public class Bullet : MonoBehaviour
 			}
 			else
 			{
-				didHit = false;
+				SanjoEnemy sanjoEnemyScript = col.gameObject.GetComponentInParent<SanjoEnemy>();
+				if (sanjoEnemyScript != null && sanjoEnemyScript != owner && !(owner is SanjoEnemy) && col.gameObject.GetComponent<SanjoCollisionChecker>() == null) {
+					sanjoEnemyScript.BulletHit(myT.right, myT.position);
+				} else {
+					didHit = false;
+				}
 			}
 		}
 		else
