@@ -30,7 +30,7 @@ public class HighScoreManager : MonoBehaviour
 		StartCoroutine(getHighScores(true));
 	}
 
-	public void saveScore()
+	public void saveScore(bool updateAfterwards = true)
 	{
 		string name = playerNameTextObject.GetComponent<TextMeshProUGUI>().text;
 		if (name.Length < 2) return;
@@ -40,7 +40,7 @@ public class HighScoreManager : MonoBehaviour
 		name = name.Replace('/', '-');
 		name = name.Replace('\n', ' ');
 		Debug.Log("Adding high score " + playerScore + " for player " + name);
-		StartCoroutine(addHighScore(name, playerScore));
+		StartCoroutine(addHighScore(name, playerScore, updateAfterwards));
 		inputZone.SetActive(false);
 	}
 
@@ -48,6 +48,22 @@ public class HighScoreManager : MonoBehaviour
 	{
 		playerScore = score;
 		playerScoreTextObject.GetComponent<TextMeshProUGUI>().text = "YOUR TIME: " + score.ToString("0.000") + 's';
+	}
+
+	private void SetScoreInputZoneActiveOrAutoSubmitScore()
+	{
+		inputZone.SetActive(true);
+		string name = playerNameTextObject.GetComponent<TextMeshProUGUI>().text;
+		if (name.Length < 2)
+		{
+			Debug.Log("No saved name so showing input field " + name);
+		}
+		else
+		{
+			Debug.Log("Auto adding high score with saved name " + name);
+			inputZone.SetActive(false);
+			saveScore(false);
+		}
 	}
 
 	void updateHighScoreLabel(bool shouldIncludePlayer)
@@ -118,7 +134,7 @@ public class HighScoreManager : MonoBehaviour
 				names = new string[0];
 				scores = new string[0];
 				updateHighScoreLabel(true);
-				inputZone.SetActive(true);
+				SetScoreInputZoneActiveOrAutoSubmitScore();
 			}
 			else
 			{
@@ -136,6 +152,7 @@ public class HighScoreManager : MonoBehaviour
 					highScoreStrings = highScoreString.Split(stringSplitter, System.StringSplitOptions.None);
 				}
 
+				bool hasShownPlayerInputField = false;
 				int scoreCountToDisplay = scoreCount;
 				if (highScoreStrings.Length < scoreCountToDisplay)
 				{
@@ -143,7 +160,8 @@ public class HighScoreManager : MonoBehaviour
 					if (shouldIncludePlayer)
 					{
 						Debug.Log("High Score By Default!");
-						inputZone.SetActive(true);
+						SetScoreInputZoneActiveOrAutoSubmitScore();
+						hasShownPlayerInputField = true;
 					}
 				}
 
@@ -155,9 +173,10 @@ public class HighScoreManager : MonoBehaviour
 					string[] split = highScoreStrings[s].Split(',');
 					names[s] = split[0];
 					scores[s] = split[1];
-					if (shouldIncludePlayer && playerScore <= float.Parse(split[1]))
+					if (shouldIncludePlayer && playerScore <= float.Parse(split[1]) && !hasShownPlayerInputField)
 					{
-						inputZone.SetActive(true);
+						SetScoreInputZoneActiveOrAutoSubmitScore();
+						hasShownPlayerInputField = true;
 					}
 				}
 			}
@@ -165,7 +184,7 @@ public class HighScoreManager : MonoBehaviour
 		}
 	}
 
-	IEnumerator addHighScore(string name, float score)
+	IEnumerator addHighScore(string name, float score, bool updateAfterwards = true)
 	{
 		string url = "https://agile-citadel-44322.herokuapp.com/" + leaderboardName + "/add/" + name + '/' + score.ToString("0.000") + '/';
 		using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
@@ -183,7 +202,7 @@ public class HighScoreManager : MonoBehaviour
 			else
 			{
 				Debug.Log("Successfully added new score");
-				StartCoroutine(getHighScores(false));
+				if (updateAfterwards) StartCoroutine(getHighScores(false));
 			}
 		}
 	}
