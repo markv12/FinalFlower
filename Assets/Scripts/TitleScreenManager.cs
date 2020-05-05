@@ -20,7 +20,6 @@ public class TitleScreenManager : MonoBehaviour
 
 	private void StartGame()
 	{
-		AudioManager.Instance.PlayGameMusic();
 		LoadingScreen.LoadScene(Scenes.LEVEL_1);
 	}
 	private void GoToLevelSelect()

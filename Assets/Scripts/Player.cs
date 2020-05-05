@@ -36,6 +36,7 @@ public class Player : MonoBehaviour {
 	}
 
 	private static readonly WaitForSeconds stunLength = new WaitForSeconds(0.5f);
+	[System.NonSerialized]
 	public bool isStunned = false;
 	private Coroutine beStunnedRoutine;
 	private IEnumerator BeStunned() {
@@ -73,40 +74,48 @@ public class Player : MonoBehaviour {
 
 	public static Player mainPlayer;
 
-	void Awake()
-	{
+	void Awake() {
 		mainPlayer = this;
 	}
 	void Start() {
-		controller = GetComponent<Controller2D> ();
+		controller = GetComponent<Controller2D>();
 
-		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
+		gravity = -(2 * maxJumpHeight) / Mathf.Pow(timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (gravity) * minJumpHeight);
-	
-		LevelNameIndicator.ShowLevelName(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+		minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(gravity) * minJumpHeight);
+
+		string activeSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+		LevelNameIndicator.ShowLevelName(activeSceneName);
+
+		AudioManager.Instance.PlayGameMusic(AudioManager.UseClip1ForSceneName(activeSceneName));
 	}
 
+	private float timeSinceLastBelow = 0;
 	void FixedUpdate() {
-        CalculateVelocity();
-        HandleWallSliding();
+		CalculateVelocity();
+		HandleWallSliding();
 
-        controller.Move(velocity * Time.fixedDeltaTime, directionalInput);
+		controller.Move(velocity * Time.fixedDeltaTime, directionalInput);
 
-        if (controller.collisions.above || controller.collisions.below) {
-            if (controller.collisions.slidingDownMaxSlope) {
-                velocity.y += controller.collisions.slopeNormal.y * -gravity * Time.deltaTime;
-            } else {
-                velocity.y = 0;
-            }
-        }
+		if (controller.collisions.above || controller.collisions.below) {
+			if (controller.collisions.slidingDownMaxSlope) {
+				velocity.y += controller.collisions.slopeNormal.y * -gravity * Time.deltaTime;
+			} else {
+				velocity.y = 0;
+			}
+		}
+		if (controller.collisions.below) {
+			timeSinceLastBelow = 0;
+		} else {
+			timeSinceLastBelow += Time.fixedDeltaTime;
+		}
 
-		if(t.position.y < -15 && Time.timeScale > 0) {
+		if (t.position.y < -15 && Time.timeScale > 0) {
 			GameOverManager.GameOver();
 		}
 	}
 
-	public void SetDirectionalInput (Vector2 input) {
+	public void SetDirectionalInput(Vector2 input) {
 		directionalInput = input;
 	}
 
@@ -126,7 +135,8 @@ public class Player : MonoBehaviour {
 					velocity.y = wallLeap.y;
 				}
 			}
-			if (controller.collisions.below) {
+			if (controller.collisions.below || timeSinceLastBelow < 0.12f) {
+				timeSinceLastBelow = 1;
 				AudioManager.Instance.PlayJumpSound();
 				playerAnimationController.Jump();
 				if (controller.collisions.slidingDownMaxSlope) {
@@ -163,23 +173,19 @@ public class Player : MonoBehaviour {
 
 				if (directionalInput.x != wallDirX && directionalInput.x != 0) {
 					timeToWallUnstick -= Time.deltaTime;
-				}
-				else {
+				} else {
 					timeToWallUnstick = wallStickTime;
 				}
-			}
-			else {
+			} else {
 				timeToWallUnstick = wallStickTime;
 			}
-
 		}
-
 	}
 
 	void CalculateVelocity() {
 		float targetVelocityX = directionalInput.x * MoveSpeed;
 		playerAnimationController.RotateWheel(targetVelocityX);
-		velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
+		velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
 		velocity.y += gravity * Time.deltaTime;
 	}
 }

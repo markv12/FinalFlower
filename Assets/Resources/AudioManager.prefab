@@ -689,6 +689,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bf826dd0df1cf04691853f303b55ab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuMusic: {fileID: 7418639655806590804}
+  backgroundMusicSource: {fileID: 6160548387907860264}
+  warningMusicSource: {fileID: 7831554653416676723}
+  endMusic: {fileID: 8126868468807350299}
+  bgm1: {fileID: 8300000, guid: dc0ee4d625f31430093891b42d9d39ba, type: 3}
+  bgmWarning1: {fileID: 8300000, guid: efa17b7ff040444ef9f51ec6b1fc60c0, type: 3}
+  bgm2: {fileID: 8300000, guid: f19fd5010a9eeb04f95e8fa1cfc4ab26, type: 3}
+  bgmWarning2: {fileID: 8300000, guid: 99d2e8ec37f04c74d8b9d4cf3163c871, type: 3}
   audioSources:
   - {fileID: 1421743375607637230}
   - {fileID: 1421743376172756657}
@@ -697,10 +705,6 @@ MonoBehaviour:
   - {fileID: 1421743376130309656}
   - {fileID: 5992239207845488806}
   - {fileID: 501979928304529411}
-  menuMusic: {fileID: 7418639655806590804}
-  backgroundMusic: {fileID: 6160548387907860264}
-  warningMusic: {fileID: 7831554653416676723}
-  endMusic: {fileID: 8126868468807350299}
   shootSound: {fileID: 8300000, guid: b0d4d1b511919488690c5e95f4df84b8, type: 3}
   hitWallSound: {fileID: 8300000, guid: 083dc74248df7496384632f36cdacfc3, type: 3}
   hitPlayerSound: {fileID: 8300000, guid: 8880df3f3db9448b59f386e963fff109, type: 3}

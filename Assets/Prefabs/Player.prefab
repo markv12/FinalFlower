@@ -629,12 +629,11 @@ MonoBehaviour:
   minJumpHeight: 1
   timeToJumpApex: 0.4
   moveSpeed: 10
-  wallJumpClimb: {x: 7.5, y: 16}
-  wallJumpOff: {x: 8.5, y: 7}
-  wallLeap: {x: 18, y: 17}
-  wallSlideSpeedMax: 3
+  wallJumpClimb: {x: 7.5, y: 17}
+  wallJumpOff: {x: 8.5, y: 10}
+  wallLeap: {x: 18, y: 18}
+  wallSlideSpeedMax: 5
   wallStickTime: 0.25
-  isStunned: 0
   handController: {fileID: 5839118119517269011}
 --- !u!114 &6260324718434507324
 MonoBehaviour:

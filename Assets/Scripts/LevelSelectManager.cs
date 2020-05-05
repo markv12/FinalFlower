@@ -31,7 +31,6 @@ public class LevelSelectManager : MonoBehaviour
 
 	private void LoadGameScene(Scenes scene)
 	{
-		AudioManager.Instance.PlayGameMusic();
 		LoadingScreen.LoadScene(scene);
 	}
 }

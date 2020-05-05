@@ -1,46 +1,46 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
-
 	private const string AUDIO_MANAGER_PATH = "AudioManager";
-	private const float BG_MUSIC_VOLUME = 0.25f;
+	private const float BG_MUSIC_VOLUME = 0.3f;
 	private const float MENU_MUSIC_VOLUME = 0.6f;
 	private static AudioManager instance;
 	public static AudioManager Instance
 	{
 		get
 		{
-			if (instance == null)
-			{
+			if (instance == null) {
 				GameObject gameOverScreenObject = (GameObject)Resources.Load(AUDIO_MANAGER_PATH);
 				GameObject instantiated = Instantiate(gameOverScreenObject);
 				DontDestroyOnLoad(instantiated);
 				instance = instantiated.GetComponent<AudioManager>();
-
-				instance.warningMusic.volume = 0;
-				instance.warningMusic.Play();
-
-				instance.backgroundMusic.volume = 0;
-				instance.backgroundMusic.Play();
-				instance.CreateAnimationRoutine(
-						1,
-						delegate (float progress)
-						{
-							instance.backgroundMusic.volume = Mathf.Lerp(0, BG_MUSIC_VOLUME, progress);
-						}
-				);
 			}
 			return instance;
 		}
 	}
 
-	public AudioSource[] audioSources;
+	private void SetBGMClips(bool useClip1) {
+		AudioClip bgmClip = useClip1 ? bgm1 : bgm2;
+		AudioClip bgmWarningClip = useClip1 ? bgmWarning1 : bgmWarning2;
+		backgroundMusicSource.clip = bgmClip;
+		warningMusicSource.clip = bgmWarningClip;
+	}
 
+	[Header("Background Music")]
 	public AudioSource menuMusic;
-	public AudioSource backgroundMusic;
-	public AudioSource warningMusic;
+	public AudioSource backgroundMusicSource;
+	public AudioSource warningMusicSource;
 	public AudioSource endMusic;
+
+	public AudioClip bgm1;
+	public AudioClip bgmWarning1;
+	public AudioClip bgm2;
+	public AudioClip bgmWarning2;
+
+	[Header("Sound Effects")]
+	public AudioSource[] audioSources;
 	public AudioClip shootSound;
 	public AudioClip hitWallSound;
 	public AudioClip hitPlayerSound;
@@ -64,26 +64,26 @@ public class AudioManager : MonoBehaviour
 	}
 	public void PlayHitPlayerSound()
 	{
-		PlaySFX(hitPlayerSound, 1f);
+		PlaySFX(hitPlayerSound, 0.8f);
 	}
 	public void PlayHitEnemySound()
 	{
-		PlaySFX(hitEnemySound, 1f);
+		PlaySFX(hitEnemySound, 0.8f);
 	}
 
 	public void PlayJumpSound()
 	{
-		PlaySFX(jumpSound, 1f);
+		PlaySFX(jumpSound, 0.75f);
 	}
 
 	public void PlayWinSound()
 	{
-		PlaySFX(winSound, 0.6f);
+		PlaySFX(winSound, 0.5f);
 	}
 
 	public void PlayCapsuleThrow()
 	{
-		PlaySFX(capsuleThrowSound, 1f);
+		PlaySFX(capsuleThrowSound, 0.8f);
 	}
 
 	public void PlayCapsuleCatch()
@@ -93,7 +93,7 @@ public class AudioManager : MonoBehaviour
 
 	public void PlayCapsuleBreak()
 	{
-		PlaySFX(capsuleBreakSound, 0.45f);
+		PlaySFX(capsuleBreakSound, 0.4f);
 	}
 
 	public void PlaySFX(AudioClip clip, float volume)
@@ -106,22 +106,22 @@ public class AudioManager : MonoBehaviour
 	public void PlayMenuMusic()
 	{
 		this.EnsureCoroutineStopped(ref musicFadeRoutine);
-		float warningStartVolume = warningMusic.volume;
-		float backgroundStartVolume = backgroundMusic.volume;
+		float warningStartVolume = warningMusicSource.volume;
+		float backgroundStartVolume = backgroundMusicSource.volume;
 		float endMusicStartVolume = endMusic.volume;
 		float endVolume = 0;
 		musicFadeRoutine = this.CreateAnimationRoutine(
 				0.5f,
 				delegate (float progress)
 				{
-					warningMusic.volume = Mathf.Lerp(warningStartVolume, endVolume, progress);
-					backgroundMusic.volume = Mathf.Lerp(backgroundStartVolume, endVolume, progress);
+					warningMusicSource.volume = Mathf.Lerp(warningStartVolume, endVolume, progress);
+					backgroundMusicSource.volume = Mathf.Lerp(backgroundStartVolume, endVolume, progress);
 					endMusic.volume = Mathf.Lerp(endMusicStartVolume, endVolume, progress);
 				},
 				delegate
 				{
-					warningMusic.Stop();
-					backgroundMusic.Stop();
+					warningMusicSource.Stop();
+					backgroundMusicSource.Stop();
 					endMusic.Stop();
 					menuMusic.Play();
 					musicFadeRoutine = this.CreateAnimationRoutine(
@@ -135,47 +135,52 @@ public class AudioManager : MonoBehaviour
 		);
 	}
 
-	public void PlayGameMusic()
-	{
-		this.EnsureCoroutineStopped(ref musicFadeRoutine);
-		float menuStartVolume = menuMusic.volume;
-		float endVolume = 0;
-		musicFadeRoutine = this.CreateAnimationRoutine(
-				0.5f,
-				delegate (float progress)
-				{
-					menuMusic.volume = Mathf.Lerp(menuStartVolume, endVolume, progress);
-				},
-				delegate
-				{
-					menuMusic.Stop();
-					backgroundMusic.volume = 0;
-					warningMusic.volume = 0;
-					backgroundMusic.Play();
-					warningMusic.Play();
+	private bool currentlyClip1 = false;
+	public void PlayGameMusic(bool useClip1) {
+		if (useClip1 != currentlyClip1 || backgroundMusicSource.volume <= 0 || !backgroundMusicSource.isPlaying) {
+			this.EnsureCoroutineStopped(ref musicFadeRoutine);
+			float menuStartVolume = menuMusic.volume;
+			float bgmStartVolume = backgroundMusicSource.volume;
+			float warningStartVolume = warningMusicSource.volume;
+			float endVolume = 0;
+			musicFadeRoutine = this.CreateAnimationRoutine(
+					0.5f,
+					delegate (float progress) {
+						menuMusic.volume = Mathf.Lerp(menuStartVolume, endVolume, progress);
+						backgroundMusicSource.volume = Mathf.Lerp(bgmStartVolume, endVolume, progress);
+						warningMusicSource.volume = Mathf.Lerp(warningStartVolume, endVolume, progress);
+					},
+					delegate {
+						menuMusic.Stop();
+						SetBGMClips(useClip1);
+						currentlyClip1 = useClip1;
+						backgroundMusicSource.volume = 0;
+						warningMusicSource.volume = 0;
+						backgroundMusicSource.Play();
+						warningMusicSource.Play();
 
-					musicFadeRoutine = this.CreateAnimationRoutine(
-									1f,
-									delegate (float progress)
-								{
-									backgroundMusic.volume = Mathf.Lerp(0, BG_MUSIC_VOLUME, progress);
-								}
-							);
-				}
-		);
+						musicFadeRoutine = this.CreateAnimationRoutine(
+										1f,
+										delegate (float progress) {
+											backgroundMusicSource.volume = Mathf.Lerp(0, BG_MUSIC_VOLUME, progress);
+										}
+								);
+					}
+			);
+		}
 	}
 
 	private Coroutine musicFadeRoutine = null;
 	public void EnableWarningMusic(bool enabled)
 	{
 		this.EnsureCoroutineStopped(ref musicFadeRoutine);
-		float startVolume = warningMusic.volume;
-		float endVolume = enabled ? 0.08f : 0;
+		float startVolume = warningMusicSource.volume;
+		float endVolume = enabled ? 0.07f : 0;
 		musicFadeRoutine = this.CreateAnimationRoutine(
 				0.5f,
 				delegate (float progress)
 				{
-					warningMusic.volume = Mathf.Lerp(startVolume, endVolume, progress);
+					warningMusicSource.volume = Mathf.Lerp(startVolume, endVolume, progress);
 				}
 		);
 	}
@@ -183,20 +188,20 @@ public class AudioManager : MonoBehaviour
 	public void PlayEndMusic()
 	{
 		this.EnsureCoroutineStopped(ref musicFadeRoutine);
-		float warningStartVolume = warningMusic.volume;
-		float backgroundStartVolume = backgroundMusic.volume;
+		float warningStartVolume = warningMusicSource.volume;
+		float backgroundStartVolume = backgroundMusicSource.volume;
 		float endVolume = 0;
 		musicFadeRoutine = this.CreateAnimationRoutine(
 				0.5f,
 				delegate (float progress)
 				{
-					warningMusic.volume = Mathf.Lerp(warningStartVolume, endVolume, progress);
-					backgroundMusic.volume = Mathf.Lerp(backgroundStartVolume, endVolume, progress);
+					warningMusicSource.volume = Mathf.Lerp(warningStartVolume, endVolume, progress);
+					backgroundMusicSource.volume = Mathf.Lerp(backgroundStartVolume, endVolume, progress);
 				},
 				delegate
 				{
-					warningMusic.Stop();
-					backgroundMusic.Stop();
+					warningMusicSource.Stop();
+					backgroundMusicSource.Stop();
 					endMusic.Play();
 					musicFadeRoutine = this.CreateAnimationRoutine(
 									1f,
@@ -214,5 +219,13 @@ public class AudioManager : MonoBehaviour
 		AudioSource result = audioSources[audioSourceIndex];
 		audioSourceIndex = (audioSourceIndex + 1) % audioSources.Length;
 		return result;
+	}
+
+	public static bool UseClip1ForSceneName(string sceneName) {
+		return sceneName == Scenes.LEVEL_1.Name()
+			|| sceneName == Scenes.LEVEL_2.Name()
+			|| sceneName == Scenes.LEVEL_3.Name()
+			|| sceneName == Scenes.LEVEL_4.Name()
+			|| sceneName == Scenes.LEVEL_5.Name();
 	}
 }
